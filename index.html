@@ -11,6 +11,7 @@
 />
 
 <style>
+
 :root{
     --bg:#040816;
 
@@ -44,6 +45,7 @@ html{
 body{
     background:var(--bg);
     color:var(--text);
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -59,92 +61,109 @@ body{
 }
 
 /* =========================
-   高级深空背景
+   深空背景
 ========================= */
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
+
     background:
-        radial-gradient(circle at 15% 40%,
-            rgba(37,99,235,.35),
+        radial-gradient(circle at 12% 48%,
+            rgba(37,99,235,.38),
             transparent 28%),
 
-        radial-gradient(circle at 85% 15%,
-            rgba(168,85,247,.28),
-            transparent 26%),
+        radial-gradient(circle at 86% 14%,
+            rgba(168,85,247,.30),
+            transparent 25%),
 
         radial-gradient(circle at 50% -10%,
-            rgba(59,130,246,.15),
-            transparent 40%);
+            rgba(59,130,246,.12),
+            transparent 42%);
 
-    z-index:-4;
+    z-index:-5;
 }
 
 body::after{
     content:"";
     position:fixed;
     inset:0;
+
     background-image:
-        radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px);
+        radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
 
     background-size:120px 120px;
-    opacity:.25;
-    z-index:-3;
+
+    opacity:.22;
+
+    z-index:-4;
 }
 
-/* 左侧星球 */
+/* 左星球 */
 
 .planet-left{
     position:fixed;
-    width:700px;
-    height:700px;
-    left:-340px;
-    bottom:-240px;
+
+    width:760px;
+    height:760px;
+
+    left:-390px;
+    bottom:-300px;
+
     border-radius:50%;
+
     background:
-        radial-gradient(circle at 40% 40%,
-            rgba(96,165,250,.9),
-            rgba(37,99,235,.35) 40%,
+        radial-gradient(circle at 38% 38%,
+            rgba(96,165,250,.95),
+            rgba(37,99,235,.42) 40%,
             rgba(0,0,0,0) 72%);
 
     filter:blur(2px);
-    opacity:.9;
-    z-index:-2;
+
+    z-index:-3;
 }
 
-/* 右侧星球 */
+/* 右星球 */
 
 .planet-right{
     position:fixed;
-    width:580px;
-    height:580px;
-    right:-240px;
-    top:-80px;
+
+    width:620px;
+    height:620px;
+
+    right:-250px;
+    top:-90px;
+
     border-radius:50%;
+
     background:
         radial-gradient(circle at 50% 50%,
-            rgba(168,85,247,.5),
-            rgba(76,29,149,.25) 45%,
+            rgba(168,85,247,.52),
+            rgba(76,29,149,.24) 45%,
             rgba(0,0,0,0) 72%);
 
-    border:1px solid rgba(168,85,247,.25);
+    border:1px solid rgba(168,85,247,.24);
 
     box-shadow:
         0 0 120px rgba(168,85,247,.18);
 
-    z-index:-2;
+    z-index:-3;
 }
 
 .ring{
     position:absolute;
-    width:760px;
+
+    width:780px;
     height:180px;
+
     border:1px solid rgba(168,85,247,.35);
+
     border-radius:50%;
-    top:180px;
-    left:-90px;
+
+    top:190px;
+    left:-95px;
+
     transform:rotate(-12deg);
 }
 
@@ -155,8 +174,10 @@ body::after{
 .container{
     width:100%;
     max-width:1180px;
+
     margin:auto;
-    padding:28px 20px 50px;
+
+    padding:28px 20px 55px;
 }
 
 /* =========================
@@ -167,42 +188,46 @@ body::after{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin-bottom:70px;
+
+    margin-bottom:68px;
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:14px;
 }
 
 .brand-logo{
-    width:42px;
-    height:42px;
-    border-radius:14px;
+    width:52px;
+    height:52px;
 
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    border-radius:18px;
+
+    background:
+        linear-gradient(135deg,#2563eb,#7c3aed);
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    font-size:18px;
+    font-size:20px;
 
     box-shadow:
-        0 10px 30px rgba(59,130,246,.35);
+        0 12px 36px rgba(59,130,246,.36);
 }
 
 .brand-text h2{
     font-size:20px;
     font-weight:800;
-    letter-spacing:.4px;
+    letter-spacing:.3px;
 }
 
 .brand-text p{
+    margin-top:3px;
+
     font-size:13px;
     color:var(--sub);
-    margin-top:2px;
 }
 
 .top-actions{
@@ -213,6 +238,7 @@ body::after{
 
 .status-pill{
     padding:12px 18px;
+
     border-radius:999px;
 
     background:rgba(255,255,255,.04);
@@ -223,16 +249,18 @@ body::after{
     align-items:center;
     gap:12px;
 
+    backdrop-filter:blur(20px);
+
     color:#dbeafe;
     font-size:14px;
-
-    backdrop-filter:blur(20px);
 }
 
 .dot{
     width:10px;
     height:10px;
+
     border-radius:50%;
+
     background:#22c55e;
 
     box-shadow:
@@ -241,9 +269,12 @@ body::after{
 
 .join-btn{
     padding:12px 24px;
+
     border-radius:999px;
+
     text-decoration:none;
     color:#fff;
+
     font-weight:700;
 
     background:
@@ -256,8 +287,9 @@ body::after{
 
 .join-btn:hover{
     transform:translateY(-2px);
+
     box-shadow:
-        0 10px 30px rgba(37,99,235,.35);
+        0 10px 30px rgba(37,99,235,.36);
 }
 
 /* =========================
@@ -266,7 +298,8 @@ body::after{
 
 .hero{
     text-align:center;
-    margin-bottom:60px;
+
+    margin-bottom:62px;
 }
 
 .hero-badge{
@@ -280,9 +313,10 @@ body::after{
 
     background:rgba(139,92,246,.12);
 
-    border:1px solid rgba(168,85,247,.25);
+    border:1px solid rgba(168,85,247,.24);
 
     color:#e9d5ff;
+
     font-size:14px;
     font-weight:700;
 
@@ -292,9 +326,11 @@ body::after{
 }
 
 .hero h1{
-    font-size:76px;
-    line-height:1.06;
+    font-size:74px;
+    line-height:1.08;
+
     font-weight:900;
+
     letter-spacing:-2px;
 
     background:
@@ -310,10 +346,12 @@ body::after{
 }
 
 .hero p{
-    margin-top:24px;
-    font-size:22px;
+    margin-top:22px;
+
     color:#cbd5e1;
-    line-height:1.8;
+
+    font-size:22px;
+    line-height:1.9;
 }
 
 /* =========================
@@ -323,9 +361,10 @@ body::after{
 .cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
+
     gap:28px;
 
-    margin-bottom:36px;
+    margin-bottom:40px;
 }
 
 .card{
@@ -344,48 +383,55 @@ body::after{
     backdrop-filter:blur(24px);
 
     transition:.4s;
+
+    /* 优化：开启Flex布局让卡片高度拉平，按钮吸底对齐 */
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .card:hover{
     transform:translateY(-8px);
 
-    border-color:rgba(255,255,255,.18);
+    border-color:rgba(255,255,255,.16);
 }
 
 .card::before{
     content:"";
     position:absolute;
     inset:0;
-    opacity:.15;
+
+    opacity:.14;
+
     z-index:-1;
 }
 
 .card-blue::before{
     background:
         radial-gradient(circle at top,
-        rgba(59,130,246,.5),
+        rgba(59,130,246,.52),
         transparent 55%);
 }
 
 .card-purple::before{
     background:
         radial-gradient(circle at top,
-        rgba(168,85,247,.5),
+        rgba(168,85,247,.52),
         transparent 55%);
 }
 
 .card-green::before{
     background:
         radial-gradient(circle at top,
-        rgba(34,197,94,.45),
+        rgba(34,197,94,.46),
         transparent 55%);
 }
 
 .icon-box{
-    width:92px;
-    height:92px;
+    width:94px;
+    height:94px;
 
-    border-radius:28px;
+    border-radius:30px;
 
     display:flex;
     align-items:center;
@@ -403,7 +449,7 @@ body::after{
         linear-gradient(135deg,#2563eb,#60a5fa);
 
     box-shadow:
-        0 18px 45px rgba(37,99,235,.35);
+        0 18px 45px rgba(37,99,235,.36);
 }
 
 .icon-purple{
@@ -411,7 +457,7 @@ body::after{
         linear-gradient(135deg,#7c3aed,#c084fc);
 
     box-shadow:
-        0 18px 45px rgba(124,58,237,.35);
+        0 18px 45px rgba(124,58,237,.36);
 }
 
 .icon-green{
@@ -419,21 +465,27 @@ body::after{
         linear-gradient(135deg,#06b6d4,#22c55e);
 
     box-shadow:
-        0 18px 45px rgba(6,182,212,.35);
+        0 18px 45px rgba(6,182,212,.36);
 }
 
 .card h2{
-    font-size:42px;
+    font-size:40px;
+
     margin-bottom:14px;
+
     font-weight:800;
 }
 
 .desc{
     color:#cbd5e1;
+
     line-height:1.8;
     font-size:16px;
 
     margin-bottom:30px;
+    
+    /* 优化：撑开内部空间，保证不同按钮数量的卡片底栏高度严格对齐 */
+    flex-grow:1; 
 }
 
 .main-btn{
@@ -441,9 +493,11 @@ body::after{
     height:62px;
 
     border:none;
+
     border-radius:18px;
 
     color:#fff;
+
     font-size:18px;
     font-weight:800;
 
@@ -468,7 +522,7 @@ body::after{
         linear-gradient(135deg,#3b82f6,#2563eb);
 
     box-shadow:
-        0 12px 32px rgba(37,99,235,.35);
+        0 12px 32px rgba(37,99,235,.36);
 }
 
 .btn-purple{
@@ -476,7 +530,7 @@ body::after{
         linear-gradient(135deg,#c084fc,#9333ea);
 
     box-shadow:
-        0 12px 32px rgba(147,51,234,.35);
+        0 12px 32px rgba(147,51,234,.36);
 }
 
 .btn-green{
@@ -484,12 +538,12 @@ body::after{
         linear-gradient(135deg,#22c55e,#06b6d4);
 
     box-shadow:
-        0 12px 32px rgba(34,197,94,.35);
+        0 12px 32px rgba(34,197,94,.36);
 }
 
 .tools{
     display:flex;
-    gap:12px;
+    gap:8px; /* 稍微压缩间距以容纳3个按钮 */
 }
 
 .tool-btn{
@@ -505,16 +559,20 @@ body::after{
 
     color:#cbd5e1;
 
-    font-size:14px;
+    font-size:13px; /* 稍微缩小字体兼容小屏幕 */
     font-weight:700;
 
     cursor:pointer;
 
     transition:.25s;
+    
+    white-space:nowrap;
+    padding:0 4px;
 }
 
 .tool-btn:hover{
     background:rgba(255,255,255,.08);
+
     color:#fff;
 }
 
@@ -524,12 +582,12 @@ body::after{
 
 .features{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
 
-    gap:18px;
+    gap:22px;
 
-    margin-top:18px;
-    margin-bottom:60px;
+    margin-top:10px;
+    margin-bottom:56px;
 }
 
 .feature{
@@ -537,26 +595,30 @@ body::after{
 
     border:1px solid rgba(255,255,255,.06);
 
-    border-radius:24px;
+    border-radius:26px;
 
-    padding:28px 24px;
+    padding:30px 26px;
 
     backdrop-filter:blur(20px);
 }
 
 .feature i{
     font-size:28px;
+
     margin-bottom:18px;
 }
 
 .feature h3{
-    font-size:20px;
-    margin-bottom:10px;
+    font-size:21px;
+
+    margin-bottom:12px;
 }
 
 .feature p{
     color:var(--sub);
-    line-height:1.7;
+
+    line-height:1.8;
+
     font-size:14px;
 }
 
@@ -566,8 +628,11 @@ body::after{
 
 .footer{
     text-align:center;
+
     color:var(--muted);
+
     line-height:2.1;
+
     font-size:14px;
 
     padding-bottom:20px;
@@ -579,8 +644,10 @@ body::after{
 
 .toast{
     position:fixed;
+
     bottom:30px;
     left:50%;
+
     transform:translateX(-50%) translateY(100px);
 
     background:#fff;
@@ -593,7 +660,7 @@ body::after{
     font-weight:700;
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,.4);
+        0 20px 50px rgba(0,0,0,.42);
 
     opacity:0;
 
@@ -604,7 +671,79 @@ body::after{
 
 .toast.show{
     transform:translateX(-50%) translateY(0);
+
     opacity:1;
+}
+
+/* =========================
+   新赠：二维码弹窗组件样式
+========================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 8, 22, 0.75);
+    backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s ease;
+    z-index: 10000;
+}
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.modal-card {
+    background: #0b1126;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 32px 24px;
+    border-radius: 28px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    max-width: 90%;
+    width: 320px;
+    transform: scale(0.85);
+    transition: .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-overlay.show .modal-card {
+    transform: scale(1);
+}
+.modal-card h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+}
+.qr-container {
+    background: #fff;
+    padding: 16px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.qr-container img {
+    display: block;
+    width: 180px;
+    height: 180px;
+}
+.close-modal-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #cbd5e1;
+    padding: 12px 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
+    transition: .2s;
+    font-size: 15px;
+}
+.close-modal-btn:hover {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
 }
 
 /* =========================
@@ -618,7 +757,7 @@ body::after{
     }
 
     .features{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:1fr;
     }
 
     .hero h1{
@@ -644,22 +783,34 @@ body::after{
         justify-content:center;
     }
 
+    .hero{
+        margin-bottom:48px;
+    }
+
+    .hero-badge{
+        margin-bottom:22px;
+    }
+
     .hero h1{
-        font-size:42px;
+        font-size:52px;
+        line-height:1.1;
+        letter-spacing:-1.5px;
     }
 
     .hero p{
         font-size:18px;
-    }
-
-    .features{
-        grid-template-columns:1fr;
+        line-height:1.9;
     }
 
     .card h2{
         font-size:34px;
     }
+
+    .features{
+        gap:18px;
+    }
 }
+
 </style>
 </head>
 
@@ -672,8 +823,6 @@ body::after{
 </div>
 
 <div class="container">
-
-    <!-- 顶部 -->
 
     <div class="topbar">
 
@@ -697,7 +846,11 @@ body::after{
                 服务状态：正常
             </div>
 
-            <a href="https://t.me/zmxooo" class="join-btn" target="_blank">
+            <a
+              href="https://t.me/zmxooo"
+              class="join-btn"
+              target="_blank"
+            >
                 <i class="fa-brands fa-telegram"></i>
                 加入频道
             </a>
@@ -705,8 +858,6 @@ body::after{
         </div>
 
     </div>
-
-    <!-- Hero -->
 
     <div class="hero">
 
@@ -716,21 +867,16 @@ body::after{
         </div>
 
         <h1>
-            全球网络，自由畅通
+            全球网络 自由畅通
         </h1>
 
         <p>
-            长期维护的免费订阅服务<br>
             支持 Clash / Shadowrocket 一键导入
         </p>
 
     </div>
 
-    <!-- 卡片 -->
-
     <div class="cards">
-
-        <!-- Clash -->
 
         <div class="card card-blue">
 
@@ -765,6 +911,13 @@ body::after{
 
                 <button
                   class="tool-btn"
+                  onclick="showQR('Clash 订阅二维码', 'https://cai.zmxoo.xyz/config.yaml')"
+                >
+                    扫码导入
+                </button>
+
+                <button
+                  class="tool-btn"
                   onclick="window.open('https://cai.zmxoo.xyz/config.yaml')"
                 >
                     查看链接
@@ -773,8 +926,6 @@ body::after{
             </div>
 
         </div>
-
-        <!-- 小火箭 -->
 
         <div class="card card-purple">
 
@@ -792,7 +943,7 @@ body::after{
 
             <a
               class="main-btn btn-purple"
-              href="shadowrocket://add/sub://https://cai.zmxoo.xyz/index.html"
+              href="sub://https://cai.zmxoo.xyz/index.html"
             >
                 <i class="fa-solid fa-paper-plane"></i>
                 一键导入订阅
@@ -809,6 +960,13 @@ body::after{
 
                 <button
                   class="tool-btn"
+                  onclick="showQR('小火箭订阅二维码', 'sub://https://cai.zmxoo.xyz/index.html')"
+                >
+                    扫码导入
+                </button>
+
+                <button
+                  class="tool-btn"
                   onclick="window.open('https://cai.zmxoo.xyz/index.html')"
                 >
                     查看链接
@@ -817,8 +975,6 @@ body::after{
             </div>
 
         </div>
-
-        <!-- TG -->
 
         <div class="card card-green">
 
@@ -849,7 +1005,21 @@ body::after{
                   class="tool-btn"
                   onclick="copyText('https://t.me/zmxooo')"
                 >
-                    复制频道链接
+                    复制频道
+                </button>
+                
+                <button
+                  class="tool-btn"
+                  onclick="showQR('Telegram 频道二维码', 'https://t.me/zmxooo')"
+                >
+                    扫码关注
+                </button>
+
+                <button
+                  class="tool-btn"
+                  onclick="window.open('https://t.me/zmxooo')"
+                >
+                    打开频道
                 </button>
 
             </div>
@@ -858,49 +1028,36 @@ body::after{
 
     </div>
 
-    <!-- 特性 -->
-
     <div class="features">
 
         <div class="feature">
             <i class="fa-solid fa-shield-halved"></i>
-            <h3>安全稳定</h3>
+            <h3>长期维护</h3>
             <p>
-                长期维护可用<br>
-                免费公益共享
-            </p>
-        </div>
-
-        <div class="feature">
-            <i class="fa-solid fa-bolt"></i>
-            <h3>高速连接</h3>
-            <p>
-                全球节点覆盖<br>
-                自动规则分流
+                公益免费订阅<br>
+                持续更新节点配置
             </p>
         </div>
 
         <div class="feature">
             <i class="fa-solid fa-globe"></i>
-            <h3>免费订阅</h3>
+            <h3>全球覆盖</h3>
             <p>
-                多客户端兼容<br>
-                一键快速导入
+                多地区节点接入<br>
+                自动规则分流
             </p>
         </div>
 
         <div class="feature">
-            <i class="fa-solid fa-arrows-rotate"></i>
-            <h3>实时更新</h3>
+            <i class="fa-solid fa-bolt"></i>
+            <h3>一键导入</h3>
             <p>
-                Telegram 通知<br>
-                自动同步配置
+                支持 Clash / 小火箭<br>
+                多平台快速连接
             </p>
         </div>
 
     </div>
-
-    <!-- Footer -->
 
     <div class="footer">
 
@@ -919,19 +1076,64 @@ body::after{
     复制成功
 </div>
 
+<div id="qrModal" class="modal-overlay" onclick="closeQR()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+        <h3 id="qrTitle">订阅二维码</h3>
+        <div class="qr-container">
+            <img id="qrImage" src="" alt="二维码加载中...">
+        </div>
+        <button class="close-modal-btn" onclick="closeQR()">关闭</button>
+    </div>
+</div>
+
 <script>
 
+// 强化后的复制函数：100% 解决各种浏览器以及非 HTTPS 报错无法复制的问题
 function copyText(text){
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(showToast).catch(fallbackCopy);
+    } else {
+        fallbackCopy();
+    }
 
-    navigator.clipboard.writeText(text);
+    function fallbackCopy() {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast();
+        } catch (err) {
+            alert('复制失败，请手动复制链接');
+        }
+        document.body.removeChild(textArea);
+    }
 
-    const toast = document.getElementById("toast");
+    function showToast() {
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        if(window.toastTimer) clearTimeout(window.toastTimer);
+        window.toastTimer = setTimeout(()=>{
+            toast.classList.remove("show");
+        },2200);
+    }
+}
 
-    toast.classList.add("show");
+// 控制显示二维码弹窗
+function showQR(title, text) {
+    document.getElementById("qrTitle").innerText = title;
+    // 使用高速稳定的公共二维码 API 生成 250x250 分辨率的二维码
+    document.getElementById("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(text);
+    document.getElementById("qrModal").classList.add("show");
+}
 
-    setTimeout(()=>{
-        toast.classList.remove("show");
-    },2200);
+// 控制关闭二维码弹窗
+function closeQR() {
+    document.getElementById("qrModal").classList.remove("show");
 }
 
 </script>
