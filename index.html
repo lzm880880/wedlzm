@@ -104,23 +104,17 @@ body::after{
 
 .planet-left{
     position:fixed;
-
     width:760px;
     height:760px;
-
     left:-390px;
     bottom:-300px;
-
     border-radius:50%;
-
     background:
         radial-gradient(circle at 38% 38%,
             rgba(96,165,250,.95),
             rgba(37,99,235,.42) 40%,
             rgba(0,0,0,0) 72%);
-
     filter:blur(2px);
-
     z-index:-3;
 }
 
@@ -128,42 +122,30 @@ body::after{
 
 .planet-right{
     position:fixed;
-
     width:620px;
     height:620px;
-
     right:-250px;
     top:-90px;
-
     border-radius:50%;
-
     background:
         radial-gradient(circle at 50% 50%,
             rgba(168,85,247,.52),
             rgba(76,29,149,.24) 45%,
             rgba(0,0,0,0) 72%);
-
     border:1px solid rgba(168,85,247,.24);
-
     box-shadow:
         0 0 120px rgba(168,85,247,.18);
-
     z-index:-3;
 }
 
 .ring{
     position:absolute;
-
     width:780px;
     height:180px;
-
     border:1px solid rgba(168,85,247,.35);
-
     border-radius:50%;
-
     top:190px;
     left:-95px;
-
     transform:rotate(-12deg);
 }
 
@@ -174,9 +156,7 @@ body::after{
 .container{
     width:100%;
     max-width:1180px;
-
     margin:auto;
-
     padding:28px 20px 55px;
 }
 
@@ -188,7 +168,6 @@ body::after{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     margin-bottom:68px;
 }
 
@@ -201,18 +180,13 @@ body::after{
 .brand-logo{
     width:52px;
     height:52px;
-
     border-radius:18px;
-
     background:
         linear-gradient(135deg,#2563eb,#7c3aed);
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     font-size:20px;
-
     box-shadow:
         0 12px 36px rgba(59,130,246,.36);
 }
@@ -225,7 +199,6 @@ body::after{
 
 .brand-text p{
     margin-top:3px;
-
     font-size:13px;
     color:var(--sub);
 }
@@ -238,19 +211,13 @@ body::after{
 
 .status-pill{
     padding:12px 18px;
-
     border-radius:999px;
-
     background:rgba(255,255,255,.04);
-
     border:1px solid rgba(255,255,255,.08);
-
     display:flex;
     align-items:center;
     gap:12px;
-
     backdrop-filter:blur(20px);
-
     color:#dbeafe;
     font-size:14px;
 }
@@ -258,81 +225,60 @@ body::after{
 .dot{
     width:10px;
     height:10px;
-
     border-radius:50%;
-
     background:#22c55e;
-
     box-shadow:
         0 0 12px #22c55e;
 }
 
 .join-btn{
     padding:12px 24px;
-
     border-radius:999px;
-
     text-decoration:none;
     color:#fff;
-
     font-weight:700;
-
     background:
         linear-gradient(135deg,#2563eb,#0ea5e9);
-
     border:1px solid rgba(255,255,255,.08);
-
     transition:.3s;
 }
 
 .join-btn:hover{
     transform:translateY(-2px);
-
     box-shadow:
         0 10px 30px rgba(37,99,235,.36);
 }
 
 /* =========================
-   Hero
+   Hero (已应用 clamp 自适应，解决手机挤压)
 ========================= */
 
 .hero{
     text-align:center;
-
     margin-bottom:62px;
+    padding: 0 10px;
 }
 
 .hero-badge{
     display:inline-flex;
     align-items:center;
     gap:10px;
-
     padding:10px 22px;
-
     border-radius:999px;
-
     background:rgba(139,92,246,.12);
-
     border:1px solid rgba(168,85,247,.24);
-
     color:#e9d5ff;
-
     font-size:14px;
     font-weight:700;
-
     margin-bottom:28px;
-
     backdrop-filter:blur(20px);
 }
 
 .hero h1{
-    font-size:74px;
-    line-height:1.08;
-
-    font-weight:900;
-
-    letter-spacing:-2px;
-
+    font-size: clamp(32px, 7.5vw, 74px);
+    line-height: 1.2;
+    font-weight: 900;
+    letter-spacing: -1.5px;
     background:
         linear-gradient(
             to right,
@@ -340,51 +286,37 @@ body::after{
             #dbeafe,
             #a5b4fc
         );
-
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
 .hero p{
     margin-top:22px;
-
     color:#cbd5e1;
-
-    font-size:22px;
-    line-height:1.9;
+    font-size: clamp(15px, 2.2vw, 22px);
+    line-height: 1.6;
 }
 
 /* =========================
-   卡片
+   卡片 (已应用 Flex 对齐)
 ========================= */
 
 .cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-
     gap:28px;
-
     margin-bottom:40px;
 }
 
 .card{
     position:relative;
-
     background:var(--card-bg);
-
     border:1px solid var(--card-border);
-
     border-radius:34px;
-
     padding:34px 30px;
-
     overflow:hidden;
-
     backdrop-filter:blur(24px);
-
     transition:.4s;
-
-    /* 优化：开启Flex布局让卡片高度拉平，按钮吸底对齐 */
     display:flex;
     flex-direction:column;
     justify-content:space-between;
@@ -392,7 +324,6 @@ body::after{
 
 .card:hover{
     transform:translateY(-8px);
-
     border-color:rgba(255,255,255,.16);
 }
 
@@ -400,9 +331,7 @@ body::after{
     content:"";
     position:absolute;
     inset:0;
-
     opacity:.14;
-
     z-index:-1;
 }
 
@@ -430,86 +359,58 @@ body::after{
 .icon-box{
     width:94px;
     height:94px;
-
     border-radius:30px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     font-size:40px;
-
     margin-bottom:28px;
-
     color:#fff;
 }
 
 .icon-blue{
-    background:
-        linear-gradient(135deg,#2563eb,#60a5fa);
-
-    box-shadow:
-        0 18px 45px rgba(37,99,235,.36);
+    background:linear-gradient(135deg,#2563eb,#60a5fa);
+    box-shadow:0 18px 45px rgba(37,99,235,.36);
 }
 
 .icon-purple{
-    background:
-        linear-gradient(135deg,#7c3aed,#c084fc);
-
-    box-shadow:
-        0 18px 45px rgba(124,58,237,.36);
+    background:linear-gradient(135deg,#7c3aed,#c084fc);
+    box-shadow:0 18px 45px rgba(124,58,237,.36);
 }
 
 .icon-green{
-    background:
-        linear-gradient(135deg,#06b6d4,#22c55e);
-
-    box-shadow:
-        0 18px 45px rgba(6,182,212,.36);
+    background:linear-gradient(135deg,#06b6d4,#22c55e);
+    box-shadow:0 18px 45px rgba(6,182,212,.36);
 }
 
 .card h2{
     font-size:40px;
-
     margin-bottom:14px;
-
     font-weight:800;
 }
 
 .desc{
     color:#cbd5e1;
-
     line-height:1.8;
     font-size:16px;
-
     margin-bottom:30px;
-    
-    /* 优化：撑开内部空间，保证不同按钮数量的卡片底栏高度严格对齐 */
     flex-grow:1; 
 }
 
 .main-btn{
     width:100%;
     height:62px;
-
     border:none;
-
     border-radius:18px;
-
     color:#fff;
-
     font-size:18px;
     font-weight:800;
-
     display:flex;
     align-items:center;
     justify-content:center;
     gap:12px;
-
     text-decoration:none;
-
     transition:.3s;
-
     margin-bottom:18px;
 }
 
@@ -518,61 +419,42 @@ body::after{
 }
 
 .btn-blue{
-    background:
-        linear-gradient(135deg,#3b82f6,#2563eb);
-
-    box-shadow:
-        0 12px 32px rgba(37,99,235,.36);
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    box-shadow:0 12px 32px rgba(37,99,235,.36);
 }
 
 .btn-purple{
-    background:
-        linear-gradient(135deg,#c084fc,#9333ea);
-
-    box-shadow:
-        0 12px 32px rgba(147,51,234,.36);
+    background:linear-gradient(135deg,#c084fc,#9333ea);
+    box-shadow:0 12px 32px rgba(147,51,234,.36);
 }
 
 .btn-green{
-    background:
-        linear-gradient(135deg,#22c55e,#06b6d4);
-
-    box-shadow:
-        0 12px 32px rgba(34,197,94,.36);
+    background:linear-gradient(135deg,#22c55e,#06b6d4);
+    box-shadow:0 12px 32px rgba(34,197,94,.36);
 }
 
 .tools{
     display:flex;
-    gap:8px; /* 稍微压缩间距以容纳3个按钮 */
+    gap:8px;
 }
 
 .tool-btn{
     flex:1;
-
     height:52px;
-
     border-radius:16px;
-
     border:1px solid rgba(255,255,255,.06);
-
     background:rgba(255,255,255,.03);
-
     color:#cbd5e1;
-
-    font-size:13px; /* 稍微缩小字体兼容小屏幕 */
+    font-size:13px; 
     font-weight:700;
-
     cursor:pointer;
-
     transition:.25s;
-    
     white-space:nowrap;
     padding:0 4px;
 }
 
 .tool-btn:hover{
     background:rgba(255,255,255,.08);
-
     color:#fff;
 }
 
@@ -583,42 +465,32 @@ body::after{
 .features{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-
     gap:22px;
-
     margin-top:10px;
     margin-bottom:56px;
 }
 
 .feature{
     background:rgba(255,255,255,.03);
-
     border:1px solid rgba(255,255,255,.06);
-
     border-radius:26px;
-
     padding:30px 26px;
-
     backdrop-filter:blur(20px);
 }
 
 .feature i{
     font-size:28px;
-
     margin-bottom:18px;
 }
 
 .feature h3{
     font-size:21px;
-
     margin-bottom:12px;
 }
 
 .feature p{
     color:var(--sub);
-
     line-height:1.8;
-
     font-size:14px;
 }
 
@@ -628,13 +500,9 @@ body::after{
 
 .footer{
     text-align:center;
-
     color:var(--muted);
-
     line-height:2.1;
-
     font-size:14px;
-
     padding-bottom:20px;
 }
 
@@ -644,40 +512,29 @@ body::after{
 
 .toast{
     position:fixed;
-
     bottom:30px;
     left:50%;
-
     transform:translateX(-50%) translateY(100px);
-
     background:#fff;
     color:#000;
-
     padding:14px 26px;
-
     border-radius:999px;
-
     font-weight:700;
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.42);
-
+    box-shadow:0 20px 50px rgba(0,0,0,.42);
     opacity:0;
-
     transition:.35s;
-
     z-index:9999;
 }
 
 .toast.show{
     transform:translateX(-50%) translateY(0);
-
     opacity:1;
 }
 
 /* =========================
-   新赠：二维码弹窗组件样式
+   二维码弹窗组件样式
 ========================= */
+
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -751,61 +608,37 @@ body::after{
 ========================= */
 
 @media(max-width:1100px){
-
     .cards{
         grid-template-columns:1fr;
     }
-
     .features{
         grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:58px;
     }
 }
 
 @media(max-width:700px){
-
     .topbar{
         flex-direction:column;
         gap:20px;
     }
-
     .top-actions{
         width:100%;
         flex-direction:column;
     }
-
     .status-pill,
     .join-btn{
         width:100%;
         justify-content:center;
     }
-
     .hero{
         margin-bottom:48px;
     }
-
     .hero-badge{
         margin-bottom:22px;
     }
-
-    .hero h1{
-        font-size:52px;
-        line-height:1.1;
-        letter-spacing:-1.5px;
-    }
-
-    .hero p{
-        font-size:18px;
-        line-height:1.9;
-    }
-
     .card h2{
         font-size:34px;
     }
-
     .features{
         gap:18px;
     }
@@ -825,27 +658,21 @@ body::after{
 <div class="container">
 
     <div class="topbar">
-
         <div class="brand">
-
             <div class="brand-logo">
                 <i class="fa-solid fa-paper-plane"></i>
             </div>
-
             <div class="brand-text">
                 <h2>Global Access</h2>
                 <p>免费 · 稳定 · 自由</p>
             </div>
-
         </div>
 
         <div class="top-actions">
-
             <div class="status-pill">
                 <div class="dot"></div>
                 服务状态：正常
             </div>
-
             <a
               href="https://t.me/zmxooo"
               class="join-btn"
@@ -854,44 +681,33 @@ body::after{
                 <i class="fa-brands fa-telegram"></i>
                 加入频道
             </a>
-
         </div>
-
     </div>
 
     <div class="hero">
-
         <div class="hero-badge">
             <i class="fa-solid fa-bolt"></i>
             长期维护 · 免费订阅
         </div>
-
         <h1>
             全球网络 自由畅通
         </h1>
-
         <p>
             支持 Clash / Shadowrocket 一键导入
         </p>
-
     </div>
 
     <div class="cards">
-
         <div class="card card-blue">
-
             <div class="icon-box icon-blue">
                 <i class="fa-solid fa-cat"></i>
             </div>
-
             <h2>Clash</h2>
-
             <div class="desc">
                 免费 Clash 节点订阅<br>
                 支持 Meta / Mihomo<br>
                 多平台客户端通用
             </div>
-
             <a
               class="main-btn btn-blue"
               href="clash://install-config?url=https%3A%2F%2Fcai.zmxoo.xyz%2Fconfig.yaml"
@@ -899,48 +715,38 @@ body::after{
                 <i class="fa-solid fa-rocket"></i>
                 一键导入订阅
             </a>
-
             <div class="tools">
-
                 <button
                   class="tool-btn"
                   onclick="copyText('https://cai.zmxoo.xyz/config.yaml')"
                 >
                     复制订阅
                 </button>
-
                 <button
                   class="tool-btn"
                   onclick="showQR('Clash 订阅二维码', 'https://cai.zmxoo.xyz/config.yaml')"
                 >
                     扫码导入
                 </button>
-
                 <button
                   class="tool-btn"
                   onclick="window.open('https://cai.zmxoo.xyz/config.yaml')"
                 >
                     查看链接
                 </button>
-
             </div>
-
         </div>
 
         <div class="card card-purple">
-
             <div class="icon-box icon-purple">
                 <i class="fa-solid fa-rocket"></i>
             </div>
-
             <h2>Shadowrocket</h2>
-
             <div class="desc">
                 免费小火箭订阅<br>
                 iOS 一键快速导入<br>
                 扫码即可连接使用
             </div>
-
             <a
               class="main-btn btn-purple"
               href="sub://https://cai.zmxoo.xyz/index.html"
@@ -948,48 +754,38 @@ body::after{
                 <i class="fa-solid fa-paper-plane"></i>
                 一键导入订阅
             </a>
-
             <div class="tools">
-
                 <button
                   class="tool-btn"
                   onclick="copyText('https://cai.zmxoo.xyz/index.html')"
                 >
                     复制订阅
                 </button>
-
                 <button
                   class="tool-btn"
                   onclick="showQR('小火箭订阅二维码', 'sub://https://cai.zmxoo.xyz/index.html')"
                 >
                     扫码导入
                 </button>
-
                 <button
                   class="tool-btn"
                   onclick="window.open('https://cai.zmxoo.xyz/index.html')"
                 >
                     查看链接
                 </button>
-
             </div>
-
         </div>
 
         <div class="card card-green">
-
             <div class="icon-box icon-green">
                 <i class="fa-brands fa-telegram"></i>
             </div>
-
             <h2>Telegram</h2>
-
             <div class="desc">
                 节点更新通知频道<br>
                 获取最新备用节点<br>
                 订阅异常实时通知
             </div>
-
             <a
               class="main-btn btn-green"
               href="https://t.me/zmxooo"
@@ -998,38 +794,30 @@ body::after{
                 <i class="fa-brands fa-telegram"></i>
                 加入频道
             </a>
-
             <div class="tools">
-
                 <button
                   class="tool-btn"
                   onclick="copyText('https://t.me/zmxooo')"
                 >
                     复制频道
                 </button>
-                
                 <button
                   class="tool-btn"
                   onclick="showQR('Telegram 频道二维码', 'https://t.me/zmxooo')"
                 >
                     扫码关注
                 </button>
-
                 <button
                   class="tool-btn"
                   onclick="window.open('https://t.me/zmxooo')"
                 >
                     打开频道
                 </button>
-
             </div>
-
         </div>
-
     </div>
 
     <div class="features">
-
         <div class="feature">
             <i class="fa-solid fa-shield-halved"></i>
             <h3>长期维护</h3>
@@ -1038,7 +826,6 @@ body::after{
                 持续更新节点配置
             </p>
         </div>
-
         <div class="feature">
             <i class="fa-solid fa-globe"></i>
             <h3>全球覆盖</h3>
@@ -1047,7 +834,6 @@ body::after{
                 自动规则分流
             </p>
         </div>
-
         <div class="feature">
             <i class="fa-solid fa-bolt"></i>
             <h3>一键导入</h3>
@@ -1056,20 +842,14 @@ body::after{
                 多平台快速连接
             </p>
         </div>
-
     </div>
 
     <div class="footer">
-
         © 2026 Global Access<br>
-
         免费订阅 · 公益共享 · 长期维护<br>
-
         仅供网络技术交流学习使用<br>
         请遵守当地法律法规
-
     </div>
-
 </div>
 
 <div id="toast" class="toast">
@@ -1087,8 +867,6 @@ body::after{
 </div>
 
 <script>
-
-// 强化后的复制函数：100% 解决各种浏览器以及非 HTTPS 报错无法复制的问题
 function copyText(text){
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(showToast).catch(fallbackCopy);
@@ -1123,19 +901,15 @@ function copyText(text){
     }
 }
 
-// 控制显示二维码弹窗
 function showQR(title, text) {
     document.getElementById("qrTitle").innerText = title;
-    // 使用高速稳定的公共二维码 API 生成 250x250 分辨率的二维码
     document.getElementById("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(text);
     document.getElementById("qrModal").classList.add("show");
 }
 
-// 控制关闭二维码弹窗
 function closeQR() {
     document.getElementById("qrModal").classList.remove("show");
 }
-
 </script>
 
 </body>
