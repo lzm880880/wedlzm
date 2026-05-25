@@ -2,250 +2,312 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#f4f6f9" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
-    <title>2026最新免费VPN - 永久公益节点池</title>
-    <meta name="description" content="提供最新免费稳定的 Clash、小火箭订阅节点，持续更新。">
-    
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOBAL ACCESS - 全球网络 自由连接</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <style>
-        /* 亮色主题（默认） CSS 变量 */
+        /* 核心商业暗黑配色系统 */
         :root {
-            --primary-color: #007bff;
-            --telegram-color: #0088cc;
-            --bg-color: #f4f6f9;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-muted: #6c757d;
-            --item-bg: #f8f9fa;
-            --item-hover: #f1f3f5;
-            --code-bg: #e9ecef;
-            --border-color: #e9ecef;
-            --modal-bg: rgba(0,0,0,0.6);
+            --bg-main: #060913;
+            --card-bg: rgba(13, 20, 38, 0.6);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --card-glow: rgba(79, 172, 254, 0.1);
+            
+            --clash-color: #3b82f6;
+            --clash-gradient: linear-gradient(135deg, #2563eb, #3b82f6);
+            --rocket-color: #8b5cf6;
+            --rocket-gradient: linear-gradient(135deg, #7c3aed, #a78bfa);
+            --tg-color: #0d9488;
+            --tg-gradient: linear-gradient(135deg, #0f766e, #14b8a6);
+
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #475569;
         }
 
-        /* 暗黑模式自动适配 */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --primary-color: #3b82f6;
-                --bg-color: #121212;
-                --card-bg: #1e1e1e;
-                --text-main: #e5e5e5;
-                --text-muted: #a3a3a3;
-                --item-bg: #2a2a2a;
-                --item-hover: #333333;
-                --code-bg: #222222;
-                --border-color: #3f3f3f;
-                --modal-bg: rgba(0,0,0,0.8);
-            }
-            .btn-import { background: #1e3a8a !important; color: #93c5fd !important; border-color: #1e3a8a !important; }
-            .btn-import:hover { background: #1d4ed8 !important; }
-            .btn-qr { background: #374151 !important; color: #e5e5e5 !important; }
-        }
-
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background: var(--bg-color); 
-            color: var(--text-main);
-            margin: 0; 
-            padding: 20px 15px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            min-height: 100vh;
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; padding: 40px 20px;
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
             box-sizing: border-box;
-            transition: background-color 0.3s ease;
+            overflow-x: hidden;
+            /* 星空与极光顶衬背景 */
+            background-image: 
+                radial-gradient(circle at 50% -10%, rgba(59, 130, 246, 0.18), transparent 60%),
+                radial-gradient(circle at 50% 30%, rgba(139, 92, 246, 0.05), transparent 50%);
+            background-attachment: fixed;
         }
 
-        .header { text-align: center; margin: 20px 0 30px 0; }
-        .header .logo-icon { font-size: 45px; color: var(--primary-color); animation: pulse 2s infinite; }
-        .header h1 { font-size: 26px; margin: 12px 0 6px 0; font-weight: 700; }
-        .header p { color: var(--text-muted); margin: 0; font-size: 14px; }
-
-        .card { 
-            width: 100%; max-width: 480px; 
-            background: var(--card-bg); 
-            border-radius: 16px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            margin-bottom: 20px; padding: 24px; 
-            border-left: 5px solid var(--primary-color); 
-            box-sizing: border-box; transition: transform 0.3s ease, background-color 0.3s ease;
+        /* 顶部导航状态条 */
+        .top-bar {
+            width: 100%; max-width: 1100px; display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 60px; font-size: 13px; color: var(--text-secondary);
         }
-        .card:hover { transform: translateY(-2px); }
+        .brand { font-weight: 800; font-size: 16px; color: #fff; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .brand i { color: var(--clash-color); }
+        .status-tags { display: flex; gap: 20px; }
+        .status-tag { display: flex; align-items: center; gap: 6px; }
+        .status-tag i { color: #10b981; font-size: 10px; }
 
-        .section-title { font-weight: 700; font-size: 16px; margin-bottom: 18px; display: flex; align-items: center; }
-        .section-title i { margin-right: 8px; color: var(--primary-color); font-size: 18px; }
-
-        .sub-item { 
-            background: var(--item-bg); border-radius: 12px; padding: 16px; 
-            margin-bottom: 14px; border: 1px solid var(--border-color); transition: all 0.2s; 
+        /* 标题主视觉 */
+        .hero { text-align: center; margin-bottom: 50px; }
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 16px; border-radius: 30px; font-size: 12px; font-weight: 600;
+            color: var(--text-secondary); letter-spacing: 2px; text-transform: uppercase; display: inline-block; margin-bottom: 20px;
         }
-        .sub-item:last-child { margin-bottom: 0; }
-        .sub-item:hover { background: var(--item-hover); }
-        
-        .sub-name { font-size: 14px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
-        .sub-url { 
-            font-family: monospace; font-size: 12px; color: var(--text-muted); 
-            word-break: break-all; background: var(--code-bg); 
-            padding: 10px; border-radius: 6px; margin-bottom: 12px; user-select: all; 
+        .hero h1 { font-size: 42px; font-weight: 800; margin: 0; letter-spacing: -1px; background: linear-gradient(to right, #fff 60%, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 16px; color: var(--text-secondary); margin: 12px 0 0; letter-spacing: 1px; }
+
+        /* 三栏核心容器 */
+        .main-container {
+            width: 100%; max-width: 1100px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        /* 顶级玻璃态卡片 */
+        .main-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px; padding: 35px 30px;
+            box-sizing: border-box; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            display: flex; flex-direction: column; position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .main-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 40px var(--card-glow);
         }
         
-        .btn-group { display: flex; gap: 8px; }
-        .btn { 
-            flex: 1; padding: 10px; border-radius: 8px; border: none; font-size: 13px; font-weight: 600; 
-            cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-            text-decoration: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); 
+        /* 卡片悬停霓虹微光配置 */
+        .main-card.clash-card:hover { var(--card-glow): rgba(59, 130, 246, 0.15); }
+        .main-card.rocket-card:hover { var(--card-glow): rgba(139, 92, 246, 0.15); }
+        .main-card.tg-card:hover { var(--card-glow): rgba(20, 184, 166, 0.15); }
+
+        /* 卡片内部组件 */
+        .card-icon { width: 60px; height: 60px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 25px; color: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .clash-icon { background: var(--clash-gradient); }
+        .rocket-icon { background: var(--rocket-gradient); }
+        .tg-icon { background: var(--tg-gradient); }
+
+        .main-card h2 { font-size: 24px; font-weight: 700; margin: 0 0 8px 0; }
+        .card-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 25px; line-height: 1.5; }
+
+        /* 特性列表 */
+        .feature-list { list-style: none; padding: 0; margin: 0 0 35px 0; display: flex; flex-direction: column; gap: 14px; }
+        .feature-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #cbd5e1; }
+        .feature-item i { font-size: 12px; }
+        .clash-item i { color: var(--clash-color); }
+        .rocket-item i { color: var(--rocket-color); }
+        .tg-item i { color: var(--tg-color); }
+
+        /* 隐形数据区 */
+        .hidden-url { display: none; }
+
+        /* 渐变操作按钮 */
+        .action-btn {
+            width: 100%; padding: 14px; border-radius: 14px; border: none; font-weight: 700; font-size: 14px;
+            cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none; color: #fff; margin-bottom: 12px; transition: all 0.3s;
         }
+        .btn-clash { background: var(--clash-gradient); box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25); }
+        .btn-clash:hover { filter: brightness(1.15); box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4); }
         
-        .btn-copy { background: #343a40; color: white; }
-        .btn-copy:hover { background: #212529; }
-        
-        .btn-import { background: #e7f5ff; color: #0366d6; border: 1px solid #d0ebff; }
-        .btn-import:hover { background: #d0ebff; }
+        .btn-rocket { background: var(--rocket-gradient); box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25); }
+        .btn-rocket:hover { filter: brightness(1.15); box-shadow: 0 6px 24px rgba(139, 92, 246, 0.4); }
 
-        /* 新增：二维码按钮样式 */
-        .btn-qr { background: #e2e8f0; color: #475569; flex: 0 0 45px; }
-        .btn-qr:hover { background: #cbd5e1; }
+        .btn-tg { background: var(--tg-gradient); box-shadow: 0 4px 20px rgba(20, 184, 166, 0.25); }
+        .btn-tg:hover { filter: brightness(1.15); box-shadow: 0 6px 24px rgba(20, 184, 166, 0.4); }
 
-        .btn-tg { background: var(--telegram-color); color: white; width: 100%; box-sizing: border-box; font-size: 15px; padding: 12px; border-radius: 10px; }
-        .btn-tg:hover { background: #0077b3; box-shadow: 0 4px 12px rgba(0,136,204,0.3); }
-        .btn:active { transform: scale(0.95); }
+        /* 工具按钮组 */
+        .util-group { display: flex; gap: 10px; margin-top: auto; }
+        .util-btn {
+            flex: 1; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border);
+            padding: 12px; border-radius: 12px; color: var(--text-secondary); font-size: 12px; font-weight: 600;
+            cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s;
+        }
+        .util-btn:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.15); color: #fff; }
+        .util-btn:active { transform: scale(0.97); }
 
-        .footer { font-size: 12px; color: var(--text-muted); margin-top: 20px; text-align: center; line-height: 1.8; max-width: 400px; padding-bottom: 20px; }
-        
-        /* 弹窗及二维码样式 */
+        /* 优化调整：精简并去掉付费感的单数据面板 */
+        .stats-panel-simple {
+            width: 100%; max-width: 500px; background: rgba(9, 14, 29, 0.4); border: 1px solid var(--card-border);
+            border-radius: 20px; padding: 18px; box-sizing: border-box; text-align: center;
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+        }
+        .stats-panel-simple i { color: var(--clash-color); font-size: 16px; }
+        .stat-simple-text { font-size: 14px; color: var(--text-secondary); }
+        .stat-simple-count { font-weight: 800; color: #fff; font-family: monospace; font-size: 16px; margin: 0 4px; }
+
+        /* 版权与声明声明 */
+        .footer { margin-top: 40px; text-align: center; font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+        /* 提示与弹窗 */
+        .toast {
+            position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%);
+            background: #fff; color: #000; padding: 12px 28px; border-radius: 30px; font-size: 13px; font-weight: 700;
+            z-index: 10000; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 8px; pointer-events: none;
+        }
+        .toast.show { bottom: 40px; opacity: 1; }
+
         .modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: var(--modal-bg); backdrop-filter: blur(5px);
+            display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(3, 5, 10, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;
         }
         .modal.show { display: flex; opacity: 1; }
         .modal-content {
-            background-color: var(--card-bg); padding: 25px; border-radius: 16px; text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-width: 300px; width: 80%; transform: translateY(20px); transition: transform 0.3s;
+            background: #0d1426; border: 1px solid rgba(255,255,255,0.08); padding: 35px; border-radius: 24px; text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8); max-width: 300px; width: 85%; transform: translateY(20px); transition: transform 0.3s;
             position: relative;
         }
         .modal.show .modal-content { transform: translateY(0); }
-        .close-btn {
-            position: absolute; top: 12px; right: 15px; color: var(--text-muted); 
-            font-size: 24px; font-weight: bold; cursor: pointer; line-height: 1;
-        }
-        .close-btn:hover { color: var(--text-main); }
-        #qr-image { width: 200px; height: 200px; margin: 15px auto; display: block; border-radius: 8px; background: white; padding: 10px; }
+        #qr-image { width: 180px; height: 180px; display: block; margin: 20px auto; border-radius: 12px; background: white; padding: 12px; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
 
-        .toast {
-            position: fixed; bottom: -50px; left: 50%; transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.85); color: white; padding: 10px 24px;
-            border-radius: 30px; font-size: 14px; z-index: 9999; transition: all 0.3s ease;
-            opacity: 0; pointer-events: none; display: flex; align-items: center; gap: 8px;
-        }
-        .toast.show { bottom: 40px; opacity: 1; }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.08); opacity: 0.9; }
-            100% { transform: scale(1); opacity: 1; }
+        /* 移动端响应式坍塌 */
+        @media (max-width: 900px) {
+            .main-container { grid-template-columns: 1fr; gap: 20px; }
+            .hero h1 { font-size: 32px; }
+            .top-bar { margin-bottom: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <i class="fas fa-bolt logo-icon"></i>
-        <h1>永久免费节点池</h1>
-        <p>更新及时，更多订阅请加入频道</p>
+    <div class="top-bar">
+        <div class="brand"><i class="fas fa-globe-asia"></i> GLOBAL ACCESS</div>
+        <div class="status-tags">
+            <div class="status-tag"><i class="fas fa-circle"></i> 公益资源可用</div>
+            <div class="status-tag" style="color: var(--text-muted);"><i class="fas fa-clock" style="color:var(--text-muted);"></i> 更新: 5分钟前</div>
+        </div>
     </div>
 
-    <div class="card">
-        <div class="section-title"><i class="fas fa-link"></i> 公益订阅地址</div>
+    <div class="hero">
+        <div class="hero-badge">FREE · OPEN-SOURCE · COMMUNITY</div>
+        <h1>全球网络 自由连接</h1>
+        <p>长期稳定、全节点免费分享的公益订阅服务</p>
+    </div>
+
+    <div class="main-container">
         
-        <div class="sub-item">
-            <div class="sub-name"><span>🎁 Clash-Meta ①</span> <small style="color:#0366d6; font-weight:normal;">推荐</small></div>
-            <div class="sub-url" id="sub1">https://cai.zmxoo.xyz/config.yaml</div>
-            <div class="btn-group">
-                <button class="btn btn-copy" onclick="copyText('sub1')"><i class="fas fa-copy"></i></button>
-                <a href="clash://install-config?url=https%3A%2F%2Fcai.zmxoo.xyz%2Fconfig.yaml" class="btn btn-import"><i class="fas fa-download"></i> 一键导入</a>
-                <button class="btn btn-qr" onclick="showQR('https://cai.zmxoo.xyz/config.yaml', 'Clash 订阅')"><i class="fas fa-qrcode"></i></button>
+        <div class="main-card clash-card">
+            <div class="card-icon clash-icon"><i class="fas fa-cat"></i></div>
+            <h2>Clash</h2>
+            <div class="card-desc">支持 Clash / Meta / Mihomo<br>多平台通用代理客户端</div>
+            <ul class="feature-list">
+                <li class="feature-item clash-item"><i class="fas fa-check-circle"></i> 自动适配多种加密协议</li>
+                <li class="feature-item clash-item"><i class="fas fa-check-circle"></i> 智能规则路由规则分流</li>
+                <li class="feature-item clash-item"><i class="fas fa-check-circle"></i> 跨平台无缝一键订阅</li>
+            </ul>
+            <div class="hidden-url" id="url-clash">https://cai.zmxoo.xyz/config.yaml</div>
+            
+            <a href="clash://install-config?url=https%3A%2F%2Fcai.zmxoo.xyz%2Fconfig.yaml" class="action-btn btn-clash">一键导入订阅 <i class="fas fa-arrow-right"></i></a>
+            <div class="util-group">
+                <button class="util-btn" onclick="copyFunc('url-clash')"><i class="fas fa-copy"></i> 复制订阅</button>
+                <button class="util-btn" onclick="showQR('https://cai.zmxoo.xyz/config.yaml', 'Clash')"><i class="fas fa-qrcode"></i> 二维码</button>
             </div>
         </div>
 
-        <div class="sub-item">
-            <div class="sub-name"><span>🎁 小火箭 ②</span></div>
-            <div class="sub-url" id="sub2">https://cai.zmxoo.xyz/index.html</div>
-            <div class="btn-group">
-                <button class="btn btn-copy" onclick="copyText('sub2')"><i class="fas fa-copy"></i></button>
-                <a href="shadowrocket://add/sub://https://cai.zmxoo.xyz/index.html" class="btn btn-import"><i class="fas fa-paper-plane"></i> 一键导入</a>
-                <button class="btn btn-qr" onclick="showQR('https://cai.zmxoo.xyz/index.html', '小火箭订阅')"><i class="fas fa-qrcode"></i></button>
+        <div class="main-card rocket-card">
+            <div class="card-icon rocket-icon"><i class="fas fa-rocket"></i></div>
+            <h2>Shadowrocket</h2>
+            <div class="card-desc">iOS 专属代理工具<br>一键扫码/导入，即刻轻快连接</div>
+            <ul class="feature-list">
+                <li class="feature-item rocket-item"><i class="fas fa-check-circle"></i> 苹果端一键高效安全导入</li>
+                <li class="feature-item rocket-item"><i class="fas fa-check-circle"></i> 规则全量覆盖，省电省流</li>
+                <li class="feature-item rocket-item"><i class="fas fa-check-circle"></i> 界面极简，随时启动</li>
+            </ul>
+            <div class="hidden-url" id="url-rocket">https://cai.zmxoo.xyz/index.html</div>
+
+            <a href="shadowrocket://add/sub://https://cai.zmxoo.xyz/index.html" class="action-btn btn-rocket">一键导入订阅 <i class="fas fa-arrow-right"></i></a>
+            <div class="util-group">
+                <button class="util-btn" onclick="copyFunc('url-rocket')"><i class="fas fa-copy"></i> 复制订阅</button>
+                <button class="util-btn" onclick="showQR('https://cai.zmxoo.xyz/index.html', '小火箭')"><i class="fas fa-qrcode"></i> 二维码</button>
             </div>
         </div>
+
+        <div class="main-card tg-card">
+            <div class="card-icon tg-icon"><i class="fab fa-telegram-plane"></i></div>
+            <h2>Telegram 频道</h2>
+            <div class="card-desc">实时更新与发布通告群组<br>获取最新备用节点信息</div>
+            <ul class="feature-list">
+                <li class="feature-item tg-item"><i class="fas fa-check-circle"></i> 紧急备用节点池发布</li>
+                <li class="feature-item tg-item"><i class="fas fa-check-circle"></i> 客户端小白配置指南</li>
+                <li class="feature-item tg-item"><i class="fas fa-check-circle"></i> 纯净无广告的技术社群</li>
+            </ul>
+            
+            <a href="https://t.me/zmxooo" target="_blank" class="action-btn btn-tg">立即加入频道 <i class="fas fa-arrow-right"></i></a>
+            <div class="util-group">
+                <button class="util-btn" style="flex: 1;" onclick="copyDirect('https://t.me/zmxooo')"><i class="fas fa-link"></i> 复制频道链接</button>
+            </div>
+        </div>
+
     </div>
 
-    <div class="card" style="border-left-color: var(--telegram-color);">
-        <div class="section-title"><i class="fab fa-telegram"></i> Telegram 频道</div>
-        <a href="https://t.me/zmxooo" target="_blank" class="btn btn-tg"><i class="fab fa-telegram-plane"></i> 点击加入频道交流</a>
+    <div class="stats-panel-simple">
+        <i class="fas fa-server"></i>
+        <div class="stat-simple-text">目前免费公共节点池内共有<span class="stat-simple-count">1,248+</span>个可用节点</div>
     </div>
 
     <div class="footer">
-        <i class="fas fa-shield-alt" style="color: #10b981;"></i> 采用高强度加密，保护隐私安全<br>
-        <span style="display:inline-block; margin-top:5px;">© 2026 zmxoo.xyz 版权所有</span>
+        © 2026 Global Access. All rights reserved.<br>
+        本站所有资源均免费提供且仅供技术交流学习使用，请务必遵守当地法律法规。
     </div>
 
-    <div id="toast" class="toast"><i class="fas fa-check-circle" style="color: #2ed573;"></i> <span id="toast-text"></span></div>
+    <div id="toast" class="toast"><i class="fas fa-check-circle" style="color: #10b981;"></i> <span id="toast-text"></span></div>
 
-    <div id="qrModal" class="modal" onclick="closeQR(event)">
+    <div id="qrModal" class="modal" onclick="closeQR()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeQR(event)">&times;</span>
-            <h3 id="qr-title" style="margin-top: 0; font-size: 16px;">扫描二维码导入</h3>
+            <span class="close-btn" onclick="closeQR()">&times;</span>
+            <h3 style="margin: 0 0 10px 0; font-size: 18px;">手机扫码导入</h3>
             <img id="qr-image" src="" alt="二维码加载中...">
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 0;">请使用客户端右上角的扫码功能</p>
+            <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">请使用客户端内的扫码功能直接识别</p>
         </div>
     </div>
 
     <script>
-        // 复制功能
-        function copyText(elementId) {
+        function copyFunc(elementId) {
             const text = document.getElementById(elementId).innerText;
+            copyDirect(text);
+        }
+
+        function copyDirect(text) {
             if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => showToast('📋 复制成功！')).catch(() => fallBackCopy(text));
+                navigator.clipboard.writeText(text).then(() => showToast('复制成功，快去客户端粘贴吧！'));
             } else {
-                fallBackCopy(text);
+                const input = document.createElement('textarea');
+                input.value = text; input.style.position = 'fixed';
+                document.body.appendChild(input); input.select();
+                document.execCommand('copy'); document.body.removeChild(input);
+                showToast('复制成功！');
             }
         }
 
-        function fallBackCopy(text) {
-            const input = document.createElement('textarea');
-            input.value = text;
-            input.style.position = 'fixed';
-            document.body.appendChild(input);
-            input.select();
-            try { document.execCommand('copy'); showToast('📋 复制成功！'); } 
-            catch (err) { showToast('❌ 复制失败，请手动复制'); }
-            document.body.removeChild(input);
-        }
-
-        function showToast(message) {
+        function showToast(msg) {
             const toast = document.getElementById('toast');
-            document.getElementById('toast-text').innerText = message;
+            document.getElementById('toast-text').innerText = msg;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2000);
+            setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        // 二维码功能
-        function showQR(url, title) {
-            document.getElementById('qr-title').innerText = '扫描 ' + title;
-            // 使用 api.qrserver.com 生成二维码
-            document.getElementById('qr-image').src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=10&data=' + encodeURIComponent(url);
-            document.getElementById('qrModal').classList.add('show');
+        function showQR(url, clientName) {
+            const modal = document.getElementById('qrModal');
+            document.getElementById('qr-image').src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=5&data=' + encodeURIComponent(url);
+            modal.classList.add('show');
         }
 
-        function closeQR(event) {
-            if(event) event.preventDefault();
+        function cancelQR() {
             document.getElementById('qrModal').classList.remove('show');
-            // 延迟清空图片 src，防止闪烁
-            setTimeout(() => { document.getElementById('qr-image').src = ''; }, 300);
+        }
+        function closeQR() {
+            document.getElementById('qrModal').classList.remove('show');
         }
     </script>
 </body>
