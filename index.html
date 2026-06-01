@@ -728,12 +728,7 @@ body::after{
                 >
                     扫码导入
                 </button>
-                <button
-                  class="tool-btn"
-                  onclick="window.open('https://fa.zmxoo.xyz/subapi')"
-                >
-                    查看链接
-                </button>
+
             </div>
         </div>
 
@@ -767,12 +762,7 @@ body::after{
                 >
                     扫码导入
                 </button>
-                <button
-                  class="tool-btn"
-                  onclick="window.open('https://fa.zmxoo.xyz/linkapi')"
-                >
-                    查看链接
-                </button>
+
             </div>
         </div>
 
@@ -890,7 +880,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const tools = clashCard.querySelectorAll('.tool-btn');
         tools[0].setAttribute('onclick', `copyText('${dynamicSubapi}')`);
         tools[1].setAttribute('onclick', `showQR('Clash 订阅二维码', '${dynamicSubapi}')`);
-        tools[2].setAttribute('onclick', `window.open('${dynamicSubapi}')`);
     }
 
     // 4. 动态更新 Shadowrocket 卡片中的 DOM 属性
@@ -903,7 +892,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const tools = ssrCard.querySelectorAll('.tool-btn');
         tools[0].setAttribute('onclick', `copyText('${dynamicLinkapi}')`); // 复制的是纯 https 链接，方便多端手动添加
         tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${subProtocolUrl}')`); // 扫码使用的是 sub:// 协议
-        tools[2].setAttribute('onclick', `window.open('${dynamicLinkapi}')`);
     }
 });
 
