@@ -867,6 +867,47 @@ body::after{
 </div>
 
 <script>
+// 页面加载时动态更新所有带参数的链接与点击事件
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. 获取当前日期并格式化为 YYYYMMDD
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const version = `${year}${month}${day}`; // 例如: 20260601
+
+    // 2. 定义基础链接的动态映射
+    const subapiBase = "https://fa.zmxoo.xyz/subapi";
+    const linkapiBase = "https://fa.zmxoo.xyz/linkapi";
+
+    const dynamicSubapi = `${subapiBase}?v=${version}`;
+    const dynamicLinkapi = `${linkapiBase}?v=${version}`;
+
+    // 3. 动态更新 Clash 卡片中的 DOM 属性
+    const clashCard = document.querySelector('.card-blue');
+    if (clashCard) {
+        clashCard.querySelector('.main-btn').href = `clash://install-config?url=${encodeURIComponent(dynamicSubapi)}`;
+        const tools = clashCard.querySelectorAll('.tool-btn');
+        tools[0].setAttribute('onclick', `copyText('${dynamicSubapi}')`);
+        tools[1].setAttribute('onclick', `showQR('Clash 订阅二维码', '${dynamicSubapi}')`);
+        tools[2].setAttribute('onclick', `window.open('${dynamicSubapi}')`);
+    }
+
+    // 4. 动态更新 Shadowrocket 卡片中的 DOM 属性
+    const ssrCard = document.querySelector('.card-purple');
+    if (ssrCard) {
+        // 保持原汁原味的 sub:// 协议拼接动态链接
+        const subProtocolUrl = `sub://${dynamicLinkapi}`;
+        ssrCard.querySelector('.main-btn').href = subProtocolUrl;
+        
+        const tools = ssrCard.querySelectorAll('.tool-btn');
+        tools[0].setAttribute('onclick', `copyText('${dynamicLinkapi}')`); // 复制的是纯 https 链接，方便多端手动添加
+        tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${subProtocolUrl}')`); // 扫码使用的是 sub:// 协议
+        tools[2].setAttribute('onclick', `window.open('${dynamicLinkapi}')`);
+    }
+});
+
+// ================= 核心原生功能函数（保持原样） =================
 function copyText(text){
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(showToast).catch(fallbackCopy);
@@ -911,6 +952,3 @@ function closeQR() {
     document.getElementById("qrModal").classList.remove("show");
 }
 </script>
-
-</body>
-</html>
