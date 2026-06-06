@@ -774,40 +774,52 @@ body::after{
             </div>
             <h2>Telegram</h2>
             <div class="desc">
-                节点更新通知频道<br>
-                获取最新备用节点<br>
+                最新节点更新通知<br>
+                用户交流与技术讨论群组<br>
                 订阅异常实时通知
             </div>
+            
             <a
               class="main-btn btn-green"
               href="https://t.me/zmxooo"
               target="_blank"
             >
                 <i class="fa-brands fa-telegram"></i>
-                加入频道
+                进入 Telegram 社区
             </a>
-            <div class="tools">
+            
+            <div class="tools" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
                 <button
                   class="tool-btn"
-                  onclick="copyText('https://t.me/zmxooo')"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.open('https://t.me/zmxooo', '_blank')"
                 >
-                    复制频道
+                    加入频道
                 </button>
                 <button
                   class="tool-btn"
-                  onclick="showQR('Telegram 频道二维码', 'https://t.me/zmxooo')"
-                >
-                    扫码关注
-                </button>
-                <button
-                  class="tool-btn"
-                  onclick="window.open('https://t.me/zmxooo')"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.location.href='tg://resolve?domain=zmxooo'"
                 >
                     打开频道
                 </button>
+
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.open('https://t.me/CNDLTQ', '_blank')"
+                >
+                    加入群聊
+                </button>
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.location.href='tg://resolve?domain=CNDLTQ'"
+                >
+                    打开群聊
+                </button>
             </div>
         </div>
-    </div>
 
     <div class="features">
         <div class="feature">
