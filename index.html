@@ -822,11 +822,6 @@ body::after{
         </div>
         ```
 
-### 🛠️ 调整细节：
-* **布局升级**：弃用了原本的 `flex` 样式，改用 `display: grid; grid-template-columns: repeat(2, 1fr);`，强制让 4 个按钮形成完美的 **2行2列** 宫格。
-* **宽度自适应**：每个按钮去除了可能导致错位的干扰样式，宽度自动撑满其所在的格子。
-* **直达协议**：“打开”系列按钮继续保留 `tg://resolve?domain=` 协议，只要用户设备上装了 TG 客户端，点击就会直接在 APP 内部弹窗并跳转，无需经过网页中转。
-
     <div class="features">
         <div class="feature">
             <i class="fa-solid fa-shield-halved"></i>
