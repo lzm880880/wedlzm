@@ -746,7 +746,7 @@ body::after{
             </div>
             <a
               class="main-btn btn-purple"
-              href="sub://https://fa.zmxoo.xyz/linkapi"
+              href="https://fa.zmxoo.xyz/linkapi"
             >
                 <i class="fa-solid fa-paper-plane"></i>
                 一键导入订阅
@@ -760,7 +760,7 @@ body::after{
                 </button>
                 <button
                   class="tool-btn"
-                  onclick="showQR('小火箭订阅二维码', 'sub://https://fa.zmxoo.xyz/linkapi')"
+                  onclick="showQR('小火箭订阅二维码', 'https://fa.zmxoo.xyz/linkapi')"
                 >
                     扫码导入
                 </button>
@@ -906,13 +906,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // 4. 动态更新 Shadowrocket 卡片中的 DOM 属性
     const ssrCard = document.querySelector('.card-purple');
     if (ssrCard) {
-        // 保持原汁原味的 sub:// 协议拼接动态链接
-        const subProtocolUrl = `sub://${dynamicLinkapi}`;
-        ssrCard.querySelector('.main-btn').href = subProtocolUrl;
+        // 一键导入直接使用 HTTPS 链接，iOS Safari 自动识别 Shadowrocket
+        ssrCard.querySelector('.main-btn').href = dynamicLinkapi;
         
         const tools = ssrCard.querySelectorAll('.tool-btn');
-        tools[0].setAttribute('onclick', `copyText('${dynamicLinkapi}')`); // 复制的是纯 https 链接，方便多端手动添加
-        tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${subProtocolUrl}')`); // 扫码使用的是 sub:// 协议
+        tools[0].setAttribute('onclick', `copyText('${dynamicLinkapi}')`);
+        tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${dynamicLinkapi}')`);
     }
 });
 
