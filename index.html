@@ -906,9 +906,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // 4. 动态更新 Shadowrocket 卡片中的 DOM 属性
     const ssrCard = document.querySelector('.card-purple');
     if (ssrCard) {
-        // 一键导入直接使用 HTTPS 链接，iOS Safari 自动识别 Shadowrocket
-        ssrCard.querySelector('.main-btn').href = dynamicLinkapi;
+        // 【关键修复】将 HTTPS 转换为 shadowrocket:// URL Scheme，并对原始链接进行 URI 编码
+        const shadowrocketScheme = `shadowrocket://install-config?url=${encodeURIComponent(dynamicLinkapi)}`;
+        ssrCard.querySelector('.main-btn').href = shadowrocketScheme;
         
+        // 复制和扫码功能依然使用原始的 HTTPS 链接，保证兼容性
         const tools = ssrCard.querySelectorAll('.tool-btn');
         tools[0].setAttribute('onclick', `copyText('${dynamicLinkapi}')`);
         tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${dynamicLinkapi}')`);
