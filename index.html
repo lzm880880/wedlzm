@@ -14,128 +14,52 @@
 
 <style>
 
-:root {
-    /* 动效令牌 */
-    --transition-base: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+:root{
+    --bg:#040816;
 
-    /* 阴影令牌 */
-    --shadow-sm: 0 1px 2px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.08);
-    --shadow-md: 0 2px 4px rgba(0,0,0,.10), 0 16px 40px rgba(0,0,0,.18);
-}
+    --card-bg:rgba(10,16,32,.72);
+    --card-border:rgba(255,255,255,.08);
 
-/* 页面入场效果 */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-body {
-    animation: fadeIn 0.35s ease-out;
-}
+    --blue:#3b82f6;
+    --blue2:#2563eb;
 
-/* =========================
-   卡片样式
-========================= */
-.card {
-    position: relative;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 34px;
-    padding: 34px 30px;
-    overflow: hidden;
-    backdrop-filter: blur(24px);
-    
-    /* 合并后的动效 */
-    transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition-slow);
-    box-shadow: var(--shadow-sm);
-    will-change: transform;
+    --purple:#a855f7;
+    --purple2:#7c3aed;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    --green:#22c55e;
+    --green2:#06b6d4;
+
+    --text:#ffffff;
+    --sub:#94a3b8;
+    --muted:#64748b;
 }
 
-.card:hover {
-    transform: translateY(-8px); /* 保留原先更明显的移动效果 */
-    box-shadow: var(--shadow-md);
-    border-color: rgba(255,255,255,.16);
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* 卡片颜色装饰 */
-.card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: .14;
-    z-index: -1;
-}
-.card-blue::before {
-    background: radial-gradient(circle at top, rgba(59,130,246,.52), transparent 55%);
-}
-.card-purple::before {
-    background: radial-gradient(circle at top, rgba(168,85,247,.52), transparent 55%);
-}
-.card-green::before {
-    background: radial-gradient(circle at top, rgba(34,197,94,.46), transparent 55%);
+html{
+    scroll-behavior:smooth;
 }
 
-/* =========================
-   主按钮
-========================= */
-.main-btn {
-    width: 100%;
-    height: 62px;
-    border: none;
-    border-radius: 18px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    text-decoration: none;
-    margin-bottom: 18px;
+body{
+    background:var(--bg);
+    color:var(--text);
 
-    /* 动效合并 */
-    transition: transform 0.08s ease, background 0.2s ease, box-shadow 0.3s ease;
-}
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
 
-.main-btn:hover {
-    transform: translateY(-2px);
-}
-
-.main-btn:active {
-    transform: scale(0.99);
-}
-
-/* =========================
-   icon-box 动效 & 颜色
-========================= */
-.icon-box {
-    width: 94px;
-    height: 94px;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    margin-bottom: 28px;
-    color: #fff;
-}
-
-/* 渐变背景和阴影 */
-.icon-blue {
-    background: linear-gradient(135deg, #2563eb, #60a5fa);
-    box-shadow: 0 18px 45px rgba(37,99,235,.36);
-}
-.icon-purple {
-    background: linear-gradient(135deg, #7c3aed, #c084fc);
-    box-shadow: 0 18px 45px rgba(124,58,237,.36);
-}
-.icon-green {
-    background: linear-gradient(135deg, #06b6d4, #22c55e);
-    box-shadow: 0 18px 45px rgba(6,182,212,.36);
+    overflow-x:hidden;
+    min-height:100vh;
+    position:relative;
 }
 
 /* =========================
@@ -979,20 +903,17 @@ document.addEventListener("DOMContentLoaded", function() {
         tools[1].setAttribute('onclick', `showQR('Clash 订阅二维码', '${dynamicSubapi}')`);
     }
 
-    // 4. 动态更新 Shadowrocket 卡片 (规范化缩进)
+    // 4. 动态更新 Shadowrocket 卡片中的 DOM 属性
     const ssrCard = document.querySelector('.card-purple');
     if (ssrCard) {
-        // 构建 URL Scheme 并进行 URI 编码
-        const scheme = `shadowrocket://install-config?url=${encodeURIComponent(dynamicLinkapi)}`;
-        const mainBtn = ssrCard.querySelector('.main-btn');
+        // 【关键修复】将 HTTPS 转换为 shadowrocket:// URL Scheme，并对原始链接进行 URI 编码
+        const shadowrocketScheme = `shadowrocket://install-config?url=${encodeURIComponent(dynamicLinkapi)}`;
+        ssrCard.querySelector('.main-btn').href = shadowrocketScheme;
         
-        // 绑定跳转逻辑
-        mainBtn.href = scheme;
-        
-        // 统一工具按钮逻辑
+        // 复制和扫码功能依然使用原始的 HTTPS 链接，保证兼容性
         const tools = ssrCard.querySelectorAll('.tool-btn');
-        tools[0].onclick = () => copyText(dynamicLinkapi);
-        tools[1].onclick = () => showQR('小火箭订阅二维码', dynamicLinkapi);
+        tools[0].setAttribute('onclick', `copyText('${dynamicLinkapi}')`);
+        tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${dynamicLinkapi}')`);
     }
 });
 
