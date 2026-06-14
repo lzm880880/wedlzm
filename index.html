@@ -878,14 +878,7 @@ body::after{
 </div>
 
 <script>
-// 页面加载时动态更新所有带参数的链接与点击事件
-document.addEventListener("DOMContentLoaded", function() {
-    // 1. 获取当前日期并格式化为 YYYYMMDD
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const version = `${year}${month}${day}`; // 例如: 20260601
+    const version = "stable"; 
 
     // 2. 定义基础链接的动态映射
     const subapiBase = "https://fa.zmxoo.xyz/subapi";
