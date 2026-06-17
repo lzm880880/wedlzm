@@ -913,10 +913,7 @@ body::after{
 
 <!-- 别忘了补上 CSS 动画（可以放在页面的 <style> 标签里） -->
 <style>
-@keyframes modalFadeIn {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
-}
+  
 <script>
 // ⚠️ 部署好 Cloudflare Workers 后，把这里改成你自己的 Workers 地址！
 const AUTH_WORKER_URL = "https://你的Workers项目名.你的子域名.workers.dev";
@@ -1261,5 +1258,5 @@ function closeQR() {
     opacity: 0.5;
     cursor: not-allowed;
 }     
-  
+ 
 </script>
