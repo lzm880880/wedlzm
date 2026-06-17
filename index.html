@@ -856,21 +856,18 @@ body::after{
     from { opacity: 0; transform: scale(0.96); }
     to { opacity: 1; transform: scale(1); }
 }
-</style>
-
-<!-- 3. JavaScript 综合逻辑区 -->
 <script>
 // ⚠️ 部署好 Cloudflare Workers 后，把这里改成你自己的 Workers 地址！
 const AUTH_WORKER_URL = "https://你的Workers项目名.你的子域名.workers.dev";
 
-// 页面初始化：合并了缓存探测与链接参数绑定，精简性能
+// 页面初始化逻辑
 document.addEventListener("DOMContentLoaded", function() {
-    // A. 拦截雷达探测
+    // A. 探测本地登录状态缓存
     if (localStorage.getItem("global_access_logged") === "true") {
         unlockSite();
     }
 
-    // B. 卡片订阅数据一键动态注入
+    // B. 一键挂载静态卡片订阅链接
     const subapiUrl = "https://fa.zmxoo.xyz/subapi";
     const linkapiUrl = "https://fa.zmxoo.xyz/linkapi";
 
@@ -884,91 +881,153 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const ssrCard = document.querySelector('.card-purple');
     if (ssrCard) {
-        const shadowrocketScheme = `shadowrocket://install-config?url=${encodeURIComponent(linkapiUrl)}`;
-        ssrCard.querySelector('.main-btn').href = shadowrocketScheme;
+        ssrCard.querySelector('.main-btn').href = `shadowrocket://install-config?url=${encodeURIComponent(linkapiUrl)}`;
         const tools = ssrCard.querySelectorAll('.tool-btn');
         tools[0].setAttribute('onclick', `copyText('${linkapiUrl}')`);
         tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${linkapiUrl}')`);
     }
 });
 
-// 验证逻辑：触发发送验证码
-async function sendAuthCode() {
-    const emailInput = document.getElementById('auth-email');
-    const sendBtn = document.getElementById('auth-send-btn');
+// 三个面板的无缝切换引擎
+function switchPanel(type) {
+    document.getElementById('panel-login').style.display = type === 'login' ? 'block' : 'none';
+    document.getElementById('panel-register').style.display = type === 'register' ? 'block' : 'none';
+    document.getElementById('panel-forget').style.display = type === 'forget' ? 'block' : 'none';
+}
+
+// 统一发信控制引擎（支持注册和忘记密码两个场景）
+async function sendCode(scene) {
+    const emailInput = document.getElementById(scene === 'reg' ? 'reg-email' : 'forget-email');
+    const btn = document.getElementById(scene === 'reg' ? 'reg-code-btn' : 'forget-code-btn');
     const email = emailInput.value.trim();
-    
+
     if (!email || !email.includes('@')) {
-        alert('请输入正确的 QQ/163/Gmail 等主流邮箱！');
+        alert('请输入有效的邮箱地址！');
         return;
     }
-    
-    sendBtn.disabled = true;
-    sendBtn.style.opacity = "0.6";
-    sendBtn.innerText = "正在安全发送...";
+
+    btn.disabled = true;
+    btn.innerText = "发送中...";
 
     try {
-        const res = await fetch(`${AUTH_WORKER_URL}/send`, {
+        const res = await fetch(`${AUTH_WORKER_URL}/send-code`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email })
+            body: JSON.stringify({ email, scene }) // 告诉后端这是注册还是找回密码
         });
         const data = await res.json();
-        
         if (data.success) {
-            document.getElementById('auth-step1').style.display = 'none';
-            document.getElementById('auth-step2').style.display = 'block';
-            document.getElementById('auth-title').innerText = "请输入验证码";
+            alert('验证码已发送至邮箱，请检查收件箱（或垃圾箱）');
+            // 简单倒计时防刷
+            let count = 60;
+            const timer = setInterval(() => {
+                count--;
+                if(count <= 0) {
+                    clearInterval(timer);
+                    btn.disabled = false;
+                    btn.innerText = "获取验证码";
+                } else {
+                    btn.innerText = `${count}s`;
+                }
+            }, 1000);
         } else {
-            alert('验证码发送失败: ' + (data.msg || '未知错误'));
-            resetSendBtn();
+            alert(data.msg || '发送失败');
+            btn.disabled = false;
+            btn.innerText = "获取验证码";
         }
-    } catch (err) {
-        alert('与发信网关连接失败，请检查 Workers 配置！');
-        resetSendBtn();
-    }
-
-    function resetSendBtn() {
-        sendBtn.disabled = false;
-        sendBtn.style.opacity = "1";
-        sendBtn.innerText = "获取数字验证码";
+    } catch {
+        alert('网络连接故障，请检查后端网关');
+        btn.disabled = false;
+        btn.innerText = "获取验证码";
     }
 }
 
-// 验证逻辑：校验 6 位数字验证码
-async function verifyAuthCode() {
-    const email = document.getElementById('auth-email').value.trim();
-    const code = document.getElementById('auth-code').value.trim();
-    const verifyBtn = document.getElementById('auth-verify-btn');
+// 核心业务 1：处理已有账号登录
+async function handleLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const pwd = document.getElementById('login-pwd').value.trim();
 
-    if (code.length !== 6 || isNaN(code)) {
-        alert('请输入完整的 6 位数字验证码！');
+    if (!email || !pwd) {
+        alert('请完整填写邮箱和密码！');
         return;
     }
 
-    verifyBtn.disabled = true;
-    verifyBtn.innerText = "正在核对...";
-
     try {
-        const res = await fetch(`${AUTH_WORKER_URL}/verify`, {
+        const res = await fetch(`${AUTH_WORKER_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, code })
+            body: JSON.stringify({ email, password: pwd })
         });
         const data = await res.json();
+        if (data.success) {
+            if(document.getElementById('keep-login').checked) {
+                localStorage.setItem("global_access_logged", "true");
+            }
+            unlockSite();
+        } else {
+            alert(data.msg || '密码错误或账号不存在！');
+        }
+    } catch {
+        alert('无法连接到认证网关');
+    }
+}
 
+// 核心业务 2：处理新账号注册
+async function handleRegister() {
+    const email = document.getElementById('reg-email').value.trim();
+    const pwd = document.getElementById('reg-pwd').value.trim();
+    const code = document.getElementById('reg-code').value.trim();
+
+    if (!email || !pwd || !code) {
+        alert('所有字段均为必填项！');
+        return;
+    }
+
+    try {
+        const res = await fetch(`${AUTH_WORKER_URL}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password: pwd, code })
+        });
+        const data = await res.json();
         if (data.success) {
             localStorage.setItem("global_access_logged", "true");
             unlockSite();
         } else {
-            alert('验证码错误或已过期，请重新核对！');
-            verifyBtn.disabled = false;
-            verifyBtn.innerText = "立即验证解锁";
+            alert(data.msg || '注册失败，验证码不正确');
         }
-    } catch (err) {
-        alert('网络验证故障，请检查连接状态');
-        verifyBtn.disabled = false;
-        verifyBtn.innerText = "立即验证解锁";
+    } catch {
+        alert('网络请求失败');
+    }
+}
+
+// 核心业务 3：重置密码
+async function handleResetPwd() {
+    const email = document.getElementById('forget-email').value.trim();
+    const pwd = document.getElementById('forget-pwd').value.trim();
+    const code = document.getElementById('forget-code').value.trim();
+
+    if (!email || !pwd || !code) {
+        alert('请填齐所有重置信息！');
+        return;
+    }
+
+    try {
+        const res = await fetch(`${AUTH_WORKER_URL}/reset-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, newPassword: pwd, code })
+        });
+        const data = await res.json();
+        if (data.success) {
+            alert('密码修改成功，已自动为您登录！');
+            localStorage.setItem("global_access_logged", "true");
+            unlockSite();
+        } else {
+            alert(data.msg || '重置失败，验证码有误');
+        }
+    } catch {
+        alert('请求处理失败');
     }
 }
 
@@ -976,10 +1035,9 @@ async function verifyAuthCode() {
 function unlockSite() {
     const overlay = document.getElementById('auth-overlay');
     const mainSite = document.getElementById('main-site');
-    
     if (overlay) {
         overlay.style.opacity = '0';
-        setTimeout(() => overlay.remove(), 500);
+        setTimeout(() => overlay.remove(), 400);
     }
     if (mainSite) {
         mainSite.style.filter = 'none';
@@ -987,26 +1045,13 @@ function unlockSite() {
     }
 }
 
-// 修改对应的 JS 函数，让文案对应上新的高端布局
-function backToStep1() {
-    document.getElementById('auth-step1').style.display = 'block';
-    document.getElementById('auth-step2').style.display = 'none';
-    document.getElementById('auth-title').innerText = "验证码快捷登录";
-    document.getElementById('auth-subtitle').innerText = "未注册的邮箱验证后将自动创建账号";
-    const sendBtn = document.getElementById('auth-send-btn');
-    sendBtn.disabled = false;
-    sendBtn.style.opacity = "1";
-    sendBtn.innerHTML = '获取数字验证码 <i class="fa-solid fa-arrow-right" style="font-size: 13px;"></i>';
-}
-
-// 原生基础核心支持函数：复制剪贴板
+// 剪贴板复制底层函数
 function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(showToast).catch(fallbackCopy);
     } else {
         fallbackCopy();
     }
-
     function fallbackCopy() {
         const textArea = document.createElement("textarea");
         textArea.value = text;
@@ -1015,35 +1060,24 @@ function copyText(text) {
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
-        try {
-            document.execCommand('copy');
-            showToast();
-        } catch (err) {
-            alert('复制失败，请手动复制链接');
-        }
+        try { document.execCommand('copy'); showToast(); } catch { alert('复制失败'); }
         document.body.removeChild(textArea);
     }
-
-    // UI 响应式浮窗反馈处理（修复了先前由于文字直接裸露导致的致命语法报错）
     function showToast() {
         const toast = document.getElementById("toast");
         toast.classList.add("show");
         if (window.toastTimer) clearTimeout(window.toastTimer);
-        window.toastTimer = setTimeout(() => {
-            toast.classList.remove("show");
-        }, 2200);
+        window.toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 2200);
     }
 }
 
-// 二维码浮层拉取
+// 二维码组件控制
 function showQR(title, text) {
     document.getElementById("qrTitle").innerText = title;
     document.getElementById("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(text);
     document.getElementById("qrModal").classList.add("show");
 }
-
 function closeQR() {
     document.getElementById("qrModal").classList.remove("show");
 }
 </script>
-</body>
