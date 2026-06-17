@@ -792,56 +792,117 @@ body::after{
 </div> <!-- #main-site 闭合 -->
 
 
-<!-- 2. 全屏拦截登录弹窗层（像素级重构：对标高档质感，完美垂直居中） -->
 <div id="auth-overlay" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, #0f172a 0%, #020617 100%); z-index: 999999; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 20px; box-sizing: border-box;">
     
-    <!-- 星空背景装饰，提升视觉档次 -->
     <div style="position: absolute; width: 100%; height: 100%; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px; opacity: 0.15; pointer-events: none;"></div>
 
     <div style="position: relative; background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 40px 28px; border-radius: 24px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 25px 70px -10px rgba(0,0,0,0.7); box-sizing: border-box; animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
         
-        <!-- 头部品牌流光 Logo -->
         <div style="margin-bottom: 28px;">
             <h1 style="font-size: 28px; font-weight: 900; background: linear-gradient(135deg, #fff 30%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 6px 0; letter-spacing: 1px;">GLOBAL ACCESS</h1>
             <div style="width: 40px; height: 3px; background: linear-gradient(90deg, #3b82f6, #7c3aed); margin: 0 auto; border-radius: 2px;"></div>
         </div>
         
-        <!-- 动态切换的标题与描述 -->
-        <h3 id="auth-title" style="font-size: 20px; font-weight: 700; margin: 0 0 8px 0; color: #f8fafc;">验证码快捷登录</h3>
-        <p id="auth-subtitle" style="color: #64748b; font-size: 13px; margin: 0 0 28px 0; line-height: 1.5;">未注册的邮箱验证后将自动创建账号</p>
-        
-        <!-- 步骤 1：输入邮箱获取验证码 -->
-        <div id="auth-step1" style="width: 100%;">
-            <div style="position: relative; margin-bottom: 20px; text-align: left;">
-                <label style="font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block;">Email Address</label>
-                <div style="position: relative;">
-                    <i class="fa-regular fa-envelope" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #475569; font-size: 16px;"></i>
-                    <input type="email" id="auth-email" placeholder="请输入您的常用邮箱" style="width: 100%; padding: 14px 16px 14px 44px; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; color: #fff; font-size: 14px; outline: none; box-sizing: border-box; transition: all 0.3s;" onfocus="this.style.borderColor='rgba(59,130,246,0.5)'; this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.15)';" onblur="this.style.borderColor='rgba(255,255,255,0.07)'; this.style.boxShadow='none';">
-                </div>
+        <div id="panel-login" style="display: block;">
+            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">登陆账号</h3>
+            
+            <div class="auth-input-group">
+                <i class="fa-regular fa-envelope auth-icon"></i>
+                <input type="email" id="login-email" class="auth-input" placeholder="邮箱">
             </div>
             
-            <button id="auth-send-btn" onclick="sendAuthCode()" style="width: 100%; padding: 14px; background: #fff; border: none; border-radius: 12px; color: #020617; font-weight: 700; cursor: pointer; font-size: 15px; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(255,255,255,0.1);" onmouseover="this.style.transform='clientY(-1px)'" onmousedown="this.style.transform='scale(0.98)'">
-                获取数字验证码 <i class="fa-solid fa-arrow-right" style="font-size: 13px;"></i>
+            <div class="auth-input-group">
+                <i class="fa-solid fa-lock auth-icon"></i>
+                <input type="password" id="login-pwd" class="auth-input" placeholder="请输入密码">
+                <i class="fa-regular fa-eye pwd-toggle" onclick="const i=this.previousElementSibling; i.type=i.type==='password'?'text':'password'; this.classList.toggle('fa-eye-slash');"></i>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 13px; color: #cbd5e1;">
+                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                    <input type="checkbox" id="keep-login" checked style="accent-color: #3b82f6;"> 保持登陆
+                </label>
+                <span onclick="switchPanel('forget')" style="cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e1'">忘记密码</span>
+            </div>
+
+            <button onclick="handleLogin()" class="auth-btn btn-primary">
+                登录 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button onclick="switchPanel('register')" class="auth-btn btn-secondary">
+                创建账号
             </button>
         </div>
-        
-        <!-- 步骤 2：输入验证码确认登录 -->
-        <div id="auth-step2" style="display: none; width: 100%;">
-            <div style="position: relative; margin-bottom: 20px; text-align: left;">
-                <label style="font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block;">Verification Code</label>
-                <input type="text" id="auth-code" placeholder="6 位数字" maxlength="6" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; color: #fff; font-size: 18px; font-weight: 700; text-align: center; letter-spacing: 6px; outline: none; box-sizing: border-box; transition: all 0.3s;" onfocus="this.style.borderColor='rgba(124,58,237,0.5)';" onblur="this.style.borderColor='rgba(255,255,255,0.07)';">
+
+        <div id="panel-register" style="display: none;">
+            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">注册账号</h3>
+            
+            <div class="auth-input-group">
+                <i class="fa-regular fa-envelope auth-icon"></i>
+                <input type="email" id="reg-email" class="auth-input" placeholder="输入邮箱">
             </div>
             
-            <button id="auth-verify-btn" onclick="verifyAuthCode()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #3b82f6, #7c3aed); border: none; border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; font-size: 15px; transition: all 0.2s ease; box-shadow: 0 4px 15px rgba(124,58,237,0.3);">
-                立即登录 / 注册
+            <div style="display: flex; gap: 10px; margin-bottom: 18px;">
+                <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
+                    <i class="fa-solid fa-shield-halved auth-icon"></i>
+                    <input type="text" id="reg-code" class="auth-input" placeholder="验证码" maxlength="6">
+                </div>
+                <button id="reg-code-btn" onclick="sendCode('reg')" class="btn-code">
+                    获取验证码
+                </button>
+            </div>
+
+            <div class="auth-input-group">
+                <i class="fa-solid fa-lock auth-icon"></i>
+                <input type="password" id="reg-pwd" class="auth-input" placeholder="设置登录密码">
+                <i class="fa-regular fa-eye pwd-toggle" onclick="const i=this.previousElementSibling; i.type=i.type==='password'?'text':'password'; this.classList.toggle('fa-eye-slash');"></i>
+            </div>
+
+            <button onclick="handleRegister()" class="auth-btn btn-primary">
+                注册并登录
             </button>
             
             <div style="margin-top: 20px;">
-                <span onclick="backToStep1()" style="color: #94a3b8; font-size: 13px; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
-                    <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 返回修改邮箱
+                <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
+                    <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 返回登录
                 </span>
             </div>
         </div>
+
+        <div id="panel-forget" style="display: none;">
+            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">重置密码</h3>
+            
+            <div class="auth-input-group">
+                <i class="fa-regular fa-envelope auth-icon"></i>
+                <input type="email" id="forget-email" class="auth-input" placeholder="注册时使用的邮箱">
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-bottom: 18px;">
+                <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
+                    <i class="fa-solid fa-shield-halved auth-icon"></i>
+                    <input type="text" id="forget-code" class="auth-input" placeholder="验证码" maxlength="6">
+                </div>
+                <button id="forget-code-btn" onclick="sendCode('forget')" class="btn-code">
+                    获取验证码
+                </button>
+            </div>
+
+            <div class="auth-input-group">
+                <i class="fa-solid fa-lock auth-icon"></i>
+                <input type="password" id="forget-pwd" class="auth-input" placeholder="输入新密码">
+                <i class="fa-regular fa-eye pwd-toggle" onclick="const i=this.previousElementSibling; i.type=i.type==='password'?'text':'password'; this.classList.toggle('fa-eye-slash');"></i>
+            </div>
+
+            <button onclick="handleResetPwd()" class="auth-btn btn-primary">
+                确认重置
+            </button>
+            
+            <div style="margin-top: 20px;">
+                <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
+                    <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 记起密码了？返回登录
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- 底部保留服务声明，显得更正规 -->
         <div style="margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px;">
@@ -1080,4 +1141,125 @@ function showQR(title, text) {
 function closeQR() {
     document.getElementById("qrModal").classList.remove("show");
 }
+
+ /* =========================
+   全新认证弹窗组件样式
+========================= */
+.auth-input-group {
+    position: relative;
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.auth-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 15px;
+    z-index: 2;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+
+.auth-input:focus {
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.auth-input::placeholder {
+    color: #475569;
+}
+
+.pwd-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.pwd-toggle:hover {
+    color: #cbd5e1;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+.auth-btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1e293b);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #3b82f6, #334155);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 14px;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.btn-code {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.btn-code:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-code:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}     
+  
 </script>
