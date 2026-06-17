@@ -1208,8 +1208,29 @@ function copyText(text) {
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
-        try { document.
-<script>
+        try { document.execCommand('copy'); showToast(); } catch { alert('复制失败'); }
+        document.body.removeChild(textArea);
+    }
+    function showToast() {
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        if (window.toastTimer) {
+            clearTimeout(window.toastTimer);
+        }
+        window.toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 2200);
+    }
+}
+
+function showQR(title, text) {
+    document.getElementById("qrTitle").innerText = title;
+    document.getElementById("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(text);
+    document.getElementById("qrModal").classList.add("show");
+}
+
+function closeQR() {
+    document.getElementById("qrModal").classList.remove("show");
+}
+</script>
 
 </body>
 </html>
