@@ -754,8 +754,9 @@ body::after{
 const AUTH_WORKER_URL = window.location.origin + "/auth";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// 全局状态锁，防止所有表单、按钮被重复点击/连击
+// 全局状态锁与注册策略标记 ('tg' 或 'email')
 let isSubmitting = false;
+let currentRegMethod = 'tg';
 
 // 守护引擎
 document.addEventListener("DOMContentLoaded", async function() {
@@ -788,7 +789,7 @@ async function verifySessionToken(token) {
     }
 }
 
-// 统一 Turnstile 解析器（标准 DOM 树高可靠读取法）
+// 统一 Turnstile 解析器
 function getTurnstileResponse(panelId) {
     try {
         return document.querySelector(`#${panelId} [name="cf-turnstile-response"]`)?.value || "";
@@ -798,7 +799,6 @@ function getTurnstileResponse(panelId) {
     }
 }
 
-// 安全重置 Turnstile
 function resetTurnstileInstance(panelId) {
     try {
         if (typeof turnstile !== "undefined") {
@@ -809,22 +809,41 @@ function resetTurnstileInstance(panelId) {
     }
 }
 
-// 发信引擎（加入持久化防刷与全局锁机制）
+// 动态前端切换注册验证通道
+function switchRegMethod(method) {
+    currentRegMethod = method;
+    const tabTg = document.getElementById('tab-tg');
+    const tabEmail = document.getElementById('tab-email');
+    const fieldTg = document.getElementById('field-tg-code');
+    const fieldEmail = document.getElementById('field-email-code');
+
+    if (method === 'tg') {
+        tabTg.classList.add('active');
+        tabEmail.classList.remove('active');
+        fieldTg.style.display = 'block';
+        fieldEmail.style.display = 'none';
+    } else {
+        tabTg.classList.remove('active');
+        tabEmail.classList.add('active');
+        fieldTg.style.display = 'none';
+        fieldEmail.style.display = 'flex';
+    }
+}
+
+// 发信引擎 (调用后端的 /auth/send-code 路由)
 async function sendCode(scene) {
     if (isSubmitting) return;
 
-    const isReg = scene === 'reg';
-    const panelId = isReg ? 'reg-turnstile' : 'forget-turnstile';
-    const emailInput = document.getElementById(isReg ? 'reg-email' : 'forget-email');
-    const btn = document.getElementById(isReg ? 'reg-code-btn' : 'forget-code-btn');
+    const emailInput = document.getElementById(scene === 'reg' ? 'reg-email' : 'forget-email');
+    const btn = document.getElementById(scene === 'reg' ? 'reg-code-btn' : 'forget-code-btn');
     const email = emailInput.value.trim();
+    const panelId = scene === 'reg' ? 'reg-turnstile' : 'forget-turnstile';
 
     if (!email || !EMAIL_REGEX.test(email)) {
         alert('请输入结构合法的真实邮箱地址！');
         return;
     }
 
-    // 本地持久化冷却检查，防止刷新页面轰炸
     const cooldownKey = `cd_${scene}_${email}`;
     const lastSendTime = localStorage.getItem(cooldownKey);
     const now = Date.now();
@@ -836,7 +855,7 @@ async function sendCode(scene) {
 
     const turnstileToken = getTurnstileResponse(panelId);
     if (!turnstileToken) {
-        alert('请先完成人机安全验证！');
+        alert('发信通道已受风控安全防护，请先点击完成人机验证盾牌！');
         return;
     }
 
@@ -853,7 +872,7 @@ async function sendCode(scene) {
         });
         const data = await res.json();
         if (data.success) {
-            alert('验证码已成功发往您的邮箱，请注意查收');
+            alert('验证码已成功发往您的邮箱，请注意查收！若久未收到，请检查垃圾箱。');
             localStorage.setItem(cooldownKey, Date.now());
             
             let count = 60;
@@ -868,13 +887,13 @@ async function sendCode(scene) {
                 }
             }, 1000);
         } else {
-            alert(data.msg || '获取验证码失败，请稍后再试');
+            alert(data.msg || '获取验证码失败，可能是本日该通道发信额度已达上限。');
             btn.disabled = false;
             btn.innerText = originalText;
             resetTurnstileInstance(panelId);
         }
     } catch {
-        alert('无法与验证码网关取得连接');
+        alert('无法与网关注册发信集群取得通信连接');
         btn.disabled = false;
         btn.innerText = originalText;
         resetTurnstileInstance(panelId);
@@ -883,7 +902,7 @@ async function sendCode(scene) {
     }
 }
 
-// 登录（加固防抖锁）
+// 登录模块
 async function handleLogin() {
     if (isSubmitting) return;
 
@@ -895,7 +914,7 @@ async function handleLogin() {
     if (!validateAuthInputs(email, password)) return;
 
     if (!turnstileToken) {
-        alert('请先完成人机安全验证！');
+        alert('请先完成登录人机安全验证！');
         return;
     }
 
@@ -931,44 +950,76 @@ async function handleLogin() {
     }
 }
 
-// 注册（加固防抖锁）
+// 注册模块 (适配 TG邀请码 或是 邮箱验证码)
 async function handleRegister() {
     if (isSubmitting) return;
 
     const email = document.getElementById('reg-email').value.trim();
     const password = document.getElementById('reg-pwd').value;
-    const code = document.getElementById('reg-code').value.trim();
     const submitBtn = document.getElementById('reg-submit-btn');
     const turnstileToken = getTurnstileResponse('reg-turnstile');
 
-    if (!validateAuthInputs(email, password, code)) return;
+    let inviteCode = undefined;
+    let emailCode = undefined;
 
+    // 前端严格校验输入逻辑
+    if (currentRegMethod === 'tg') {
+        inviteCode = document.getElementById('reg-invite-code').value.trim();
+        if (!inviteCode) {
+            alert('请输入 Telegram 机器人派发的免费邀请码！');
+            return;
+        }
+    } else {
+        emailCode = document.getElementById('reg-email-code').value.trim();
+        if (!/^\d{6}$/.test(emailCode)) {
+            alert('邮箱验证码格式错误，必须为 6 位纯数字！');
+            return;
+        }
+    }
+
+    if (!email || !EMAIL_REGEX.test(email)) {
+        alert('请输入结构合法的个人电子邮箱账号！');
+        return;
+    }
+    if (!password || password.length < 6) {
+        alert('为了您的账号安全，设置的登录密码长度不能低于 6 位！');
+        return;
+    }
+
+    // 全局强制人机验证防御，防止机器人恶意批量注册
     if (!turnstileToken) {
-        alert('请先完成人机安全验证！');
+        alert('请先完成注册人机验证安全盾牌！');
         return;
     }
 
     isSubmitting = true;
     submitBtn.disabled = true;
     const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在注册...';
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在创建云端账号...';
 
     try {
         const res = await fetch(`${AUTH_WORKER_URL}/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password, code, turnstileToken })
+            body: JSON.stringify({ 
+                email, 
+                password, 
+                turnstileToken, 
+                emailCode, 
+                inviteCode 
+            }) // undefined 的字段会被 stringify 自动过滤
         });
         const data = await res.json();
+        
         if (data.success && data.token && data.subToken) {
             localStorage.setItem("global_access_token", data.token);
             unlockSiteAndRenderCards(data.subToken);
         } else {
-            alert(data.msg || '注册失败，请检查验证码是否正确');
+            alert(data.msg || '注册失败，验证凭证已被注入风控拦截或已过期。');
             resetTurnstileInstance('reg-turnstile');
         }
     } catch {
-        alert('无法将请求投递至注册服务器');
+        alert('无法将封包投递至注册核心鉴权服务器集群');
         resetTurnstileInstance('reg-turnstile');
     } finally {
         submitBtn.disabled = false;
@@ -977,7 +1028,7 @@ async function handleRegister() {
     }
 }
 
-// 重置密码（加固防抖锁）
+// 忘记密码模块
 async function handleResetPwd() {
     if (isSubmitting) return;
 
@@ -990,7 +1041,7 @@ async function handleResetPwd() {
     if (!validateAuthInputs(email, password, code)) return;
 
     if (!turnstileToken) {
-        alert('请先完成人机安全验证！');
+        alert('请先完成重置密码人机安全验证！');
         return;
     }
 
@@ -1024,13 +1075,14 @@ async function handleResetPwd() {
     }
 }
 
-// 动态组装解密主站
+// 动态组装主站内容
 function unlockSiteAndRenderCards(subToken) {
     if (!subToken) {
         alert("鉴权令牌异常，请重新登录");
         return;
     }
 
+    // 严格使用你的原版 API 域名进行订阅链接拼接
     const subapiUrl = `https://fa.zmxoo.xyz/subapi?token=${subToken}`;
     const linkapiUrl = `https://fa.zmxoo.xyz/linkapi?token=${subToken}`;
     const cardsWrapper = document.getElementById('cards-wrapper');
@@ -1142,7 +1194,6 @@ function validateAuthInputs(email, password, code = null) {
     return true;
 }
 
-// 复制文本（修复 Toast 定时器冲突）
 function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(showToast).catch(fallbackCopy);
@@ -1157,28 +1208,8 @@ function copyText(text) {
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
-        try { document.execCommand('copy'); showToast(); } catch { alert('复制失败'); }
-        document.body.removeChild(textArea);
-    }
-    function showToast() {
-        const toast = document.getElementById("toast");
-        toast.classList.add("show");
-        if (window.toastTimer) {
-            clearTimeout(window.toastTimer);
-        }
-        window.toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 2200);
-    }
-}
-
-function showQR(title, text) {
-    document.getElementById("qrTitle").innerText = title;
-    document.getElementById("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(text);
-    document.getElementById("qrModal").classList.add("show");
-}
-function closeQR() {
-    document.getElementById("qrModal").classList.remove("show");
-}
-</script>
+        try { document.
+<script>
 
 </body>
 </html>
