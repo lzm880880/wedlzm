@@ -14,11 +14,6 @@
 
 <style>
 
-html, body {
-    width: 100%;
-    overflow-x: hidden; /* 防止水平滚动 */
-}
-  
 :root{
     --bg:#040816;
 
@@ -656,270 +651,232 @@ body::after{
 
 <body>
 
-<!-- 1. 全站主要内容包裹器：已完美嵌套并包裹所有模块，确保验证码未解锁前绝对无法查看和点击 -->
-<div id="main-site" style="filter: blur(12px); pointer-events: none; transition: filter 0.5s ease;">
-    <!-- 星球背景 -->
-    <div class="planet-left"></div>
-    <div class="planet-right"><div class="ring"></div></div>
-    
-    <div class="container">
-        <!-- 顶栏区域 -->
-        <div class="topbar">
-            <div class="brand">
-                <div class="brand-logo">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </div>
-                <div class="brand-text">
-                    <h2>Global Access</h2>
-                    <p>免费 · 稳定 · 自由</p>
-                </div>
-            </div>
+<div class="planet-left"></div>
 
-            <div class="top-actions">
-                <div class="status-pill">
-                    <div class="dot"></div>
-                    服务状态：正常
-                </div>
-                <a href="https://t.me/zmxooo" class="join-btn" target="_blank">
-                    <i class="fa-brands fa-telegram"></i> 加入频道
-                </a>
+<div class="planet-right">
+    <div class="ring"></div>
+</div>
+
+<div class="container">
+
+    <div class="topbar">
+        <div class="brand">
+            <div class="brand-logo">
+                <i class="fa-solid fa-paper-plane"></i>
+            </div>
+            <div class="brand-text">
+                <h2>Global Access</h2>
+                <p>免费 · 稳定 · 自由</p>
             </div>
         </div>
 
-        <!-- 标语区域 -->
-        <div class="hero">
-            <div class="hero-badge">
-                <i class="fa-solid fa-bolt"></i> 长期维护 · 免费订阅
+        <div class="top-actions">
+            <div class="status-pill">
+                <div class="dot"></div>
+                服务状态：正常
             </div>
-            <h1>全球网络 自由畅通</h1>
-            <p>支持 Clash / Shadowrocket 一键导入</p>
+            <a
+              href="https://t.me/zmxooo"
+              class="join-btn"
+              target="_blank"
+            >
+                <i class="fa-brands fa-telegram"></i>
+                加入频道
+            </a>
         </div>
+    </div>
 
-        <!-- 节点下载卡片区域 -->
-        <div class="cards">
-            <!-- Clash 卡片 -->
-            <div class="card card-blue">
-                <div class="icon-box icon-blue">
-                    <i class="fa-solid fa-cat"></i>
-                </div>
-                <h2>Clash</h2>
-                <div class="desc">
-                    免费 Clash 节点订阅<br>
-                    支持 Meta / Mihomo<br>
-                    多平台客户端通用
-                </div>
-                <a class="main-btn btn-blue" href="clash://install-config?url=https%3A%2F%2Ffa.zmxoo.xyz%2Fsubapi">
-                    <i class="fa-solid fa-rocket"></i> 一键导入订阅
-                </a>
-                <div class="tools">
-                    <button class="tool-btn" onclick="copyText('https://fa.zmxoo.xyz/subapi')">复制订阅</button>
-                    <button class="tool-btn" onclick="showQR('Clash 订阅二维码', 'https://fa.zmxoo.xyz/subapi')">扫码导入</button>
-                </div>
-            </div>
-
-            <!-- Shadowrocket 卡片 -->
-            <div class="card card-purple">
-                <div class="icon-box icon-purple">
-                    <i class="fa-solid fa-rocket"></i>
-                </div>
-                <h2>Shadowrocket</h2>
-                <div class="desc">
-                    免费小火箭订阅<br>
-                    iOS 一键快速导入<br>
-                    扫码即可连接使用
-                </div>
-                <a class="main-btn btn-purple" href="sub://https://fa.zmxoo.xyz/linkapi">
-                    <i class="fa-solid fa-paper-plane"></i> 一键导入订阅
-                </a>
-                <div class="tools">
-                    <button class="tool-btn" onclick="copyText('https://fa.zmxoo.xyz/linkapi')">复制订阅</button>
-                    <button class="tool-btn" onclick="showQR('小火箭订阅二维码', 'sub://https://fa.zmxoo.xyz/linkapi')">扫码导入</button>
-                </div>
-            </div>
-
-            <!-- Telegram 卡片 -->
-            <div class="card card-green">
-                <div class="icon-box icon-green">
-                    <i class="fa-brands fa-telegram"></i>
-                </div>
-                <h2>Telegram</h2>
-                <div class="desc">
-                    最新节点更新通知<br>
-                    用户交流与技术讨论群组<br>
-                    订阅异常实时通知
-                </div>
-                <a class="main-btn btn-green" href="https://t.me/zmxooo" target="_blank">
-                    <i class="fa-brands fa-telegram"></i> 进入 Telegram 社区
-                </a>
-                <div class="tools" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                    <button class="tool-btn" style="width: 100%; height: 52px;" onclick="window.open('https://t.me/zmxooo', '_blank')">加入频道</button>
-                    <button class="tool-btn" style="width: 100%; height: 52px;" onclick="window.location.href='tg://resolve?domain=zmxooo'">打开频道</button>
-                    <button class="tool-btn" style="width: 100%; height: 52px;" onclick="window.open('https://t.me/CNDLTQ', '_blank')">加入群聊</button>
-                    <button class="tool-btn" style="width: 100%; height: 52px;" onclick="window.location.href='tg://resolve?domain=CNDLTQ'">打开群聊</button>
-                </div>
-            </div>
+    <div class="hero">
+        <div class="hero-badge">
+            <i class="fa-solid fa-bolt"></i>
+            长期维护 · 免费订阅
         </div>
+        <h1>
+            全球网络 自由畅通
+        </h1>
+        <p>
+            支持 Clash / Shadowrocket 一键导入
+        </p>
+    </div>
 
-        <!-- 核心优势特性区 -->
-        <div class="features">
-            <div class="feature">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h3>长期维护</h3>
-                <p>公益免费订阅<br>持续更新节点配置</p>
+    <div class="cards">
+        <div class="card card-blue">
+            <div class="icon-box icon-blue">
+                <i class="fa-solid fa-cat"></i>
             </div>
-            <div class="feature">
-                <i class="fa-solid fa-globe"></i>
-                <h3>全球覆盖</h3>
-                <p>多地区节点接入<br>自动规则分流</p>
+            <h2>Clash</h2>
+            <div class="desc">
+                免费 Clash 节点订阅<br>
+                支持 Meta / Mihomo<br>
+                多平台客户端通用
             </div>
-            <div class="feature">
-                <i class="fa-solid fa-bolt"></i>
-                <h3>一键导入</h3>
-                <p>支持 Clash / 小火箭<br>多平台快速连接</p>
-            </div>
-        </div>
-
-        <!-- 社区简介描述 -->
-        <div style="max-width: 860px; margin: 0 auto 50px; padding: 0 20px; text-align: center; color: var(--sub); font-size: 14px; line-height: 1.9;">
-            <h3 style="color: #cbd5e1; font-size: 16px; margin-bottom: 12px; font-weight: 700;">为什么选择 Global Access 公益订阅？</h3>
-            <p style="margin-bottom: 12px;">对于从事<strong>独立开发 (Indie Hacker)</strong>、<strong>学术研究</strong>以及需要频繁使用 <strong>ChatGPT 等前沿 AI 工具</strong>的用户而言，一个稳定、低延迟的全球 network 环境是核心生产力。在寻找可用节点的网络环境中，许多人经常遭遇配置失效或高昂费用的困扰。</p>
-            <p>Global Access 致力于提供长期免费的公益 network 路由支持。无论您使用的是 <strong>Clash (Meta/Mihomo)</strong> 还是 <strong>Shadowrocket (小火箭)</strong>，只需一键点击或扫码导入，即可轻松获取更新的节点配置。我们希望帮助您打破信息壁垒，让获取全球资讯、流媒体访问和前沿技术查阅变得更加自由畅通。</p>
-        </div>
-
-        <!-- 页脚 -->
-        <div class="footer">
-            © 2026 Global Access<br>
-            免费订阅 · 公益共享 · 长期维护<br>
-            仅供网络技术交流学习使用<br>
-            请遵守当地法律法规
-        </div>
-    </div> <!-- .container 闭合 -->
-</div> <!-- #main-site 闭合 -->
-
-
-<div id="auth-overlay" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, #0f172a 0%, #020617 100%); z-index: 999999; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 20px; box-sizing: border-box;">
-    
-    <div style="position: absolute; width: 100%; height: 100%; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px; opacity: 0.15; pointer-events: none;"></div>
-
-    <div style="position: relative; background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 40px 28px; border-radius: 24px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 25px 70px -10px rgba(0,0,0,0.7); box-sizing: border-box; animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
-        
-        <div style="margin-bottom: 28px;">
-            <h1 style="font-size: 28px; font-weight: 900; background: linear-gradient(135deg, #fff 30%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 6px 0; letter-spacing: 1px;">GLOBAL ACCESS</h1>
-            <div style="width: 40px; height: 3px; background: linear-gradient(90deg, #3b82f6, #7c3aed); margin: 0 auto; border-radius: 2px;"></div>
-        </div>
-        
-        <div id="panel-login" style="display: block;">
-            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">登陆账号</h3>
-            
-            <div class="auth-input-group">
-                <i class="fa-regular fa-envelope auth-icon"></i>
-                <input type="email" id="login-email" class="auth-input" placeholder="邮箱">
-            </div>
-            
-            <div class="auth-input-group">
-                <i class="fa-solid fa-lock auth-icon"></i>
-                <input type="password" id="login-pwd" class="auth-input" placeholder="请输入密码">
-                <i class="fa-regular fa-eye pwd-toggle" onclick="const i=this.previousElementSibling; i.type=i.type==='password'?'text':'password'; this.classList.toggle('fa-eye-slash');"></i>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 13px; color: #cbd5e1;">
-                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                    <input type="checkbox" id="keep-login" checked style="accent-color: #3b82f6;"> 保持登陆
-                </label>
-                <span onclick="switchPanel('forget')" style="cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e1'">忘记密码</span>
-            </div>
-
-            <button onclick="handleLogin()" class="auth-btn btn-primary">
-                登录 <i class="fa-solid fa-arrow-right"></i>
-            </button>
-            <button onclick="switchPanel('register')" class="auth-btn btn-secondary">
-                创建账号
-            </button>
-        </div>
-
-        <div id="panel-register" style="display: none;">
-            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">注册账号</h3>
-            
-            <div class="auth-input-group">
-                <i class="fa-regular fa-envelope auth-icon"></i>
-                <input type="email" id="reg-email" class="auth-input" placeholder="输入邮箱">
-            </div>
-            
-            <div style="display: flex; gap: 10px; margin-bottom: 18px;">
-                <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
-                    <i class="fa-solid fa-shield-halved auth-icon"></i>
-                    <input type="text" id="reg-code" class="auth-input" placeholder="验证码" maxlength="6">
-                </div>
-                <button id="reg-code-btn" onclick="sendCode('reg')" class="btn-code">
-                    获取验证码
+            <a
+              class="main-btn btn-blue"
+              href="clash://install-config?url=https%3A%2F%2Ffa.zmxoo.xyz%2Fsubapi"
+            >
+                <i class="fa-solid fa-rocket"></i>
+                一键导入订阅
+            </a>
+            <div class="tools">
+                <button
+                  class="tool-btn"
+                  onclick="copyText('https://fa.zmxoo.xyz/subapi')"
+                >
+                    复制订阅
                 </button>
-            </div>
+                <button
+                  class="tool-btn"
+                  onclick="showQR('Clash 订阅二维码', 'https://fa.zmxoo.xyz/subapi')"
+                >
+                    扫码导入
+                </button>
 
-            <div class="auth-input-group">
-                <i class="fa-solid fa-lock auth-icon"></i>
-                <input type="password" id="reg-pwd" class="auth-input" placeholder="设置登录密码">
-                <i class="fa-regular fa-eye pwd-toggle" onclick="const i=this.previousElementSibling; i.type=i.type==='password'?'text':'password'; this.classList.toggle('fa-eye-slash');"></i>
-            </div>
-
-            <button onclick="handleRegister()" class="auth-btn btn-primary">
-                注册并登录
-            </button>
-            
-            <div style="margin-top: 20px;">
-                <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
-                    <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 返回登录
-                </span>
             </div>
         </div>
 
-        <div id="panel-forget" style="display: none;">
-            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">重置密码</h3>
-            
-            <div class="auth-input-group">
-                <i class="fa-regular fa-envelope auth-icon"></i>
-                <input type="email" id="forget-email" class="auth-input" placeholder="注册时使用的邮箱">
+        <div class="card card-purple">
+            <div class="icon-box icon-purple">
+                <i class="fa-solid fa-rocket"></i>
             </div>
-            
-            <div style="display: flex; gap: 10px; margin-bottom: 18px;">
-                <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
-                    <i class="fa-solid fa-shield-halved auth-icon"></i>
-                    <input type="text" id="forget-code" class="auth-input" placeholder="验证码" maxlength="6">
-                </div>
-                <button id="forget-code-btn" onclick="sendCode('forget')" class="btn-code">
-                    获取验证码
+            <h2>Shadowrocket</h2>
+            <div class="desc">
+                免费小火箭订阅<br>
+                iOS 一键快速导入<br>
+                扫码即可连接使用
+            </div>
+            <a
+              class="main-btn btn-purple"
+              href="sub://https://fa.zmxoo.xyz/linkapi"
+            >
+                <i class="fa-solid fa-paper-plane"></i>
+                一键导入订阅
+            </a>
+            <div class="tools">
+                <button
+                  class="tool-btn"
+                  onclick="copyText('https://fa.zmxoo.xyz/linkapi')"
+                >
+                    复制订阅
                 </button>
-            </div>
+                <button
+                  class="tool-btn"
+                  onclick="showQR('小火箭订阅二维码', 'sub://https://fa.zmxoo.xyz/linkapi')"
+                >
+                    扫码导入
+                </button>
 
-            <div class="auth-input-group">
-                <i class="fa-solid fa-lock auth-icon"></i>
-                <input type="password" id="forget-pwd" class="auth-input" placeholder="输入新密码">
-                <i class="fa-regular fa-eye pwd-toggle" onclick="const i=this.previousElementSibling; i.type=i.type==='password'?'text':'password'; this.classList.toggle('fa-eye-slash');"></i>
             </div>
+        </div>
 
-            <button onclick="handleResetPwd()" class="auth-btn btn-primary">
-                确认重置
-            </button>
+        <div class="card card-green">
+            <div class="icon-box icon-green">
+                <i class="fa-brands fa-telegram"></i>
+            </div>
+            <h2>Telegram</h2>
+            <div class="desc">
+                最新节点更新通知<br>
+                用户交流与技术讨论群组<br>
+                订阅异常实时通知
+            </div>
             
-            <div style="margin-top: 20px;">
-                <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
-                    <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 记起密码了？返回登录
-                </span>
+            <a
+              class="main-btn btn-green"
+              href="https://t.me/zmxooo"
+              target="_blank"
+            >
+                <i class="fa-brands fa-telegram"></i>
+                进入 Telegram 社区
+            </a>
+            
+            <div class="tools" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.open('https://t.me/zmxooo', '_blank')"
+                >
+                    加入频道
+                </button>
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.location.href='tg://resolve?domain=zmxooo'"
+                >
+                    打开频道
+                </button>
+
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.open('https://t.me/CNDLTQ', '_blank')"
+                >
+                    加入群聊
+                </button>
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.location.href='tg://resolve?domain=CNDLTQ'"
+                >
+                    打开群聊
+                </button>
             </div>
         </div>
     </div>
-</div>
 
-        <!-- 底部保留服务声明，显得更正规 -->
-        <div style="margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px;">
-            <p style="color: #475569; font-size: 11px; margin: 0; line-height: 1.4;">登录即代表您同意我们的<br>《服务条款》与《隐私政策》</p>
+    <div class="features">
+        <div class="feature">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>长期维护</h3>
+            <p>
+                公益免费订阅<br>
+                持续更新节点配置
+            </p>
         </div>
+        <div class="feature">
+            <i class="fa-solid fa-globe"></i>
+            <h3>全球覆盖</h3>
+            <p>
+                多地区节点接入<br>
+                自动规则分流
+            </p>
+        </div>
+        <div class="feature">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>一键导入</h3>
+            <p>
+                支持 Clash / 小火箭<br>
+                多平台快速连接
+            </p>
+        </div>
+    </div>
+
+    <div style="max-width: 860px; margin: 0 auto 50px; padding: 0 20px; text-align: center; color: var(--sub); font-size: 14px; line-height: 1.9;">
+        <h3 style="color: #cbd5e1; font-size: 16px; margin-bottom: 12px; font-weight: 700;">为什么选择 Global Access 公益订阅？</h3>
+        <p style="margin-bottom: 12px;">对于从事<strong>独立开发 (Indie Hacker)</strong>、<strong>学术研究</strong>以及需要频繁使用 <strong>ChatGPT 等前沿 AI 工具</strong>的用户而言，一个稳定、低延迟的全球网络环境是核心生产力。在寻找可用节点的网络环境中，许多人经常遭遇配置失效或高昂费用的困扰。</p>
+        <p>Global Access 致力于提供长期免费的公益网络路由支持。无论您使用的是 <strong>Clash (Meta/Mihomo)</strong> 还是 <strong>Shadowrocket (小火箭)</strong>，只需一键点击或扫码导入，即可轻松获取更新的节点配置。我们希望帮助您打破信息壁垒，让获取全球资讯、流媒体访问和前沿技术查阅变得更加自由畅通。</p>
+    </div>
+
+    <div class="footer">
+        © 2026 Global Access<br>
+        免费订阅 · 公益共享 · 长期维护<br>
+        仅供网络技术交流学习使用<br>
+        请遵守当地法律法规
     </div>
 </div>
 
-<!-- 别忘了补上 CSS 动画（可以放在页面的 <style> 标签里） -->
-<style>
-  
-<script>
+<div id="toast" class="toast">
+    复制成功
+</div>
+
+<div id="qrModal" class="modal-overlay" onclick="closeQR()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+        <h3 id="qrTitle">订阅二维码</h3>
+        <div class="qr-container">
+            <img id="qrImage" src="" alt="二维码加载中...">
+        </div>
+        <button class="close-modal-btn" onclick="closeQR()">关闭</button>
+    </div>
+</div>
+
 // ⚠️ 部署好 Cloudflare Workers 后，把这里改成你自己的 Workers 地址！
 const AUTH_WORKER_URL = "https://你的Workers项目名.你的子域名.workers.dev";
 
@@ -1143,125 +1100,3 @@ function showQR(title, text) {
 function closeQR() {
     document.getElementById("qrModal").classList.remove("show");
 }
-
- /* =========================
-   全新认证弹窗组件样式
-========================= */
-.auth-input-group {
-    position: relative;
-    margin-bottom: 18px;
-    text-align: left;
-}
-
-.auth-icon {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #64748b;
-    font-size: 15px;
-    z-index: 2;
-}
-
-.auth-input {
-    width: 100%;
-    padding: 14px 16px 14px 44px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-    box-sizing: border-box;
-    transition: all 0.3s;
-}
-
-.auth-input:focus {
-    border-color: rgba(59, 130, 246, 0.5);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-
-.auth-input::placeholder {
-    color: #475569;
-}
-
-.pwd-toggle {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #64748b;
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.2s;
-}
-
-.pwd-toggle:hover {
-    color: #cbd5e1;
-}
-
-.auth-btn {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border: none;
-}
-
-.auth-btn:active {
-    transform: scale(0.98);
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #2563eb, #1e293b);
-    color: #fff;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.btn-primary:hover {
-    background: linear-gradient(135deg, #3b82f6, #334155);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: #cbd5e1;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-top: 14px;
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-}
-
-.btn-code {
-    background: rgba(255, 255, 255, 0.05);
-    color: #e2e8f0;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 0 14px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-    white-space: nowrap;
-}
-
-.btn-code:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.btn-code:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}     
- 
-</script>
