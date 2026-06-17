@@ -648,7 +648,119 @@ body::after{
 
 </style>
 </head>
+  
+<div id="auth-overlay" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, #0f172a 0%, #020617 100%); z-index: 999999; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 20px; box-sizing: border-box;">
+    
+    <div style="position: absolute; width: 100%; height: 100%; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px; opacity: 0.15; pointer-events: none;"></div>
 
+    <div style="position: relative; background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 40px 28px; border-radius: 24px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 25px 70px -10px rgba(0,0,0,0.7); box-sizing: border-box; animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+        
+        <div style="margin-bottom: 28px;">
+            <h1 style="font-size: 28px; font-weight: 900; background: linear-gradient(135deg, #fff 30%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 6px 0; letter-spacing: 1px;">GLOBAL ACCESS</h1>
+            <div style="width: 40px; height: 3px; background: linear-gradient(90deg, #3b82f6, #7c3aed); margin: 0 auto; border-radius: 2px;"></div>
+        </div>
+        
+        <div id="panel-login" style="display: block;">
+            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">登陆账号</h3>
+            
+            <div class="auth-input-group">
+                <i class="fa-regular fa-envelope auth-icon"></i>
+                <input type="email" id="login-email" class="auth-input" placeholder="邮箱">
+            </div>
+            
+            <div class="auth-input-group">
+                <i class="fa-solid fa-lock auth-icon"></i>
+                <input type="password" id="login-pwd" class="auth-input" placeholder="请输入密码">
+                <i class="fa-regular fa-eye pwd-toggle" onclick="const i=this.previousElementSibling; i.type=i.type==='password'?'text':'password'; this.classList.toggle('fa-eye-slash');"></i>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 13px; color: #cbd5e1;">
+                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                    <input type="checkbox" id="keep-login" checked style="accent-color: #3b82f6;"> 保持登陆
+                </label>
+                <span onclick="switchPanel('forget')" style="cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e1'">忘记密码</span>
+            </div>
+
+            <button onclick="handleLogin()" class="auth-btn btn-primary">
+                登录 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button onclick="switchPanel('register')" class="auth-btn btn-secondary">
+                创建账号
+            </button>
+        </div>
+
+        <div id="panel-register" style="display: none;">
+            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">注册账号</h3>
+            
+            <div class="auth-input-group">
+                <i class="fa-regular fa-envelope auth-icon"></i>
+                <input type="email" id="reg-email" class="auth-input" placeholder="输入邮箱">
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-bottom: 18px;">
+                <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
+                    <i class="fa-solid fa-shield-halved auth-icon"></i>
+                    <input type="text" id="reg-code" class="auth-input" placeholder="验证码" maxlength="6">
+                </div>
+                <button id="reg-code-btn" onclick="sendCode('reg')" class="btn-code">
+                    获取验证码
+                </button>
+            </div>
+
+            <div class="auth-input-group">
+                <i class="fa-solid fa-lock auth-icon"></i>
+                <input type="password" id="reg-pwd" class="auth-input" placeholder="设置登录密码">
+                <i class="fa-regular fa-eye pwd-toggle" onclick="const i=this.previousElementSibling; i.type=i.type==='password'?'text':'password'; this.classList.toggle('fa-eye-slash');"></i>
+            </div>
+
+            <button onclick="handleRegister()" class="auth-btn btn-primary">
+                注册并登录
+            </button>
+            
+            <div style="margin-top: 20px;">
+                <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
+                    <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 返回登录
+                </span>
+            </div>
+        </div>
+
+        <div id="panel-forget" style="display: none;">
+            <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">重置密码</h3>
+            
+            <div class="auth-input-group">
+                <i class="fa-regular fa-envelope auth-icon"></i>
+                <input type="email" id="forget-email" class="auth-input" placeholder="注册时使用的邮箱">
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-bottom: 18px;">
+                <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
+                    <i class="fa-solid fa-shield-halved auth-icon"></i>
+                    <input type="text" id="forget-code" class="auth-input" placeholder="验证码" maxlength="6">
+                </div>
+                <button id="forget-code-btn" onclick="sendCode('forget')" class="btn-code">
+                    获取验证码
+                </button>
+            </div>
+
+            <div class="auth-input-group">
+                <i class="fa-solid fa-lock auth-icon"></i>
+                <input type="password" id="forget-pwd" class="auth-input" placeholder="输入新密码">
+                <i class="fa-regular fa-eye pwd-toggle" onclick="const i=this.previousElementSibling; i.type=i.type==='password'?'text':'password'; this.classList.toggle('fa-eye-slash');"></i>
+            </div>
+
+            <button onclick="handleResetPwd()" class="auth-btn btn-primary">
+                确认重置
+            </button>
+            
+            <div style="margin-top: 20px;">
+                <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
+                    <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 记起密码了？返回登录
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+  
 <body>
 
 <div class="planet-left"></div>
