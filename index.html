@@ -681,36 +681,53 @@ body::after{
                 <button onclick="switchPanel('register')" class="auth-btn btn-secondary">创建账号</button>
             </div>
 
-            <div id="panel-register" style="display: none;">
-                <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">注册账号</h3>
-                <div class="auth-input-group">
-                    <i class="fa-regular fa-envelope auth-icon"></i>
-                    <input type="email" id="reg-email" class="auth-input" placeholder="输入邮箱">
-                </div>
-                <div style="display: flex; gap: 10px; margin-bottom: 18px;">
-                    <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
-                        <i class="fa-solid fa-shield-halved auth-icon"></i>
-                        <input type="text" id="reg-code" class="auth-input" placeholder="验证码" maxlength="6">
-                    </div>
-                    <button id="reg-code-btn" onclick="sendCode('reg')" class="btn-code">获取验证码</button>
-                </div>
-                <div class="auth-input-group">
-                    <i class="fa-solid fa-lock auth-icon"></i>
-                    <input type="password" id="reg-pwd" class="auth-input" placeholder="设置登录密码（不少于6位）">
-                    <i class="fa-regular fa-eye pwd-toggle" onclick="togglePwdVisibility(this)"></i>
-                </div>
-                
-                <div class="turnstile-box">
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAADmpLMwMEZ0x7ugx" data-theme="dark" id="reg-turnstile"></div>
-                </div>
+<div id="panel-register" style="display: none;">
+    <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 20px 0; color: #f8fafc;">注册账号</h3>
 
-                <button id="reg-submit-btn" onclick="handleRegister()" class="auth-btn btn-primary">注册并登录</button>
-                <div style="margin-top: 20px;">
-                    <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
-                        <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 返回登录
-                    </span>
-                </div>
-            </div>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <button id="tab-tg" class="auth-btn btn-secondary" style="margin-top: 0; flex: 1; border-color: rgba(59, 130, 246, 0.5); color: #fff; background: rgba(59, 130, 246, 0.1);" onclick="switchRegMethod('tg')">
+            <i class="fa-brands fa-telegram"></i> TG 邀请码
+        </button>
+        <button id="tab-email" class="auth-btn btn-secondary" style="margin-top: 0; flex: 1;" onclick="switchRegMethod('email')">
+            <i class="fa-regular fa-envelope"></i> 邮箱验证
+        </button>
+    </div>
+
+    <div class="auth-input-group">
+        <i class="fa-regular fa-envelope auth-icon"></i>
+        <input type="email" id="reg-email" class="auth-input" placeholder="输入邮箱">
+    </div>
+
+    <div id="field-tg-code" class="auth-input-group">
+        <i class="fa-solid fa-ticket auth-icon"></i>
+        <input type="text" id="reg-invite-code" class="auth-input" placeholder="输入 Telegram 免费邀请码">
+    </div>
+
+    <div id="field-email-code" style="display: none; gap: 10px; margin-bottom: 18px;">
+        <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
+            <i class="fa-solid fa-shield-halved auth-icon"></i>
+            <input type="text" id="reg-email-code" class="auth-input" placeholder="邮箱验证码" maxlength="6">
+        </div>
+        <button id="reg-code-btn" onclick="sendCode('reg')" class="btn-code">获取验证码</button>
+    </div>
+
+    <div class="auth-input-group">
+        <i class="fa-solid fa-lock auth-icon"></i>
+        <input type="password" id="reg-pwd" class="auth-input" placeholder="设置登录密码（不少于6位）">
+        <i class="fa-regular fa-eye pwd-toggle" onclick="togglePwdVisibility(this)"></i>
+    </div>
+    
+    <div class="turnstile-box">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAADmpLMwMEZ0x7ugx" data-theme="dark" id="reg-turnstile"></div>
+    </div>
+
+    <button id="reg-submit-btn" onclick="handleRegister()" class="auth-btn btn-primary">注册并登录</button>
+    <div style="margin-top: 20px;">
+        <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
+            <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 返回登录
+        </span>
+    </div>
+</div>
 
             <div id="panel-forget" style="display: none;">
                 <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">重置密码</h3>
@@ -817,16 +834,31 @@ function switchRegMethod(method) {
     const fieldTg = document.getElementById('field-tg-code');
     const fieldEmail = document.getElementById('field-email-code');
 
+    // 选中状态的样式
+    const activeStyle = { borderColor: 'rgba(59, 130, 246, 0.5)', color: '#fff', background: 'rgba(59, 130, 246, 0.1)' };
+    // 未选中状态的样式
+    const inactiveStyle = { borderColor: 'rgba(255, 255, 255, 0.2)', color: '#cbd5e1', background: 'transparent' };
+
     if (method === 'tg') {
-        tabTg.classList.add('active');
-        tabEmail.classList.remove('active');
+        Object.assign(tabTg.style, activeStyle);
+        Object.assign(tabEmail.style, inactiveStyle);
         fieldTg.style.display = 'block';
         fieldEmail.style.display = 'none';
+        
+        // 切换回TG时，清空邮箱验证码防止冲突
+        if(document.getElementById('reg-email-code')) {
+            document.getElementById('reg-email-code').value = '';
+        }
     } else {
-        tabTg.classList.remove('active');
-        tabEmail.classList.add('active');
+        Object.assign(tabEmail.style, activeStyle);
+        Object.assign(tabTg.style, inactiveStyle);
         fieldTg.style.display = 'none';
         fieldEmail.style.display = 'flex';
+        
+        // 切换回邮箱时，清空TG邀请码防止冲突
+        if(document.getElementById('reg-invite-code')) {
+            document.getElementById('reg-invite-code').value = '';
+        }
     }
 }
 
