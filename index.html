@@ -792,44 +792,71 @@ body::after{
 </div> <!-- #main-site 闭合 -->
 
 
-<!-- 2. 全屏拦截登录弹窗层 -->
-<div id="auth-overlay" style="position: fixed; inset: 0; background: rgba(4, 8, 22, 0.65); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.5s ease;">
-    <div style="background: rgba(10, 16, 32, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); padding: 40px 30px; border-radius: 28px; width: 340px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+<!-- 2. 全屏拦截登录弹窗层（像素级重构：对标高档质感，完美垂直居中） -->
+<div id="auth-overlay" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, #0f172a 0%, #020617 100%); z-index: 999999; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 20px; box-sizing: border-box;">
+    
+    <!-- 星空背景装饰，提升视觉档次 -->
+    <div style="position: absolute; width: 100%; height: 100%; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px; opacity: 0.15; pointer-events: none;"></div>
+
+    <div style="position: relative; background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 40px 28px; border-radius: 24px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 25px 70px -10px rgba(0,0,0,0.7); box-sizing: border-box; animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
         
-        <div style="width: 60px; height: 60px; background: linear-gradient(135deg,#2563eb,#7c3aed); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px; box-shadow: 0 8px 24px rgba(59,130,246,0.36);">
-            <i class="fa-solid fa-paper-plane" style="color: #fff;"></i>
+        <!-- 头部品牌流光 Logo -->
+        <div style="margin-bottom: 28px;">
+            <h1 style="font-size: 28px; font-weight: 900; background: linear-gradient(135deg, #fff 30%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 6px 0; letter-spacing: 1px;">GLOBAL ACCESS</h1>
+            <div style="width: 40px; height: 3px; background: linear-gradient(90deg, #3b82f6, #7c3aed); margin: 0 auto; border-radius: 2px;"></div>
         </div>
         
-        <h3 id="auth-title" style="font-size: 22px; font-weight: 800; margin-bottom: 8px; color: #fff;">验证邮箱解锁节点</h3>
-        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 24px;">请输入真实的 QQ/163/Gmail 邮箱获取验证码</p>
+        <!-- 动态切换的标题与描述 -->
+        <h3 id="auth-title" style="font-size: 20px; font-weight: 700; margin: 0 0 8px 0; color: #f8fafc;">验证码快捷登录</h3>
+        <p id="auth-subtitle" style="color: #64748b; font-size: 13px; margin: 0 0 28px 0; line-height: 1.5;">未注册的邮箱验证后将自动创建账号</p>
         
-        <!-- 步骤 1：输入邮箱 -->
-        <div id="auth-step1">
-            <input type="email" id="auth-email" placeholder="输入邮箱 (如 423@qq.com)" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; color: #fff; font-size: 14px; outline: none; margin-bottom: 16px; box-sizing: border-box;">
-            <button id="auth-send-btn" onclick="sendAuthCode()" style="width: 100%; padding: 14px; background: linear-gradient(135deg,#2563eb,#0ea5e9); border: none; border-radius: 14px; color: #fff; font-weight: 700; cursor: pointer; font-size: 15px; transition: .3s;">获取数字验证码</button>
+        <!-- 步骤 1：输入邮箱获取验证码 -->
+        <div id="auth-step1" style="width: 100%;">
+            <div style="position: relative; margin-bottom: 20px; text-align: left;">
+                <label style="font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block;">Email Address</label>
+                <div style="position: relative;">
+                    <i class="fa-regular fa-envelope" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #475569; font-size: 16px;"></i>
+                    <input type="email" id="auth-email" placeholder="请输入您的常用邮箱" style="width: 100%; padding: 14px 16px 14px 44px; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; color: #fff; font-size: 14px; outline: none; box-sizing: border-box; transition: all 0.3s;" onfocus="this.style.borderColor='rgba(59,130,246,0.5)'; this.style.boxShadow='0 0 0 3px rgba(59,130,246,0.15)';" onblur="this.style.borderColor='rgba(255,255,255,0.07)'; this.style.boxShadow='none';">
+                </div>
+            </div>
+            
+            <button id="auth-send-btn" onclick="sendAuthCode()" style="width: 100%; padding: 14px; background: #fff; border: none; border-radius: 12px; color: #020617; font-weight: 700; cursor: pointer; font-size: 15px; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(255,255,255,0.1);" onmouseover="this.style.transform='clientY(-1px)'" onmousedown="this.style.transform='scale(0.98)'">
+                获取数字验证码 <i class="fa-solid fa-arrow-right" style="font-size: 13px;"></i>
+            </button>
         </div>
         
-        <!-- 步骤 2：输入验证码 -->
-        <div id="auth-step2" style="display: none;">
-            <input type="text" id="auth-code" placeholder="请输入 6 位数字验证码" maxlength="6" style="width: 100%; padding: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; color: #fff; font-size: 16px; text-align: center; letter-spacing: 4px; outline: none; margin-bottom: 16px; box-sizing: border-box;">
-            <button id="auth-verify-btn" onclick="verifyAuthCode()" style="width: 100%; padding: 14px; background: linear-gradient(135deg,#7c3aed,#c084fc); border: none; border-radius: 14px; color: #fff; font-weight: 700; cursor: pointer; font-size: 15px; transition: .3s;">立即验证解锁</button>
-            <p onclick="backToStep1()" style="color: #64748b; font-size: 12px; margin-top: 16px; cursor: pointer; text-decoration: underline;">返回修改邮箱</p>
+        <!-- 步骤 2：输入验证码确认登录 -->
+        <div id="auth-step2" style="display: none; width: 100%;">
+            <div style="position: relative; margin-bottom: 20px; text-align: left;">
+                <label style="font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block;">Verification Code</label>
+                <input type="text" id="auth-code" placeholder="6 位数字" maxlength="6" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; color: #fff; font-size: 18px; font-weight: 700; text-align: center; letter-spacing: 6px; outline: none; box-sizing: border-box; transition: all 0.3s;" onfocus="this.style.borderColor='rgba(124,58,237,0.5)';" onblur="this.style.borderColor='rgba(255,255,255,0.07)';">
+            </div>
+            
+            <button id="auth-verify-btn" onclick="verifyAuthCode()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #3b82f6, #7c3aed); border: none; border-radius: 12px; color: #fff; font-weight: 700; cursor: pointer; font-size: 15px; transition: all 0.2s ease; box-shadow: 0 4px 15px rgba(124,58,237,0.3);">
+                立即登录 / 注册
+            </button>
+            
+            <div style="margin-top: 20px;">
+                <span onclick="backToStep1()" style="color: #94a3b8; font-size: 13px; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
+                    <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 返回修改邮箱
+                </span>
+            </div>
+        </div>
+
+        <!-- 底部保留服务声明，显得更正规 -->
+        <div style="margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px;">
+            <p style="color: #475569; font-size: 11px; margin: 0; line-height: 1.4;">登录即代表您同意我们的<br>《服务条款》与《隐私政策》</p>
         </div>
     </div>
 </div>
 
-<!-- 浮动通知与扫码浮层组件 -->
-<div id="toast" class="toast">复制成功</div>
-
-<div id="qrModal" class="modal-overlay" onclick="closeQR()">
-    <div class="modal-card" onclick="event.stopPropagation()">
-        <h3 id="qrTitle">订阅二维码</h3>
-        <div class="qr-container">
-            <img id="qrImage" src="" alt="二维码加载中...">
-        </div>
-        <button class="close-modal-btn" onclick="closeQR()">关闭</button>
-    </div>
-</div>
+<!-- 别忘了补上 CSS 动画（可以放在页面的 <style> 标签里） -->
+<style>
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+</style>
 
 <!-- 3. JavaScript 综合逻辑区 -->
 <script>
@@ -960,15 +987,16 @@ function unlockSite() {
     }
 }
 
-// 返回邮箱输入步
+// 修改对应的 JS 函数，让文案对应上新的高端布局
 function backToStep1() {
     document.getElementById('auth-step1').style.display = 'block';
     document.getElementById('auth-step2').style.display = 'none';
-    document.getElementById('auth-title').innerText = "验证邮箱解锁节点";
+    document.getElementById('auth-title').innerText = "验证码快捷登录";
+    document.getElementById('auth-subtitle').innerText = "未注册的邮箱验证后将自动创建账号";
     const sendBtn = document.getElementById('auth-send-btn');
     sendBtn.disabled = false;
     sendBtn.style.opacity = "1";
-    sendBtn.innerText = "获取数字验证码";
+    sendBtn.innerHTML = '获取数字验证码 <i class="fa-solid fa-arrow-right" style="font-size: 13px;"></i>';
 }
 
 // 原生基础核心支持函数：复制剪贴板
