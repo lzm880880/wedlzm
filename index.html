@@ -6,29 +6,22 @@
 <title>Global Access - 免费 Clash/小火箭节点订阅 | 独立开发与前沿 AI 必备网络</title>
 <meta name="description" content="Global Access 提供免费、稳定、自由的 Clash 与 Shadowrocket (小火箭) 节点订阅服务。专为独立开发、AI 工具使用、学术查阅及全球资讯获取打造的一键导入网络加速方案。" />
 <meta name="keywords" content="Clash订阅, 小火箭节点, Shadowrocket免费节点, 免费节点订阅, 学术查阅网络, AI工具加速, 独立开发, 科学上网, Global Access" />
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-/>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <style>
-
 :root{
     --bg:#040816;
-
     --card-bg:rgba(10,16,32,.72);
     --card-border:rgba(255,255,255,.08);
-
     --blue:#3b82f6;
     --blue2:#2563eb;
-
     --purple:#a855f7;
     --purple2:#7c3aed;
-
     --green:#22c55e;
     --green2:#06b6d4;
-
     --text:#ffffff;
     --sub:#94a3b8;
     --muted:#64748b;
@@ -47,43 +40,20 @@ html{
 body{
     background:var(--bg);
     color:var(--text);
-
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     overflow-x:hidden;
     min-height:100vh;
     position:relative;
 }
 
-/* =========================
-   深空背景
-========================= */
-
 body::before{
     content:"";
     position:fixed;
     inset:0;
-
     background:
-        radial-gradient(circle at 12% 48%,
-            rgba(37,99,235,.38),
-            transparent 28%),
-
-        radial-gradient(circle at 86% 14%,
-            rgba(168,85,247,.30),
-            transparent 25%),
-
-        radial-gradient(circle at 50% -10%,
-            rgba(59,130,246,.12),
-            transparent 42%);
-
+        radial-gradient(circle at 12% 48%, rgba(37,99,235,.38), transparent 28%),
+        radial-gradient(circle at 86% 14%, rgba(168,85,247,.30), transparent 25%),
+        radial-gradient(circle at 50% -10%, rgba(59,130,246,.12), transparent 42%);
     z-index:-5;
 }
 
@@ -91,18 +61,11 @@ body::after{
     content:"";
     position:fixed;
     inset:0;
-
-    background-image:
-        radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
-
+    background-image: radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
     background-size:120px 120px;
-
     opacity:.22;
-
     z-index:-4;
 }
-
-/* 左星球 */
 
 .planet-left{
     position:fixed;
@@ -111,16 +74,10 @@ body::after{
     left:-390px;
     bottom:-300px;
     border-radius:50%;
-    background:
-        radial-gradient(circle at 38% 38%,
-            rgba(96,165,250,.95),
-            rgba(37,99,235,.42) 40%,
-            rgba(0,0,0,0) 72%);
+    background: radial-gradient(circle at 38% 38%, rgba(96,165,250,.95), rgba(37,99,235,.42) 40%, rgba(0,0,0,0) 72%);
     filter:blur(2px);
     z-index:-3;
 }
-
-/* 右星球 */
 
 .planet-right{
     position:fixed;
@@ -129,14 +86,9 @@ body::after{
     right:-250px;
     top:-90px;
     border-radius:50%;
-    background:
-        radial-gradient(circle at 50% 50%,
-            rgba(168,85,247,.52),
-            rgba(76,29,149,.24) 45%,
-            rgba(0,0,0,0) 72%);
+    background: radial-gradient(circle at 50% 50%, rgba(168,85,247,.52), rgba(76,29,149,.24) 45%, rgba(0,0,0,0) 72%);
     border:1px solid rgba(168,85,247,.24);
-    box-shadow:
-        0 0 120px rgba(168,85,247,.18);
+    box-shadow: 0 0 120px rgba(168,85,247,.18);
     z-index:-3;
 }
 
@@ -151,20 +103,12 @@ body::after{
     transform:rotate(-12deg);
 }
 
-/* =========================
-   容器
-========================= */
-
 .container{
     width:100%;
     max-width:1180px;
     margin:auto;
     padding:28px 20px 55px;
 }
-
-/* =========================
-   顶部
-========================= */
 
 .topbar{
     display:flex;
@@ -183,14 +127,12 @@ body::after{
     width:52px;
     height:52px;
     border-radius:18px;
-    background:
-        linear-gradient(135deg,#2563eb,#7c3aed);
+    background: linear-gradient(135deg,#2563eb,#7c3aed);
     display:flex;
     align-items:center;
     justify-content:center;
     font-size:20px;
-    box-shadow:
-        0 12px 36px rgba(59,130,246,.36);
+    box-shadow: 0 12px 36px rgba(59,130,246,.36);
 }
 
 .brand-text h2{
@@ -229,8 +171,7 @@ body::after{
     height:10px;
     border-radius:50%;
     background:#22c55e;
-    box-shadow:
-        0 0 12px #22c55e;
+    box-shadow: 0 0 12px #22c55e;
 }
 
 .join-btn{
@@ -239,21 +180,15 @@ body::after{
     text-decoration:none;
     color:#fff;
     font-weight:700;
-    background:
-        linear-gradient(135deg,#2563eb,#0ea5e9);
+    background: linear-gradient(135deg,#2563eb,#0ea5e9);
     border:1px solid rgba(255,255,255,.08);
     transition:.3s;
 }
 
 .join-btn:hover{
     transform:translateY(-2px);
-    box-shadow:
-        0 10px 30px rgba(37,99,235,.36);
+    box-shadow: 0 10px 30px rgba(37,99,235,.36);
 }
-
-/* =========================
-   Hero (已应用 clamp 自适应，解决手机挤压)
-========================= */
 
 .hero{
     text-align:center;
@@ -281,13 +216,7 @@ body::after{
     line-height: 1.2;
     font-weight: 900;
     letter-spacing: -1.5px;
-    background:
-        linear-gradient(
-            to right,
-            #ffffff,
-            #dbeafe,
-            #a5b4fc
-        );
+    background: linear-gradient(to right, #ffffff, #dbeafe, #a5b4fc);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
@@ -299,15 +228,12 @@ body::after{
     line-height: 1.6;
 }
 
-/* =========================
-   卡片 (已应用 Flex 对齐)
-========================= */
-
-.cards{
+.dynamic-cards-container {
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:28px;
     margin-bottom:40px;
+    min-height: 400px;
 }
 
 .card{
@@ -337,26 +263,9 @@ body::after{
     z-index:-1;
 }
 
-.card-blue::before{
-    background:
-        radial-gradient(circle at top,
-        rgba(59,130,246,.52),
-        transparent 55%);
-}
-
-.card-purple::before{
-    background:
-        radial-gradient(circle at top,
-        rgba(168,85,247,.52),
-        transparent 55%);
-}
-
-.card-green::before{
-    background:
-        radial-gradient(circle at top,
-        rgba(34,197,94,.46),
-        transparent 55%);
-}
+.card-blue::before{ background: radial-gradient(circle at top, rgba(59,130,246,.52), transparent 55%); }
+.card-purple::before{ background: radial-gradient(circle at top, rgba(168,85,247,.52), transparent 55%); }
+.card-green::before{ background: radial-gradient(circle at top, rgba(34,197,94,.46), transparent 55%); }
 
 .icon-box{
     width:94px;
@@ -370,20 +279,9 @@ body::after{
     color:#fff;
 }
 
-.icon-blue{
-    background:linear-gradient(135deg,#2563eb,#60a5fa);
-    box-shadow:0 18px 45px rgba(37,99,235,.36);
-}
-
-.icon-purple{
-    background:linear-gradient(135deg,#7c3aed,#c084fc);
-    box-shadow:0 18px 45px rgba(124,58,237,.36);
-}
-
-.icon-green{
-    background:linear-gradient(135deg,#06b6d4,#22c55e);
-    box-shadow:0 18px 45px rgba(6,182,212,.36);
-}
+.icon-blue{ background:linear-gradient(135deg,#2563eb,#60a5fa); box-shadow:0 18px 45px rgba(37,99,235,.36); }
+.icon-purple{ background:linear-gradient(135deg,#7c3aed,#c084fc); box-shadow:0 18px 45px rgba(124,58,237,.36); }
+.icon-green{ background:linear-gradient(135deg,#06b6d4,#22c55e); box-shadow:0 18px 45px rgba(6,182,212,.36); }
 
 .card h2{
     font-size:40px;
@@ -416,24 +314,10 @@ body::after{
     margin-bottom:18px;
 }
 
-.main-btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-blue{
-    background:linear-gradient(135deg,#3b82f6,#2563eb);
-    box-shadow:0 12px 32px rgba(37,99,235,.36);
-}
-
-.btn-purple{
-    background:linear-gradient(135deg,#c084fc,#9333ea);
-    box-shadow:0 12px 32px rgba(147,51,234,.36);
-}
-
-.btn-green{
-    background:linear-gradient(135deg,#22c55e,#06b6d4);
-    box-shadow:0 12px 32px rgba(34,197,94,.36);
-}
+.main-btn:hover{ transform:translateY(-2px); }
+.btn-blue{ background:linear-gradient(135deg,#3b82f6,#2563eb); box-shadow:0 12px 32px rgba(37,99,235,.36); }
+.btn-purple{ background:linear-gradient(135deg,#c084fc,#9333ea); box-shadow:0 12px 32px rgba(147,51,234,.36); }
+.btn-green{ background:linear-gradient(135deg,#22c55e,#06b6d4); box-shadow:0 12px 32px rgba(34,197,94,.36); }
 
 .tools{
     display:flex;
@@ -460,10 +344,6 @@ body::after{
     color:#fff;
 }
 
-/* =========================
-   特性区
-========================= */
-
 .features{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -480,25 +360,9 @@ body::after{
     backdrop-filter:blur(20px);
 }
 
-.feature i{
-    font-size:28px;
-    margin-bottom:18px;
-}
-
-.feature h3{
-    font-size:21px;
-    margin-bottom:12px;
-}
-
-.feature p{
-    color:var(--sub);
-    line-height:1.8;
-    font-size:14px;
-}
-
-/* =========================
-   Footer
-========================= */
+.feature i{ font-size:28px; margin-bottom:18px; }
+.feature h3{ font-size:21px; margin-bottom:12px; }
+.feature p{ color:var(--sub); line-height:1.8; font-size:14px; }
 
 .footer{
     text-align:center;
@@ -507,10 +371,6 @@ body::after{
     font-size:14px;
     padding-bottom:20px;
 }
-
-/* =========================
-   Toast
-========================= */
 
 .toast{
     position:fixed;
@@ -525,17 +385,108 @@ body::after{
     box-shadow:0 20px 50px rgba(0,0,0,.42);
     opacity:0;
     transition:.35s;
-    z-index:9999;
+    z-index:99999;
 }
-
 .toast.show{
     transform:translateX(-50%) translateY(0);
     opacity:1;
 }
 
-/* =========================
-   二维码弹窗组件样式
-========================= */
+.auth-input-group {
+    position: relative;
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.auth-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 15px;
+    z-index: 2;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+
+.auth-input:focus {
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.auth-input::placeholder { color: #475569; }
+
+.pwd-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+    z-index: 5;
+}
+.pwd-toggle:hover { color: #cbd5e1; }
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+.auth-btn:active { transform: scale(0.98); }
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1e293b);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.btn-primary:hover { background: linear-gradient(135deg, #3b82f6, #334155); }
+
+.btn-secondary {
+    background: transparent;
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 14px;
+}
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+
+.btn-code {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+.btn-code:hover { background: rgba(255, 255, 255, 0.1); }
+.btn-code:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .modal-overlay {
     position: fixed;
@@ -550,10 +501,7 @@ body::after{
     transition: .3s ease;
     z-index: 10000;
 }
-.modal-overlay.show {
-    opacity: 1;
-    pointer-events: auto;
-}
+.modal-overlay.show { opacity: 1; pointer-events: auto; }
 .modal-card {
     background: #0b1126;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -566,15 +514,8 @@ body::after{
     transform: scale(0.85);
     transition: .3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.modal-overlay.show .modal-card {
-    transform: scale(1);
-}
-.modal-card h3 {
-    margin-bottom: 20px;
-    font-size: 18px;
-    font-weight: 800;
-    color: #fff;
-}
+.modal-overlay.show .modal-card { transform: scale(1); }
+.modal-card h3 { margin-bottom: 20px; font-size: 18px; font-weight: 800; color: #fff; }
 .qr-container {
     background: #fff;
     padding: 16px;
@@ -583,11 +524,7 @@ body::after{
     margin-bottom: 22px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
-.qr-container img {
-    display: block;
-    width: 180px;
-    height: 180px;
-}
+.qr-container img { display: block; width: 180px; height: 180px; }
 .close-modal-btn {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.08);
@@ -600,321 +537,618 @@ body::after{
     transition: .2s;
     font-size: 15px;
 }
-.close-modal-btn:hover {
-    background: rgba(255,255,255,0.12);
-    color: #fff;
+.close-modal-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+.turnstile-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
 }
 
-/* =========================
-   响应式
-========================= */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
 
 @media(max-width:1100px){
-    .cards{
-        grid-template-columns:1fr;
-    }
-    .features{
-        grid-template-columns:1fr;
-    }
+    .dynamic-cards-container, .features { grid-template-columns:1fr; }
 }
-
 @media(max-width:700px){
-    .topbar{
-        flex-direction:column;
-        gap:20px;
-    }
-    .top-actions{
-        width:100%;
-        flex-direction:column;
-    }
-    .status-pill,
-    .join-btn{
-        width:100%;
-        justify-content:center;
-    }
-    .hero{
-        margin-bottom:48px;
-    }
-    .hero-badge{
-        margin-bottom:22px;
-    }
-    .card h2{
-        font-size:34px;
-    }
-    .features{
-        gap:18px;
-    }
+    .topbar { flex-direction:column; gap:20px; }
+    .top-actions { width:100%; flex-direction:column; }
+    .status-pill, .join-btn { width:100%; justify-content:center; }
+    .hero { margin-bottom:48px; }
+    .card h2 { font-size:34px; }
+    .features { gap:18px; }
 }
-
 </style>
 </head>
 
 <body>
 
-<div class="planet-left"></div>
+<div id="toast" class="toast">复制成功！</div>
 
-<div class="planet-right">
-    <div class="ring"></div>
-</div>
-
-<div class="container">
-
-    <div class="topbar">
-        <div class="brand">
-            <div class="brand-logo">
-                <i class="fa-solid fa-paper-plane"></i>
-            </div>
-            <div class="brand-text">
-                <h2>Global Access</h2>
-                <p>免费 · 稳定 · 自由</p>
-            </div>
-        </div>
-
-        <div class="top-actions">
-            <div class="status-pill">
-                <div class="dot"></div>
-                服务状态：正常
-            </div>
-            <a
-              href="https://t.me/zmxooo"
-              class="join-btn"
-              target="_blank"
-            >
-                <i class="fa-brands fa-telegram"></i>
-                加入频道
-            </a>
-        </div>
-    </div>
-
-    <div class="hero">
-        <div class="hero-badge">
-            <i class="fa-solid fa-bolt"></i>
-            长期维护 · 免费订阅
-        </div>
-        <h1>
-            全球网络 自由畅通
-        </h1>
-        <p>
-            支持 Clash / Shadowrocket 一键导入
-        </p>
-    </div>
-
-    <div class="cards">
-        <div class="card card-blue">
-            <div class="icon-box icon-blue">
-                <i class="fa-solid fa-cat"></i>
-            </div>
-            <h2>Clash</h2>
-            <div class="desc">
-                免费 Clash 节点订阅<br>
-                支持 Meta / Mihomo<br>
-                多平台客户端通用
-            </div>
-            <a
-              class="main-btn btn-blue"
-              href="clash://install-config?url=https%3A%2F%2Ffa.zmxoo.xyz%2Fsubapi"
-            >
-                <i class="fa-solid fa-rocket"></i>
-                一键导入订阅
-            </a>
-            <div class="tools">
-                <button
-                  class="tool-btn"
-                  onclick="copyText('https://fa.zmxoo.xyz/subapi')"
-                >
-                    复制订阅
-                </button>
-                <button
-                  class="tool-btn"
-                  onclick="showQR('Clash 订阅二维码', 'https://fa.zmxoo.xyz/subapi')"
-                >
-                    扫码导入
-                </button>
-
-            </div>
-        </div>
-
-        <div class="card card-purple">
-            <div class="icon-box icon-purple">
-                <i class="fa-solid fa-rocket"></i>
-            </div>
-            <h2>Shadowrocket</h2>
-            <div class="desc">
-                免费小火箭订阅<br>
-                iOS 一键快速导入<br>
-                扫码即可连接使用
-            </div>
-            <a
-              class="main-btn btn-purple"
-              href="sub://https://fa.zmxoo.xyz/linkapi"
-            >
-                <i class="fa-solid fa-paper-plane"></i>
-                一键导入订阅
-            </a>
-            <div class="tools">
-                <button
-                  class="tool-btn"
-                  onclick="copyText('https://fa.zmxoo.xyz/linkapi')"
-                >
-                    复制订阅
-                </button>
-                <button
-                  class="tool-btn"
-                  onclick="showQR('小火箭订阅二维码', 'sub://https://fa.zmxoo.xyz/linkapi')"
-                >
-                    扫码导入
-                </button>
-
-            </div>
-        </div>
-
-        <div class="card card-green">
-            <div class="icon-box icon-green">
-                <i class="fa-brands fa-telegram"></i>
-            </div>
-            <h2>Telegram</h2>
-            <div class="desc">
-                最新节点更新通知<br>
-                用户交流与技术讨论群组<br>
-                订阅异常实时通知
-            </div>
-            
-            <a
-              class="main-btn btn-green"
-              href="https://t.me/zmxooo"
-              target="_blank"
-            >
-                <i class="fa-brands fa-telegram"></i>
-                进入 Telegram 社区
-            </a>
-            
-            <div class="tools" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                <button
-                  class="tool-btn"
-                  style="width: 100%; height: 52px;"
-                  onclick="window.open('https://t.me/zmxooo', '_blank')"
-                >
-                    加入频道
-                </button>
-                <button
-                  class="tool-btn"
-                  style="width: 100%; height: 52px;"
-                  onclick="window.location.href='tg://resolve?domain=zmxooo'"
-                >
-                    打开频道
-                </button>
-
-                <button
-                  class="tool-btn"
-                  style="width: 100%; height: 52px;"
-                  onclick="window.open('https://t.me/CNDLTQ', '_blank')"
-                >
-                    加入群聊
-                </button>
-                <button
-                  class="tool-btn"
-                  style="width: 100%; height: 52px;"
-                  onclick="window.location.href='tg://resolve?domain=CNDLTQ'"
-                >
-                    打开群聊
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="features">
-        <div class="feature">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h3>长期维护</h3>
-            <p>
-                公益免费订阅<br>
-                持续更新节点配置
-            </p>
-        </div>
-        <div class="feature">
-            <i class="fa-solid fa-globe"></i>
-            <h3>全球覆盖</h3>
-            <p>
-                多地区节点接入<br>
-                自动规则分流
-            </p>
-        </div>
-        <div class="feature">
-            <i class="fa-solid fa-bolt"></i>
-            <h3>一键导入</h3>
-            <p>
-                支持 Clash / 小火箭<br>
-                多平台快速连接
-            </p>
-        </div>
-    </div>
-
-    <div style="max-width: 860px; margin: 0 auto 50px; padding: 0 20px; text-align: center; color: var(--sub); font-size: 14px; line-height: 1.9;">
-        <h3 style="color: #cbd5e1; font-size: 16px; margin-bottom: 12px; font-weight: 700;">为什么选择 Global Access 公益订阅？</h3>
-        <p style="margin-bottom: 12px;">对于从事<strong>独立开发 (Indie Hacker)</strong>、<strong>学术研究</strong>以及需要频繁使用 <strong>ChatGPT 等前沿 AI 工具</strong>的用户而言，一个稳定、低延迟的全球网络环境是核心生产力。在寻找可用节点的网络环境中，许多人经常遭遇配置失效或高昂费用的困扰。</p>
-        <p>Global Access 致力于提供长期免费的公益网络路由支持。无论您使用的是 <strong>Clash (Meta/Mihomo)</strong> 还是 <strong>Shadowrocket (小火箭)</strong>，只需一键点击或扫码导入，即可轻松获取更新的节点配置。我们希望帮助您打破信息壁垒，让获取全球资讯、流媒体访问和前沿技术查阅变得更加自由畅通。</p>
-    </div>
-
-    <div class="footer">
-        © 2026 Global Access<br>
-        免费订阅 · 公益共享 · 长期维护<br>
-        仅供网络技术交流学习使用<br>
-        请遵守当地法律法规
-    </div>
-</div>
-
-<div id="toast" class="toast">
-    复制成功
-</div>
-
-<div id="qrModal" class="modal-overlay" onclick="closeQR()">
-    <div class="modal-card" onclick="event.stopPropagation()">
+<div id="qrModal" class="modal-overlay">
+    <div class="modal-card">
         <h3 id="qrTitle">订阅二维码</h3>
         <div class="qr-container">
-            <img id="qrImage" src="" alt="二维码加载中...">
+            <img id="qrImage" src="" alt="QR Code">
         </div>
-        <button class="close-modal-btn" onclick="closeQR()">关闭</button>
+        <button class="close-modal-btn" onclick="closeQR()">关闭窗口</button>
+    </div>
+</div>
+
+<div id="main-site" style="display: none;">
+    <div class="planet-left"></div>
+    <div class="planet-right"><div class="ring"></div></div>
+    
+    <div class="container">
+        <div class="topbar">
+            <div class="brand">
+                <div class="brand-logo"><i class="fa-solid fa-paper-plane"></i></div>
+                <div class="brand-text">
+                    <h2>Global Access</h2>
+                    <p>免费 · 稳定 · 自由</p>
+                </div>
+            </div>
+            <div class="top-actions">
+                <div class="status-pill"><div class="dot"></div>服务状态：正常</div>
+                <button id="logout-btn" class="tool-btn" style="display: none; height: 46px; padding: 0 16px; border-radius: 999px;" onclick="handleLogout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> 退出登录
+                </button>
+                <a href="https://t.me/zmxooo" class="join-btn" target="_blank"><i class="fa-brands fa-telegram"></i> 加入频道</a>
+            </div>
+        </div>
+
+        <div class="hero">
+            <div class="hero-badge"><i class="fa-solid fa-bolt"></i> 长期维护 · 免费订阅</div>
+            <h1>全球网络 自由畅通</h1>
+            <p>支持 Clash / Shadowrocket 一键导入</p>
+        </div>
+
+        <div id="cards-wrapper" class="dynamic-cards-container">
+            </div>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>长期维护</h3>
+                <p>公益免费订阅<br>持续更新节点配置</p>
+            </div>
+            <div class="feature">
+                <i class="fa-solid fa-globe"></i>
+                <h3>全球覆盖</h3>
+                <p>多地区节点接入<br>自动规则分流</p>
+            </div>
+            <div class="feature">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>一键导入</h3>
+                <p>支持 Clash / 小火箭<br>多平台快速连接</p>
+            </div>
+        </div>
+
+        <div style="max-width: 860px; margin: 0 auto 50px; padding: 0 20px; text-align: center; color: var(--sub); font-size: 14px; line-height: 1.9;">
+            <h3 style="color: #cbd5e1; font-size: 16px; margin-bottom: 12px; font-weight: 700;">为什么选择 Global Access 公益订阅？</h3>
+            <p style="margin-bottom: 12px;">对于从事<strong>独立开发 (Indie Hacker)</strong>、<strong>学术研究</strong>以及需要频繁使用 <strong>ChatGPT 等前沿 AI 工具</strong>的用户而言，一个稳定、低延迟的全球 network 环境是核心生产力。</p>
+            <p>Global Access 致力于提供长期免费的公益 network 路由支持。只需一键点击或扫码导入，即可轻松获取更新的节点配置。我们希望帮助您打破信息壁垒，让获取全球资讯、流媒体访问和前沿技术查阅变得更加自由畅通。</p>
+        </div>
+
+        <div class="footer">
+            © 2026 Global Access<br>
+            免费订阅 · 公益共享 · 长期维护<br>
+            仅供网络技术交流学习使用<br>
+            请遵守当地法律法规
+        </div>
+    </div>
+</div>
+
+<div id="auth-overlay" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, #0f172a 0%, #020617 100%); z-index: 999999; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 20px; box-sizing: border-box;">
+    <div style="position: absolute; width: 100%; height: 100%; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px; opacity: 0.15; pointer-events: none;"></div>
+
+    <div style="position: relative; background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 40px 28px; border-radius: 24px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 25px 70px -10px rgba(0,0,0,0.7); box-sizing: border-box; animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; justify-content: space-between; min-height: 520px;">
+        
+        <div>
+            <div style="margin-bottom: 28px;">
+                <h1 style="font-size: 28px; font-weight: 900; background: linear-gradient(135deg, #fff 30%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 6px 0; letter-spacing: 1px;">GLOBAL ACCESS</h1>
+                <div style="width: 40px; height: 3px; background: linear-gradient(90deg, #3b82f6, #7c3aed); margin: 0 auto; border-radius: 2px;"></div>
+            </div>
+            
+            <div id="panel-login" style="display: block;">
+                <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">登录账号</h3>
+                <div class="auth-input-group">
+                    <i class="fa-regular fa-envelope auth-icon"></i>
+                    <input type="email" id="login-email" class="auth-input" placeholder="邮箱">
+                </div>
+                <div class="auth-input-group">
+                    <i class="fa-solid fa-lock auth-icon"></i>
+                    <input type="password" id="login-pwd" class="auth-input" placeholder="请输入密码">
+                    <i class="fa-regular fa-eye pwd-toggle" onclick="togglePwdVisibility(this)"></i>
+                </div>
+                
+                <div class="turnstile-box">
+                    <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="dark" id="login-turnstile"></div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 13px; color: #cbd5e1;">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <input type="checkbox" id="keep-login" checked style="accent-color: #3b82f6;"> 保持登录
+                    </label>
+                    <span onclick="switchPanel('forget')" style="cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e1'">忘记密码</span>
+                </div>
+                <button id="login-submit-btn" onclick="handleLogin()" class="auth-btn btn-primary">
+                    登录 <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <button onclick="switchPanel('register')" class="auth-btn btn-secondary">创建账号</button>
+            </div>
+
+            <div id="panel-register" style="display: none;">
+                <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">注册账号</h3>
+                <div class="auth-input-group">
+                    <i class="fa-regular fa-envelope auth-icon"></i>
+                    <input type="email" id="reg-email" class="auth-input" placeholder="输入邮箱">
+                </div>
+                <div style="display: flex; gap: 10px; margin-bottom: 18px;">
+                    <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
+                        <i class="fa-solid fa-shield-halved auth-icon"></i>
+                        <input type="text" id="reg-code" class="auth-input" placeholder="验证码" maxlength="6">
+                    </div>
+                    <button id="reg-code-btn" onclick="sendCode('reg')" class="btn-code">获取验证码</button>
+                </div>
+                <div class="auth-input-group">
+                    <i class="fa-solid fa-lock auth-icon"></i>
+                    <input type="password" id="reg-pwd" class="auth-input" placeholder="设置登录密码（不少于6位）">
+                    <i class="fa-regular fa-eye pwd-toggle" onclick="togglePwdVisibility(this)"></i>
+                </div>
+                
+                <div class="turnstile-box">
+                    <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="dark" id="reg-turnstile"></div>
+                </div>
+
+                <button id="reg-submit-btn" onclick="handleRegister()" class="auth-btn btn-primary">注册并登录</button>
+                <div style="margin-top: 20px;">
+                    <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
+                        <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 返回登录
+                    </span>
+                </div>
+            </div>
+
+            <div id="panel-forget" style="display: none;">
+                <h3 style="font-size: 20px; font-weight: 700; margin: 0 0 24px 0; color: #f8fafc;">重置密码</h3>
+                <div class="auth-input-group">
+                    <i class="fa-regular fa-envelope auth-icon"></i>
+                    <input type="email" id="forget-email" class="auth-input" placeholder="注册时使用的邮箱">
+                </div>
+                <div style="display: flex; gap: 10px; margin-bottom: 18px;">
+                    <div class="auth-input-group" style="margin-bottom: 0; flex: 1;">
+                        <i class="fa-solid fa-shield-halved auth-icon"></i>
+                        <input type="text" id="forget-code" class="auth-input" placeholder="验证码" maxlength="6">
+                    </div>
+                    <button id="forget-code-btn" onclick="sendCode('forget')" class="btn-code">获取验证码</button>
+                </div>
+                <div class="auth-input-group">
+                    <i class="fa-solid fa-lock auth-icon"></i>
+                    <input type="password" id="forget-pwd" class="auth-input" placeholder="输入新密码（不少于6位）">
+                    <i class="fa-regular fa-eye pwd-toggle" onclick="togglePwdVisibility(this)"></i>
+                </div>
+                
+                <div class="turnstile-box">
+                    <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="dark" id="forget-turnstile"></div>
+                </div>
+
+                <button id="forget-submit-btn" onclick="handleResetPwd()" class="auth-btn btn-primary">确认重置</button>
+                <div style="margin-top: 20px;">
+                    <span onclick="switchPanel('login')" style="color: #94a3b8; font-size: 13px; cursor: pointer;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
+                        <i class="fa-solid fa-chevron-left" style="font-size: 11px; margin-right: 4px;"></i> 返回登录
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px;">
+            <p style="color: #475569; font-size: 11px; margin: 0; line-height: 1.4;">登录即代表您同意我们的<br>《服务条款》与《隐私政策》</p>
+        </div>
     </div>
 </div>
 
 <script>
-// 页面加载时动态更新所有带参数的链接与点击事件（已取消日期参数）
-document.addEventListener("DOMContentLoaded", function() {
-    // 1. 定义基础链接
-    const subapiUrl = "https://fa.zmxoo.xyz/subapi";
-    const linkapiUrl = "https://fa.zmxoo.xyz/linkapi";
+const AUTH_WORKER_URL = window.location.origin + "/auth";
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // 2. 动态更新 Clash 卡片中的 DOM 属性
-    const clashCard = document.querySelector('.card-blue');
-    if (clashCard) {
-        clashCard.querySelector('.main-btn').href = `clash://install-config?url=${encodeURIComponent(subapiUrl)}`;
-        const tools = clashCard.querySelectorAll('.tool-btn');
-        tools[0].setAttribute('onclick', `copyText('${subapiUrl}')`);
-        tools[1].setAttribute('onclick', `showQR('Clash 订阅二维码', '${subapiUrl}')`);
-    }
+// 全局状态锁，防止所有表单、按钮被重复点击/连击
+let isSubmitting = false;
 
-    // 3. 动态更新 Shadowrocket 卡片中的 DOM 属性
-    const ssrCard = document.querySelector('.card-purple');
-    if (ssrCard) {
-        // 【关键修复】将 HTTPS 转换为 shadowrocket:// URL Scheme，并对原始链接进行 URI 编码
-        const shadowrocketScheme = `shadowrocket://install-config?url=${encodeURIComponent(linkapiUrl)}`;
-        ssrCard.querySelector('.main-btn').href = shadowrocketScheme;
-        
-        // 复制和扫码功能依然使用原始的 HTTPS 链接，保证兼容性
-        const tools = ssrCard.querySelectorAll('.tool-btn');
-        tools[0].setAttribute('onclick', `copyText('${linkapiUrl}')`);
-        tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${linkapiUrl}')`);
+// 守护引擎
+document.addEventListener("DOMContentLoaded", async function() {
+    const token = localStorage.getItem("global_access_token");
+    if (token) {
+        const authData = await verifySessionToken(token);
+        if (authData && authData.success && authData.subToken) {
+            unlockSiteAndRenderCards(authData.subToken); 
+        } else {
+            localStorage.removeItem("global_access_token"); 
+            showAuthOverlay();
+        }
+    } else {
+        showAuthOverlay();
     }
 });
 
-// ================= 核心原生功能函数（保持原样） =================
+async function verifySessionToken(token) {
+    try {
+        const res = await fetch(`${AUTH_WORKER_URL}/verify-token`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return await res.json();
+    } catch {
+        return null;
+    }
+}
+
+// 统一 Turnstile 解析器（标准 DOM 树高可靠读取法）
+function getTurnstileResponse(panelId) {
+    try {
+        return document.querySelector(`#${panelId} [name="cf-turnstile-response"]`)?.value || "";
+    } catch (e) {
+        console.error("Turnstile 获取异常:", e);
+        return "";
+    }
+}
+
+// 安全重置 Turnstile
+function resetTurnstileInstance(panelId) {
+    try {
+        if (typeof turnstile !== "undefined") {
+            turnstile.reset(`#${panelId}`);
+        }
+    } catch(e){
+        console.error("Turnstile 重置失败:", e);
+    }
+}
+
+// 发信引擎（加入持久化防刷与全局锁机制）
+async function sendCode(scene) {
+    if (isSubmitting) return;
+
+    const isReg = scene === 'reg';
+    const panelId = isReg ? 'reg-turnstile' : 'forget-turnstile';
+    const emailInput = document.getElementById(isReg ? 'reg-email' : 'forget-email');
+    const btn = document.getElementById(isReg ? 'reg-code-btn' : 'forget-code-btn');
+    const email = emailInput.value.trim();
+
+    if (!email || !EMAIL_REGEX.test(email)) {
+        alert('请输入结构合法的真实邮箱地址！');
+        return;
+    }
+
+    // 本地持久化冷却检查，防止刷新页面轰炸
+    const cooldownKey = `cd_${scene}_${email}`;
+    const lastSendTime = localStorage.getItem(cooldownKey);
+    const now = Date.now();
+    if (lastSendTime && (now - lastSendTime < 60000)) {
+        const remain = Math.ceil((60000 - (now - lastSendTime)) / 1000);
+        alert(`操作太频繁，请在 ${remain} 秒后再试！`);
+        return;
+    }
+
+    const turnstileToken = getTurnstileResponse(panelId);
+    if (!turnstileToken) {
+        alert('请先完成人机安全验证！');
+        return;
+    }
+
+    isSubmitting = true;
+    btn.disabled = true;
+    const originalText = btn.innerText;
+    btn.innerText = "发送中...";
+
+    try {
+        const res = await fetch(`${AUTH_WORKER_URL}/send-code`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, scene, turnstileToken })
+        });
+        const data = await res.json();
+        if (data.success) {
+            alert('验证码已成功发往您的邮箱，请注意查收');
+            localStorage.setItem(cooldownKey, Date.now());
+            
+            let count = 60;
+            const timer = setInterval(() => {
+                count--;
+                if(count <= 0) {
+                    clearInterval(timer);
+                    btn.disabled = false;
+                    btn.innerText = originalText;
+                } else {
+                    btn.innerText = `${count}s`;
+                }
+            }, 1000);
+        } else {
+            alert(data.msg || '获取验证码失败，请稍后再试');
+            btn.disabled = false;
+            btn.innerText = originalText;
+            resetTurnstileInstance(panelId);
+        }
+    } catch {
+        alert('无法与验证码网关取得连接');
+        btn.disabled = false;
+        btn.innerText = originalText;
+        resetTurnstileInstance(panelId);
+    } finally {
+        isSubmitting = false;
+    }
+}
+
+// 登录（加固防抖锁）
+async function handleLogin() {
+    if (isSubmitting) return;
+
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-pwd').value; 
+    const submitBtn = document.getElementById('login-submit-btn');
+    const turnstileToken = getTurnstileResponse('login-turnstile');
+
+    if (!validateAuthInputs(email, password)) return;
+
+    if (!turnstileToken) {
+        alert('请先完成人机安全验证！');
+        return;
+    }
+
+    isSubmitting = true;
+    submitBtn.disabled = true;
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 安全鉴权中...';
+
+    try {
+        const res = await fetch(`${AUTH_WORKER_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, turnstileToken })
+        });
+        const data = await res.json();
+        
+        if (data.success && data.token && data.subToken) {
+            if (document.getElementById('keep-login').checked) {
+                localStorage.setItem("global_access_token", data.token);
+            }
+            unlockSiteAndRenderCards(data.subToken);
+        } else {
+            alert(data.msg || '密码错误或账户不存在！');
+            resetTurnstileInstance('login-turnstile');
+        }
+    } catch {
+        alert('认证服务器连接超时，请重试');
+        resetTurnstileInstance('login-turnstile');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        isSubmitting = false;
+    }
+}
+
+// 注册（加固防抖锁）
+async function handleRegister() {
+    if (isSubmitting) return;
+
+    const email = document.getElementById('reg-email').value.trim();
+    const password = document.getElementById('reg-pwd').value;
+    const code = document.getElementById('reg-code').value.trim();
+    const submitBtn = document.getElementById('reg-submit-btn');
+    const turnstileToken = getTurnstileResponse('reg-turnstile');
+
+    if (!validateAuthInputs(email, password, code)) return;
+
+    if (!turnstileToken) {
+        alert('请先完成人机安全验证！');
+        return;
+    }
+
+    isSubmitting = true;
+    submitBtn.disabled = true;
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在注册...';
+
+    try {
+        const res = await fetch(`${AUTH_WORKER_URL}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, code, turnstileToken })
+        });
+        const data = await res.json();
+        if (data.success && data.token && data.subToken) {
+            localStorage.setItem("global_access_token", data.token);
+            unlockSiteAndRenderCards(data.subToken);
+        } else {
+            alert(data.msg || '注册失败，请检查验证码是否正确');
+            resetTurnstileInstance('reg-turnstile');
+        }
+    } catch {
+        alert('无法将请求投递至注册服务器');
+        resetTurnstileInstance('reg-turnstile');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        isSubmitting = false;
+    }
+}
+
+// 重置密码（加固防抖锁）
+async function handleResetPwd() {
+    if (isSubmitting) return;
+
+    const email = document.getElementById('forget-email').value.trim();
+    const password = document.getElementById('forget-pwd').value;
+    const code = document.getElementById('forget-code').value.trim();
+    const submitBtn = document.getElementById('forget-submit-btn');
+    const turnstileToken = getTurnstileResponse('forget-turnstile');
+
+    if (!validateAuthInputs(email, password, code)) return;
+
+    if (!turnstileToken) {
+        alert('请先完成人机安全验证！');
+        return;
+    }
+
+    isSubmitting = true;
+    submitBtn.disabled = true;
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 正在重置...';
+
+    try {
+        const res = await fetch(`${AUTH_WORKER_URL}/reset-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, newPassword: password, code, turnstileToken })
+        });
+        const data = await res.json();
+        if (data.success && data.token && data.subToken) {
+            alert('密码修改成功，已为您同步登录状态！');
+            localStorage.setItem("global_access_token", data.token);
+            unlockSiteAndRenderCards(data.subToken);
+        } else {
+            alert(data.msg || '重置失败，验证码无效或已过期');
+            resetTurnstileInstance('forget-turnstile');
+        }
+    } catch {
+        alert('密码重置网络错误');
+        resetTurnstileInstance('forget-turnstile');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        isSubmitting = false;
+    }
+}
+
+// 动态组装解密主站
+function unlockSiteAndRenderCards(subToken) {
+    if (!subToken) {
+        alert("鉴权令牌异常，请重新登录");
+        return;
+    }
+
+    const subapiUrl = `https://fa.zmxoo.xyz/subapi?token=${subToken}`;
+    const linkapiUrl = `https://fa.zmxoo.xyz/linkapi?token=${subToken}`;
+    const cardsWrapper = document.getElementById('cards-wrapper');
+    
+    cardsWrapper.innerHTML = `
+        <div class="card card-blue">
+            <div class="icon-box icon-blue"><i class="fa-solid fa-cat"></i></div>
+            <h2>Clash</h2>
+            <div class="desc">免费 Clash 节点订阅<br>支持 Meta / Mihomo<br>多平台客户端通用</div>
+            <a class="main-btn btn-blue" href="clash://install-config?url=${encodeURIComponent(subapiUrl)}">
+                <i class="fa-solid fa-rocket"></i> 一键导入订阅
+            </a>
+            <div class="tools">
+                <button class="tool-btn" onclick="copyText('${subapiUrl}')">复制订阅</button>
+                <button class="tool-btn" onclick="showQR('Clash 订阅二维码', '${subapiUrl}')">扫码导入</button>
+            </div>
+        </div>
+
+        <div class="card card-purple">
+            <div class="icon-box icon-purple"><i class="fa-solid fa-rocket"></i></div>
+            <h2>Shadowrocket</h2>
+            <div class="desc">免费小火箭订阅<br>iOS 一键快速导入<br>扫码即可连接使用</div>
+            <a class="main-btn btn-purple" href="shadowrocket://install-config?url=${encodeURIComponent(linkapiUrl)}">
+                <i class="fa-solid fa-paper-plane"></i> 一键导入订阅
+            </a>
+            <div class="tools">
+                <button class="tool-btn" onclick="copyText('${linkapiUrl}')">复制订阅</button>
+                <button class="tool-btn" onclick="showQR('小火箭订阅二维码', '${linkapiUrl}')">扫码导入</button>
+            </div>
+        </div>
+
+        <div class="card card-green">
+            <div class="icon-box icon-green"><i class="fa-brands fa-telegram"></i></div>
+            <h2>Telegram</h2>
+            <div class="desc">最新节点更新通知<br>用户交流与技术讨论群组<br>订阅异常实时通知</div>
+            <a class="main-btn btn-green" href="https://t.me/zmxooo" target="_blank">
+                <i class="fa-brands fa-telegram"></i> 进入 Telegram 社区
+            </a>
+            <div class="tools" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                <button class="tool-btn" style="width: 100%; height: 52px;" onclick="window.open('https://t.me/zmxooo', '_blank')">加入频道</button>
+                <button class="tool-btn" style="width: 100%; height: 52px;" onclick="window.location.href='tg://resolve?domain=zmxooo'">打开频道</button>
+                <button class="tool-btn" style="width: 100%; height: 52px;" onclick="window.open('https://t.me/CNDLTQ', '_blank')">加入群聊</button>
+                <button class="tool-btn" style="width: 100%; height: 52px;" onclick="window.location.href='tg://resolve?domain=CNDLTQ'">打开群聊</button>
+            </div>
+        </div>
+    `;
+
+    const overlay = document.getElementById('auth-overlay');
+    const mainSite = document.getElementById('main-site');
+    const logoutBtn = document.getElementById('logout-btn');
+    
+    if (overlay) {
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.remove(), 400);
+    }
+    if (mainSite) {
+        mainSite.style.display = 'block';
+    }
+    if (logoutBtn) {
+        logoutBtn.style.display = 'inline-flex';
+    }
+}
+
+function showAuthOverlay() {
+    document.getElementById('auth-overlay').style.display = 'flex';
+    document.getElementById('main-site').style.display = 'none';
+}
+
+function handleLogout() {
+    if (confirm("确定要退出当前的 Global Access 账户连接吗？")) {
+        localStorage.removeItem("global_access_token");
+        window.location.reload(); 
+    }
+}
+
+function switchPanel(type) {
+    document.getElementById('panel-login').style.display = type === 'login' ? 'block' : 'none';
+    document.getElementById('panel-register').style.display = type === 'register' ? 'block' : 'none';
+    document.getElementById('panel-forget').style.display = type === 'forget' ? 'block' : 'none';
+}
+
+function togglePwdVisibility(el) {
+    const input = el.parentElement.querySelector('input');
+    if (!input) return;
+    if (input.type === 'password') {
+        input.type = 'text';
+        el.classList.remove('fa-eye');
+        el.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        el.classList.remove('fa-eye-slash');
+        el.classList.add('fa-eye');
+    }
+}
+
+function validateAuthInputs(email, password, code = null) {
+    if (!email || !EMAIL_REGEX.test(email)) {
+        alert('请输入合法真实的电子邮箱地址！');
+        return false;
+    }
+    if (!password || password.length < 6) {
+        alert('为了您的账号安全，密码长度不能低于 6 位！');
+        return false;
+    }
+    if (code !== null && !/^\d{6}$/.test(code)) {
+        alert('验证码格式错误，必须为 6 位纯数字！');
+        return false;
+    }
+    return true;
+}
+
+// 复制文本（修复 Toast 定时器冲突）
 function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(showToast).catch(fallbackCopy);
     } else {
         fallbackCopy();
     }
-
     function fallbackCopy() {
         const textArea = document.createElement("textarea");
         textArea.value = text;
@@ -923,22 +1157,16 @@ function copyText(text) {
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
-        try {
-            document.execCommand('copy');
-            showToast();
-        } catch (err) {
-            alert('复制失败，请手动复制链接');
-        }
+        try { document.execCommand('copy'); showToast(); } catch { alert('复制失败'); }
         document.body.removeChild(textArea);
     }
-
     function showToast() {
         const toast = document.getElementById("toast");
         toast.classList.add("show");
-        if (window.toastTimer) clearTimeout(window.toastTimer);
-        window.toastTimer = setTimeout(() => {
-            toast.classList.remove("show");
-        }, 2200);
+        if (window.toastTimer) {
+            clearTimeout(window.toastTimer);
+        }
+        window.toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 2200);
     }
 }
 
@@ -947,8 +1175,10 @@ function showQR(title, text) {
     document.getElementById("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(text);
     document.getElementById("qrModal").classList.add("show");
 }
-
 function closeQR() {
     document.getElementById("qrModal").classList.remove("show");
 }
 </script>
+
+</body>
+</html>
