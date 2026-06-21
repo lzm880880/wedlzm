@@ -1,206 +1,954 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>同城红娘 - 婚恋交友平台</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Global Access - 免费 Clash/小火箭节点订阅 | 独立开发与前沿 AI 必备网络</title>
+<meta name="description" content="Global Access 提供免费、稳定、自由的 Clash 与 Shadowrocket (小火箭) 节点订阅服务。专为独立开发、AI 工具使用、学术查阅及全球资讯获取打造的一键导入网络加速方案。" />
+<meta name="keywords" content="Clash订阅, 小火箭节点, Shadowrocket免费节点, 免费节点订阅, 学术查阅网络, AI工具加速, 独立开发, 科学上网, Global Access" />
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+/>
 
 <style>
-body{margin:0;font-family:Arial;background:#f6f6f6}
 
-/* 顶部 */
-.top{
-  background:#d81e06;
-  color:#fff;
-  padding:12px;
-  display:flex;
-  justify-content:space-between;
+:root{
+    --bg:#040816;
+
+    --card-bg:rgba(10,16,32,.72);
+    --card-border:rgba(255,255,255,.08);
+
+    --blue:#3b82f6;
+    --blue2:#2563eb;
+
+    --purple:#a855f7;
+    --purple2:#7c3aed;
+
+    --green:#22c55e;
+    --green2:#06b6d4;
+
+    --text:#ffffff;
+    --sub:#94a3b8;
+    --muted:#64748b;
 }
 
-/* banner */
-.banner{
-  background:linear-gradient(135deg,#ff4d4f,#d81e06);
-  color:#fff;
-  text-align:center;
-  padding:35px 15px;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.banner h1{margin:0;font-size:22px}
-.banner p{opacity:0.9}
-.btn{
-  display:inline-block;
-  margin-top:10px;
-  background:#fff;
-  color:#d81e06;
-  padding:8px 15px;
-  border-radius:5px;
+html{
+    scroll-behavior:smooth;
 }
 
-/* stats */
-.stats{
-  display:flex;
-  background:#fff;
-  padding:10px;
-  justify-content:space-around;
-  font-size:12px;
+body{
+    background:var(--bg);
+    color:var(--text);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    overflow-x:hidden;
+    min-height:100vh;
+    position:relative;
 }
-.stats b{color:#d81e06}
 
-/* section */
-.section{padding:10px}
-.title{font-weight:bold;margin:10px 0}
+/* =========================
+   深空背景
+========================= */
 
-/* cards */
-.list{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+        radial-gradient(circle at 12% 48%,
+            rgba(37,99,235,.38),
+            transparent 28%),
+
+        radial-gradient(circle at 86% 14%,
+            rgba(168,85,247,.30),
+            transparent 25%),
+
+        radial-gradient(circle at 50% -10%,
+            rgba(59,130,246,.12),
+            transparent 42%);
+
+    z-index:-5;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+        radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
+
+    background-size:120px 120px;
+
+    opacity:.22;
+
+    z-index:-4;
+}
+
+/* 左星球 */
+
+.planet-left{
+    position:fixed;
+    width:760px;
+    height:760px;
+    left:-390px;
+    bottom:-300px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 38% 38%,
+            rgba(96,165,250,.95),
+            rgba(37,99,235,.42) 40%,
+            rgba(0,0,0,0) 72%);
+    filter:blur(2px);
+    z-index:-3;
+}
+
+/* 右星球 */
+
+.planet-right{
+    position:fixed;
+    width:620px;
+    height:620px;
+    right:-250px;
+    top:-90px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 50% 50%,
+            rgba(168,85,247,.52),
+            rgba(76,29,149,.24) 45%,
+            rgba(0,0,0,0) 72%);
+    border:1px solid rgba(168,85,247,.24);
+    box-shadow:
+        0 0 120px rgba(168,85,247,.18);
+    z-index:-3;
+}
+
+.ring{
+    position:absolute;
+    width:780px;
+    height:180px;
+    border:1px solid rgba(168,85,247,.35);
+    border-radius:50%;
+    top:190px;
+    left:-95px;
+    transform:rotate(-12deg);
+}
+
+/* =========================
+   容器
+========================= */
+
+.container{
+    width:100%;
+    max-width:1180px;
+    margin:auto;
+    padding:28px 20px 55px;
+}
+
+/* =========================
+   顶部
+========================= */
+
+.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:68px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.brand-logo{
+    width:52px;
+    height:52px;
+    border-radius:18px;
+    background:
+        linear-gradient(135deg,#2563eb,#7c3aed);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    box-shadow:
+        0 12px 36px rgba(59,130,246,.36);
+}
+
+.brand-text h2{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:.3px;
+}
+
+.brand-text p{
+    margin-top:3px;
+    font-size:13px;
+    color:var(--sub);
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.status-pill{
+    padding:12px 18px;
+    border-radius:999px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    backdrop-filter:blur(20px);
+    color:#dbeafe;
+    font-size:14px;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#22c55e;
+    box-shadow:
+        0 0 12px #22c55e;
+}
+
+.join-btn{
+    padding:12px 24px;
+    border-radius:999px;
+    text-decoration:none;
+    color:#fff;
+    font-weight:700;
+    background:
+        linear-gradient(135deg,#2563eb,#0ea5e9);
+    border:1px solid rgba(255,255,255,.08);
+    transition:.3s;
+}
+
+.join-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 10px 30px rgba(37,99,235,.36);
+}
+
+/* =========================
+   Hero (已应用 clamp 自适应，解决手机挤压)
+========================= */
+
+.hero{
+    text-align:center;
+    margin-bottom:62px;
+    padding: 0 10px;
+}
+
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 22px;
+    border-radius:999px;
+    background:rgba(139,92,246,.12);
+    border:1px solid rgba(168,85,247,.24);
+    color:#e9d5ff;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:28px;
+    backdrop-filter:blur(20px);
+}
+
+.hero h1{
+    font-size: clamp(32px, 7.5vw, 74px);
+    line-height: 1.2;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    background:
+        linear-gradient(
+            to right,
+            #ffffff,
+            #dbeafe,
+            #a5b4fc
+        );
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    margin-top:22px;
+    color:#cbd5e1;
+    font-size: clamp(15px, 2.2vw, 22px);
+    line-height: 1.6;
+}
+
+/* =========================
+   卡片 (已应用 Flex 对齐)
+========================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+    margin-bottom:40px;
 }
 
 .card{
-  width:48%;
-  background:#fff;
-  border-radius:8px;
-  padding:10px;
-  text-align:center;
+    position:relative;
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:34px;
+    padding:34px 30px;
+    overflow:hidden;
+    backdrop-filter:blur(24px);
+    transition:.4s;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
-.card img{
-  width:70px;height:70px;border-radius:50%;
+.card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,255,255,.16);
 }
 
-.card button{
-  background:#d81e06;
-  color:#fff;
-  border:none;
-  width:100%;
-  padding:6px;
-  margin-top:6px;
-  border-radius:5px;
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.14;
+    z-index:-1;
 }
 
-/* vip */
-.vip{
-  background:#fff3f3;
-  margin:10px;
-  padding:15px;
-  text-align:center;
-  border-radius:10px;
+.card-blue::before{
+    background:
+        radial-gradient(circle at top,
+        rgba(59,130,246,.52),
+        transparent 55%);
 }
 
-/* login modal */
-.modal{
-  display:none;
-  position:fixed;
-  top:0;left:0;right:0;bottom:0;
-  background:rgba(0,0,0,0.5);
+.card-purple::before{
+    background:
+        radial-gradient(circle at top,
+        rgba(168,85,247,.52),
+        transparent 55%);
 }
 
-.box{
-  width:280px;
-  background:#fff;
-  margin:120px auto;
-  padding:15px;
-  border-radius:8px;
+.card-green::before{
+    background:
+        radial-gradient(circle at top,
+        rgba(34,197,94,.46),
+        transparent 55%);
 }
 
-input{
-  width:100%;
-  margin:5px 0;
-  padding:8px;
+.icon-box{
+    width:94px;
+    height:94px;
+    border-radius:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    margin-bottom:28px;
+    color:#fff;
 }
 
-button{
-  background:#d81e06;
-  color:#fff;
-  border:none;
-  width:100%;
-  padding:8px;
+.icon-blue{
+    background:linear-gradient(135deg,#2563eb,#60a5fa);
+    box-shadow:0 18px 45px rgba(37,99,235,.36);
 }
+
+.icon-purple{
+    background:linear-gradient(135deg,#7c3aed,#c084fc);
+    box-shadow:0 18px 45px rgba(124,58,237,.36);
+}
+
+.icon-green{
+    background:linear-gradient(135deg,#06b6d4,#22c55e);
+    box-shadow:0 18px 45px rgba(6,182,212,.36);
+}
+
+.card h2{
+    font-size:40px;
+    margin-bottom:14px;
+    font-weight:800;
+}
+
+.desc{
+    color:#cbd5e1;
+    line-height:1.8;
+    font-size:16px;
+    margin-bottom:30px;
+    flex-grow:1; 
+}
+
+.main-btn{
+    width:100%;
+    height:62px;
+    border:none;
+    border-radius:18px;
+    color:#fff;
+    font-size:18px;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    text-decoration:none;
+    transition:.3s;
+    margin-bottom:18px;
+}
+
+.main-btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-blue{
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    box-shadow:0 12px 32px rgba(37,99,235,.36);
+}
+
+.btn-purple{
+    background:linear-gradient(135deg,#c084fc,#9333ea);
+    box-shadow:0 12px 32px rgba(147,51,234,.36);
+}
+
+.btn-green{
+    background:linear-gradient(135deg,#22c55e,#06b6d4);
+    box-shadow:0 12px 32px rgba(34,197,94,.36);
+}
+
+.tools{
+    display:flex;
+    gap:8px;
+}
+
+.tool-btn{
+    flex:1;
+    height:52px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.06);
+    background:rgba(255,255,255,.03);
+    color:#cbd5e1;
+    font-size:13px; 
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+    white-space:nowrap;
+    padding:0 4px;
+}
+
+.tool-btn:hover{
+    background:rgba(255,255,255,.08);
+    color:#fff;
+}
+
+/* =========================
+   特性区
+========================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+    margin-top:10px;
+    margin-bottom:56px;
+}
+
+.feature{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:26px;
+    padding:30px 26px;
+    backdrop-filter:blur(20px);
+}
+
+.feature i{
+    font-size:28px;
+    margin-bottom:18px;
+}
+
+.feature h3{
+    font-size:21px;
+    margin-bottom:12px;
+}
+
+.feature p{
+    color:var(--sub);
+    line-height:1.8;
+    font-size:14px;
+}
+
+/* =========================
+   Footer
+========================= */
+
+.footer{
+    text-align:center;
+    color:var(--muted);
+    line-height:2.1;
+    font-size:14px;
+    padding-bottom:20px;
+}
+
+/* =========================
+   Toast
+========================= */
+
+.toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#fff;
+    color:#000;
+    padding:14px 26px;
+    border-radius:999px;
+    font-weight:700;
+    box-shadow:0 20px 50px rgba(0,0,0,.42);
+    opacity:0;
+    transition:.35s;
+    z-index:9999;
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
+}
+
+/* =========================
+   二维码弹窗组件样式
+========================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 8, 22, 0.75);
+    backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s ease;
+    z-index: 10000;
+}
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.modal-card {
+    background: #0b1126;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 32px 24px;
+    border-radius: 28px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    max-width: 90%;
+    width: 320px;
+    transform: scale(0.85);
+    transition: .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-overlay.show .modal-card {
+    transform: scale(1);
+}
+.modal-card h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+}
+.qr-container {
+    background: #fff;
+    padding: 16px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.qr-container img {
+    display: block;
+    width: 180px;
+    height: 180px;
+}
+.close-modal-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #cbd5e1;
+    padding: 12px 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
+    transition: .2s;
+    font-size: 15px;
+}
+.close-modal-btn:hover {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+}
+
+/* =========================
+   响应式
+========================= */
+
+@media(max-width:1100px){
+    .cards{
+        grid-template-columns:1fr;
+    }
+    .features{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+    .topbar{
+        flex-direction:column;
+        gap:20px;
+    }
+    .top-actions{
+        width:100%;
+        flex-direction:column;
+    }
+    .status-pill,
+    .join-btn{
+        width:100%;
+        justify-content:center;
+    }
+    .hero{
+        margin-bottom:48px;
+    }
+    .hero-badge{
+        margin-bottom:22px;
+    }
+    .card h2{
+        font-size:34px;
+    }
+    .features{
+        gap:18px;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="top">
-  <div>同城红娘</div>
-  <div onclick="openLogin()">登录/注册</div>
+<div class="planet-left"></div>
+
+<div class="planet-right">
+    <div class="ring"></div>
 </div>
 
-<div class="banner">
-  <h1>真实交友 · 同城相亲</h1>
-  <p>红娘1对1匹配 · 高成功率脱单</p>
-  <div class="btn" onclick="openLogin()">立即注册</div>
-</div>
+<div class="container">
 
-<div class="stats">
-  <div><b>120K</b><br>会员</div>
-  <div><b>35K</b><br>成功</div>
-  <div><b>100%</b><br>真人</div>
-</div>
+    <div class="topbar">
+        <div class="brand">
+            <div class="brand-logo">
+                <i class="fa-solid fa-paper-plane"></i>
+            </div>
+            <div class="brand-text">
+                <h2>Global Access</h2>
+                <p>免费 · 稳定 · 自由</p>
+            </div>
+        </div>
 
-<div class="section">
-  <div class="title">推荐会员</div>
-
-  <div class="list">
-
-    <div class="card">
-      <img src="https://i.pravatar.cc/100?img=12">
-      <div>小雨 23</div>
-      <div>上海</div>
-      <button onclick="openLogin()">查看联系方式</button>
+        <div class="top-actions">
+            <div class="status-pill">
+                <div class="dot"></div>
+                服务状态：正常
+            </div>
+            <a
+              href="https://t.me/zmxooo"
+              class="join-btn"
+              target="_blank"
+            >
+                <i class="fa-brands fa-telegram"></i>
+                加入频道
+            </a>
+        </div>
     </div>
 
-    <div class="card">
-      <img src="https://i.pravatar.cc/100?img=32">
-      <div>Anna 26</div>
-      <div>新加坡</div>
-      <button onclick="openLogin()">查看联系方式</button>
+    <div class="hero">
+        <div class="hero-badge">
+            <i class="fa-solid fa-bolt"></i>
+            长期维护 · 免费订阅
+        </div>
+        <h1>
+            全球网络 自由畅通
+        </h1>
+        <p>
+            支持 Clash / Shadowrocket 一键导入
+        </p>
     </div>
 
-    <div class="card">
-      <img src="https://i.pravatar.cc/100?img=22">
-      <div>Leo 28</div>
-      <div>深圳</div>
-      <button onclick="openLogin()">查看联系方式</button>
+    <div class="cards">
+        <div class="card card-blue">
+            <div class="icon-box icon-blue">
+                <i class="fa-solid fa-cat"></i>
+            </div>
+            <h2>Clash</h2>
+            <div class="desc">
+                免费 Clash 节点订阅<br>
+                支持 Meta / Mihomo<br>
+                多平台客户端通用
+            </div>
+            <a
+              class="main-btn btn-blue"
+              href="clash://install-config?url=https%3A%2F%2Ffa.zmxoo.xyz%2Fsubapi"
+            >
+                <i class="fa-solid fa-rocket"></i>
+                一键导入订阅
+            </a>
+            <div class="tools">
+                <button
+                  class="tool-btn"
+                  onclick="copyText('https://fa.zmxoo.xyz/subapi')"
+                >
+                    复制订阅
+                </button>
+                <button
+                  class="tool-btn"
+                  onclick="showQR('Clash 订阅二维码', 'https://fa.zmxoo.xyz/subapi')"
+                >
+                    扫码导入
+                </button>
+
+            </div>
+        </div>
+
+        <div class="card card-purple">
+            <div class="icon-box icon-purple">
+                <i class="fa-solid fa-rocket"></i>
+            </div>
+            <h2>Shadowrocket</h2>
+            <div class="desc">
+                免费小火箭订阅<br>
+                iOS 一键快速导入<br>
+                扫码即可连接使用
+            </div>
+            <a
+              class="main-btn btn-purple"
+              href="sub://https://fa.zmxoo.xyz/linkapi"
+            >
+                <i class="fa-solid fa-paper-plane"></i>
+                一键导入订阅
+            </a>
+            <div class="tools">
+                <button
+                  class="tool-btn"
+                  onclick="copyText('https://fa.zmxoo.xyz/linkapi')"
+                >
+                    复制订阅
+                </button>
+                <button
+                  class="tool-btn"
+                  onclick="showQR('小火箭订阅二维码', 'sub://https://fa.zmxoo.xyz/linkapi')"
+                >
+                    扫码导入
+                </button>
+
+            </div>
+        </div>
+
+        <div class="card card-green">
+            <div class="icon-box icon-green">
+                <i class="fa-brands fa-telegram"></i>
+            </div>
+            <h2>Telegram</h2>
+            <div class="desc">
+                最新节点更新通知<br>
+                用户交流与技术讨论群组<br>
+                订阅异常实时通知
+            </div>
+            
+            <a
+              class="main-btn btn-green"
+              href="https://t.me/zmxooo"
+              target="_blank"
+            >
+                <i class="fa-brands fa-telegram"></i>
+                进入 Telegram 社区
+            </a>
+            
+            <div class="tools" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.open('https://t.me/zmxooo', '_blank')"
+                >
+                    加入频道
+                </button>
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.location.href='tg://resolve?domain=zmxooo'"
+                >
+                    打开频道
+                </button>
+
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.open('https://t.me/CNDLTQ', '_blank')"
+                >
+                    加入群聊
+                </button>
+                <button
+                  class="tool-btn"
+                  style="width: 100%; height: 52px;"
+                  onclick="window.location.href='tg://resolve?domain=CNDLTQ'"
+                >
+                    打开群聊
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-      <img src="https://i.pravatar.cc/100?img=45">
-      <div>Mike 30</div>
-      <div>北京</div>
-      <button onclick="openLogin()">查看联系方式</button>
+    <div class="features">
+        <div class="feature">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>长期维护</h3>
+            <p>
+                公益免费订阅<br>
+                持续更新节点配置
+            </p>
+        </div>
+        <div class="feature">
+            <i class="fa-solid fa-globe"></i>
+            <h3>全球覆盖</h3>
+            <p>
+                多地区节点接入<br>
+                自动规则分流
+            </p>
+        </div>
+        <div class="feature">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>一键导入</h3>
+            <p>
+                支持 Clash / 小火箭<br>
+                多平台快速连接
+            </p>
+        </div>
     </div>
 
-  </div>
+    <div style="max-width: 860px; margin: 0 auto 50px; padding: 0 20px; text-align: center; color: var(--sub); font-size: 14px; line-height: 1.9;">
+        <h3 style="color: #cbd5e1; font-size: 16px; margin-bottom: 12px; font-weight: 700;">为什么选择 Global Access 公益订阅？</h3>
+        <p style="margin-bottom: 12px;">对于从事<strong>独立开发 (Indie Hacker)</strong>、<strong>学术研究</strong>以及需要频繁使用 <strong>ChatGPT 等前沿 AI 工具</strong>的用户而言，一个稳定、低延迟的全球网络环境是核心生产力。在寻找可用节点的网络环境中，许多人经常遭遇配置失效或高昂费用的困扰。</p>
+        <p>Global Access 致力于提供长期免费的公益网络路由支持。无论您使用的是 <strong>Clash (Meta/Mihomo)</strong> 还是 <strong>Shadowrocket (小火箭)</strong>，只需一键点击或扫码导入，即可轻松获取更新的节点配置。我们希望帮助您打破信息壁垒，让获取全球资讯、流媒体访问和前沿技术查阅变得更加自由畅通。</p>
+    </div>
+
+    <div class="footer">
+        © 2026 Global Access<br>
+        免费订阅 · 公益共享 · 长期维护<br>
+        仅供网络技术交流学习使用<br>
+        请遵守当地法律法规
+    </div>
 </div>
 
-<div class="vip">
-  <h3>VIP解锁联系方式</h3>
-  <p>红娘推荐 + 优先匹配</p>
-  <button onclick="openLogin()">开通VIP</button>
+<div id="toast" class="toast">
+    复制成功
 </div>
 
-<!-- 登录弹窗 -->
-<div class="modal" id="m">
-  <div class="box">
-    <h3>登录/注册</h3>
-    <input placeholder="邮箱">
-    <input type="password" placeholder="密码">
-    <button onclick="login()">进入</button>
-  </div>
+<div id="qrModal" class="modal-overlay" onclick="closeQR()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+        <h3 id="qrTitle">订阅二维码</h3>
+        <div class="qr-container">
+            <img id="qrImage" src="" alt="二维码加载中...">
+        </div>
+        <button class="close-modal-btn" onclick="closeQR()">关闭</button>
+    </div>
 </div>
 
 <script>
-function openLogin(){
-  document.getElementById("m").style.display="block";
+// 页面加载时动态更新所有带参数的链接与点击事件（已取消日期参数）
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. 定义基础链接
+    const subapiUrl = "https://fa.zmxoo.xyz/subapi";
+    const linkapiUrl = "https://fa.zmxoo.xyz/linkapi";
+
+    // 2. 动态更新 Clash 卡片中的 DOM 属性
+    const clashCard = document.querySelector('.card-blue');
+    if (clashCard) {
+        clashCard.querySelector('.main-btn').href = `clash://install-config?url=${encodeURIComponent(subapiUrl)}`;
+        const tools = clashCard.querySelectorAll('.tool-btn');
+        tools[0].setAttribute('onclick', `copyText('${subapiUrl}')`);
+        tools[1].setAttribute('onclick', `showQR('Clash 订阅二维码', '${subapiUrl}')`);
+    }
+
+    // 3. 动态更新 Shadowrocket 卡片中的 DOM 属性
+    const ssrCard = document.querySelector('.card-purple');
+    if (ssrCard) {
+        // 【关键修复】将 HTTPS 转换为 shadowrocket:// URL Scheme，并对原始链接进行 URI 编码
+        const shadowrocketScheme = `shadowrocket://install-config?url=${encodeURIComponent(linkapiUrl)}`;
+        ssrCard.querySelector('.main-btn').href = shadowrocketScheme;
+        
+        // 复制和扫码功能依然使用原始的 HTTPS 链接，保证兼容性
+        const tools = ssrCard.querySelectorAll('.tool-btn');
+        tools[0].setAttribute('onclick', `copyText('${linkapiUrl}')`);
+        tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${linkapiUrl}')`);
+    }
+});
+
+// ================= 核心原生功能函数（保持原样） =================
+function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(showToast).catch(fallbackCopy);
+    } else {
+        fallbackCopy();
+    }
+
+    function fallbackCopy() {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast();
+        } catch (err) {
+            alert('复制失败，请手动复制链接');
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function showToast() {
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        if (window.toastTimer) clearTimeout(window.toastTimer);
+        window.toastTimer = setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2200);
+    }
 }
 
-function login(){
-  alert("模拟登录成功");
-  document.getElementById("m").style.display="none";
+function showQR(title, text) {
+    document.getElementById("qrTitle").innerText = title;
+    document.getElementById("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(text);
+    document.getElementById("qrModal").classList.add("show");
+}
+
+function closeQR() {
+    document.getElementById("qrModal").classList.remove("show");
 }
 </script>
-
-</body>
-</html>
