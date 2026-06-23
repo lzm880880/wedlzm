@@ -13,7 +13,6 @@
 />
 
 <style>
-
 :root{
     --bg:#040816;
 
@@ -32,6 +31,11 @@
     --text:#ffffff;
     --sub:#94a3b8;
     --muted:#64748b;
+    
+    /* 广告专属主题色 */
+    --ad-gold: #fbbf24;
+    --ad-gold-bg: rgba(251, 191, 36, 0.06);
+    --ad-gold-border: rgba(251, 191, 36, 0.2);
 }
 
 *{
@@ -65,7 +69,6 @@ body{
 /* =========================
    深空背景
 ========================= */
-
 body::before{
     content:"";
     position:fixed;
@@ -103,7 +106,6 @@ body::after{
 }
 
 /* 左星球 */
-
 .planet-left{
     position:fixed;
     width:760px;
@@ -121,7 +123,6 @@ body::after{
 }
 
 /* 右星球 */
-
 .planet-right{
     position:fixed;
     width:620px;
@@ -154,7 +155,6 @@ body::after{
 /* =========================
    容器
 ========================= */
-
 .container{
     width:100%;
     max-width:1180px;
@@ -165,12 +165,11 @@ body::after{
 /* =========================
    顶部
 ========================= */
-
 .topbar{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin-bottom:68px;
+    margin-bottom:48px;
 }
 
 .brand{
@@ -180,28 +179,28 @@ body::after{
 }
 
 .brand-logo{
-    width:52px;
-    height:52px;
-    border-radius:18px;
+    width:46px;
+    height:46px;
+    border-radius:14px;
     background:
         linear-gradient(135deg,#2563eb,#7c3aed);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:20px;
+    font-size:18px;
     box-shadow:
         0 12px 36px rgba(59,130,246,.36);
 }
 
 .brand-text h2{
-    font-size:20px;
+    font-size:18px;
     font-weight:800;
     letter-spacing:.3px;
 }
 
 .brand-text p{
-    margin-top:3px;
-    font-size:13px;
+    margin-top:2px;
+    font-size:12px;
     color:var(--sub);
 }
 
@@ -212,21 +211,21 @@ body::after{
 }
 
 .status-pill{
-    padding:12px 18px;
+    padding:10px 16px;
     border-radius:999px;
     background:rgba(255,255,255,.04);
     border:1px solid rgba(255,255,255,.08);
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:10px;
     backdrop-filter:blur(20px);
     color:#dbeafe;
-    font-size:14px;
+    font-size:13px;
 }
 
 .dot{
-    width:10px;
-    height:10px;
+    width:8px;
+    height:8px;
     border-radius:50%;
     background:#22c55e;
     box-shadow:
@@ -234,11 +233,12 @@ body::after{
 }
 
 .join-btn{
-    padding:12px 24px;
+    padding:10px 20px;
     border-radius:999px;
     text-decoration:none;
     color:#fff;
     font-weight:700;
+    font-size:14px;
     background:
         linear-gradient(135deg,#2563eb,#0ea5e9);
     border:1px solid rgba(255,255,255,.08);
@@ -252,32 +252,31 @@ body::after{
 }
 
 /* =========================
-   Hero (已应用 clamp 自适应，解决手机挤压)
+   Hero
 ========================= */
-
 .hero{
     text-align:center;
-    margin-bottom:62px;
+    margin-bottom:36px;
     padding: 0 10px;
 }
 
 .hero-badge{
     display:inline-flex;
     align-items:center;
-    gap:10px;
-    padding:10px 22px;
+    gap:8px;
+    padding:8px 18px;
     border-radius:999px;
     background:rgba(139,92,246,.12);
     border:1px solid rgba(168,85,247,.24);
     color:#e9d5ff;
-    font-size:14px;
+    font-size:13px;
     font-weight:700;
-    margin-bottom:28px;
+    margin-bottom:20px;
     backdrop-filter:blur(20px);
 }
 
 .hero h1{
-    font-size: clamp(32px, 7.5vw, 74px);
+    font-size: clamp(30px, 6.5vw, 64px);
     line-height: 1.2;
     font-weight: 900;
     letter-spacing: -1.5px;
@@ -293,29 +292,129 @@ body::after{
 }
 
 .hero p{
-    margin-top:22px;
+    margin-top:16px;
     color:#cbd5e1;
-    font-size: clamp(15px, 2.2vw, 22px);
+    font-size: clamp(14px, 2vw, 18px);
     line-height: 1.6;
 }
 
 /* =========================
-   卡片 (已应用 Flex 对齐)
+   广告位样式系统（商业升级）
 ========================= */
+.ad-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 4px;
+    background: var(--ad-gold);
+    color: #000;
+    margin-right: 8px;
+    vertical-align: middle;
+}
 
+/* 1. 顶部横幅广告（高转换率） */
+.ad-banner {
+    margin: -10px auto 36px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    background: rgba(59,130,246,.06);
+    border: 1px solid rgba(59,130,246,.18);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    transition: .3s ease;
+}
+.ad-banner:hover {
+    background: rgba(59,130,246,.12);
+    border-color: rgba(59,130,246,.35);
+    transform: translateY(-1px);
+}
+.ad-banner-content {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #e2e8f0;
+    text-align: left;
+}
+.ad-banner-content i {
+    color: #60a5fa;
+    margin-right: 8px;
+}
+.ad-banner-action {
+    font-size: 13px;
+    color: #60a5fa;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* 2. 中部推荐位广告 */
+.ad-middle {
+    margin: 32px 0;
+    padding: 16px;
+    border-radius: 20px;
+    background: var(--ad-gold-bg);
+    border: 1px dashed var(--ad-gold-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #fef08a;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .3s;
+}
+.ad-middle:hover {
+    background: rgba(251, 191, 36, 0.1);
+    border-style: solid;
+}
+
+/* 3. 卡片内置赞助商广告 */
+.card-ad {
+    margin-top: 16px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    text-align: left;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--sub);
+    transition: .2s;
+}
+.card-ad:hover {
+    background: rgba(255,255,255,.07);
+    color: #fff;
+}
+.card-ad span {
+    display: flex;
+    align-items: center;
+}
+
+/* =========================
+   卡片（已重构缩小比例，提高信息密度）
+========================= */
 .cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:28px;
-    margin-bottom:40px;
+    gap:24px;
+    margin-bottom:12px;
 }
 
 .card{
     position:relative;
     background:var(--card-bg);
     border:1px solid var(--card-border);
-    border-radius:34px;
-    padding:34px 30px;
+    border-radius:24px; /* 34px -> 24px */
+    padding:24px 20px;  /* 34px 30px -> 24px 20px */
     overflow:hidden;
     backdrop-filter:blur(24px);
     transition:.4s;
@@ -325,7 +424,7 @@ body::after{
 }
 
 .card:hover{
-    transform:translateY(-8px);
+    transform:translateY(-6px);
     border-color:rgba(255,255,255,.16);
 }
 
@@ -359,61 +458,61 @@ body::after{
 }
 
 .icon-box{
-    width:94px;
-    height:94px;
-    border-radius:30px;
+    width:68px;        /* 94px -> 68px */
+    height:68px;       /* 94px -> 68px */
+    border-radius:20px;/* 30px -> 20px */
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:40px;
-    margin-bottom:28px;
+    font-size:28px;    /* 40px -> 28px */
+    margin-bottom:18px;/* 28px -> 18px */
     color:#fff;
 }
 
 .icon-blue{
     background:linear-gradient(135deg,#2563eb,#60a5fa);
-    box-shadow:0 18px 45px rgba(37,99,235,.36);
+    box-shadow:0 12px 30px rgba(37,99,235,.25);
 }
 
 .icon-purple{
     background:linear-gradient(135deg,#7c3aed,#c084fc);
-    box-shadow:0 18px 45px rgba(124,58,237,.36);
+    box-shadow:0 12px 30px rgba(124,58,237,.25);
 }
 
 .icon-green{
     background:linear-gradient(135deg,#06b6d4,#22c55e);
-    box-shadow:0 18px 45px rgba(6,182,212,.36);
+    box-shadow:0 12px 30px rgba(6,182,212,.25);
 }
 
 .card h2{
-    font-size:40px;
-    margin-bottom:14px;
+    font-size:26px;     /* 40px -> 26px */
+    margin-bottom:10px;
     font-weight:800;
 }
 
 .desc{
     color:#cbd5e1;
-    line-height:1.8;
-    font-size:16px;
-    margin-bottom:30px;
+    line-height:1.6;
+    font-size:14px;    /* 16px -> 14px */
+    margin-bottom:20px;/* 30px -> 20px */
     flex-grow:1; 
 }
 
 .main-btn{
     width:100%;
-    height:62px;
+    height:50px;       /* 62px -> 50px */
     border:none;
-    border-radius:18px;
+    border-radius:14px;/* 18px -> 14px */
     color:#fff;
-    font-size:18px;
+    font-size:15px;    /* 18px -> 15px */
     font-weight:800;
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:12px;
+    gap:10px;
     text-decoration:none;
     transition:.3s;
-    margin-bottom:18px;
+    margin-bottom:12px;
 }
 
 .main-btn:hover{
@@ -422,17 +521,17 @@ body::after{
 
 .btn-blue{
     background:linear-gradient(135deg,#3b82f6,#2563eb);
-    box-shadow:0 12px 32px rgba(37,99,235,.36);
+    box-shadow:0 8px 24px rgba(37,99,235,.25);
 }
 
 .btn-purple{
     background:linear-gradient(135deg,#c084fc,#9333ea);
-    box-shadow:0 12px 32px rgba(147,51,234,.36);
+    box-shadow:0 8px 24px rgba(147,51,234,.25);
 }
 
 .btn-green{
     background:linear-gradient(135deg,#22c55e,#06b6d4);
-    box-shadow:0 12px 32px rgba(34,197,94,.36);
+    box-shadow:0 8px 24px rgba(34,197,94,.25);
 }
 
 .tools{
@@ -442,12 +541,12 @@ body::after{
 
 .tool-btn{
     flex:1;
-    height:52px;
-    border-radius:16px;
+    height:42px;       /* 52px -> 42px */
+    border-radius:12px;
     border:1px solid rgba(255,255,255,.06);
     background:rgba(255,255,255,.03);
     color:#cbd5e1;
-    font-size:13px; 
+    font-size:12px;    /* 13px -> 12px */
     font-weight:700;
     cursor:pointer;
     transition:.25s;
@@ -463,7 +562,6 @@ body::after{
 /* =========================
    特性区
 ========================= */
-
 .features{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -475,31 +573,30 @@ body::after{
 .feature{
     background:rgba(255,255,255,.03);
     border:1px solid rgba(255,255,255,.06);
-    border-radius:26px;
-    padding:30px 26px;
+    border-radius:22px;
+    padding:24px 22px;
     backdrop-filter:blur(20px);
 }
 
 .feature i{
-    font-size:28px;
-    margin-bottom:18px;
+    font-size:24px;
+    margin-bottom:14px;
 }
 
 .feature h3{
-    font-size:21px;
-    margin-bottom:12px;
+    font-size:18px;
+    margin-bottom:10px;
 }
 
 .feature p{
     color:var(--sub);
-    line-height:1.8;
-    font-size:14px;
+    line-height:1.7;
+    font-size:13px;
 }
 
 /* =========================
    Footer
 ========================= */
-
 .footer{
     text-align:center;
     color:var(--muted);
@@ -511,7 +608,6 @@ body::after{
 /* =========================
    Toast
 ========================= */
-
 .toast{
     position:fixed;
     bottom:30px;
@@ -536,7 +632,6 @@ body::after{
 /* =========================
    二维码弹窗组件样式
 ========================= */
-
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -608,7 +703,6 @@ body::after{
 /* =========================
    响应式
 ========================= */
-
 @media(max-width:1100px){
     .cards{
         grid-template-columns:1fr;
@@ -619,6 +713,9 @@ body::after{
 }
 
 @media(max-width:700px){
+    .topbar{
+        margin-bottom: 32px;
+    }
     .topbar{
         flex-direction:column;
         gap:20px;
@@ -633,19 +730,26 @@ body::after{
         justify-content:center;
     }
     .hero{
-        margin-bottom:48px;
+        margin-bottom:32px;
     }
     .hero-badge{
-        margin-bottom:22px;
+        margin-bottom:16px;
     }
     .card h2{
-        font-size:34px;
+        font-size:24px;
     }
     .features{
         gap:18px;
     }
+    .ad-banner {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .ad-banner-content {
+        text-align: center;
+    }
 }
-
 </style>
 </head>
 
@@ -699,117 +803,121 @@ body::after{
         </p>
     </div>
 
+    <a href="https://t.me/zmxooo" target="_blank" class="ad-banner" onclick="trackAdClick('top-banner')">
+        <div class="ad-banner-content">
+            <span class="ad-badge">Sponsor</span>
+            <i class="fa-solid fa-xs fa-circle-info"></i>
+            <span>高端极速稳定机场：全专线 IPLC 吞吐，新用户专享 8 折优惠券【点此查看】</span>
+        </div>
+        <div class="ad-banner-action">
+            立即前往 <i class="fa-solid fa-arrow-right"></i>
+        </div>
+    </a>
+
     <div class="cards">
         <div class="card card-blue">
-            <div class="icon-box icon-blue">
-                <i class="fa-solid fa-cat"></i>
+            <div>
+                <div class="icon-box icon-blue">
+                    <i class="fa-solid fa-cat"></i>
+                </div>
+                <h2>Clash</h2>
+                <div class="desc">
+                    免费 Clash 节点订阅<br>
+                    支持 Meta / Mihomo<br>
+                    多平台客户端通用
+                </div>
             </div>
-            <h2>Clash</h2>
-            <div class="desc">
-                免费 Clash 节点订阅<br>
-                支持 Meta / Mihomo<br>
-                多平台客户端通用
-            </div>
-            <a
-              class="main-btn btn-blue"
-              href="clash://install-config?url=https%3A%2F%2Ffa.zmxoo.xyz%2Fsubapi"
-            >
-                <i class="fa-solid fa-rocket"></i>
-                一键导入订阅
-            </a>
-            <div class="tools">
-                <button
-                  class="tool-btn"
-                  onclick="copyText('https://fa.zmxoo.xyz/subapi')"
+            <div>
+                <a
+                  class="main-btn btn-blue"
+                  href="clash://install-config?url=https%3A%2F%2Ffa.zmxoo.xyz%2Fsubapi"
                 >
-                    复制订阅
-                </button>
-                <button
-                  class="tool-btn"
-                  onclick="showQR('Clash 订阅二维码', 'https://fa.zmxoo.xyz/subapi')"
-                >
-                    扫码导入
-                </button>
-
+                    <i class="fa-solid fa-rocket"></i>
+                    一键导入订阅
+                </a>
+                <div class="tools">
+                    <button class="tool-btn" onclick="copyText('https://fa.zmxoo.xyz/subapi')">复制订阅</button>
+                    <button class="tool-btn" onclick="showQR('Clash 订阅二维码', 'https://fa.zmxoo.xyz/subapi')">扫码导入</button>
+                </div>
+                <a href="https://t.me/zmxooo" target="_blank" class="card-ad" onclick="trackAdClick('clash-inner-ad')">
+                    <span><span class="ad-badge" style="transform: scale(0.95);">广告</span>云际全专线 4k 极速秒开</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
             </div>
         </div>
 
         <div class="card card-purple">
-            <div class="icon-box icon-purple">
-                <i class="fa-solid fa-rocket"></i>
+            <div>
+                <div class="icon-box icon-purple">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <h2>Shadowrocket</h2>
+                <div class="desc">
+                    免费小火箭订阅<br>
+                    iOS 一键快速导入<br>
+                    扫码即可连接使用
+                </div>
             </div>
-            <h2>Shadowrocket</h2>
-            <div class="desc">
-                免费小火箭订阅<br>
-                iOS 一键快速导入<br>
-                扫码即可连接使用
-            </div>
-            <a
-              class="main-btn btn-purple"
-              href="sub://https://fa.zmxoo.xyz/linkapi"
-            >
-                <i class="fa-solid fa-paper-plane"></i>
-                一键导入订阅
-            </a>
-            <div class="tools">
-                <button
-                  class="tool-btn"
-                  onclick="copyText('https://fa.zmxoo.xyz/linkapi')"
+            <div>
+                <a
+                  class="main-btn btn-purple"
+                  href="sub://https://fa.zmxoo.xyz/linkapi"
                 >
-                    复制订阅
-                </button>
-                <button
-                  class="tool-btn"
-                  onclick="showQR('小火箭订阅二维码', 'sub://https://fa.zmxoo.xyz/linkapi')"
-                >
-                    扫码导入
-                </button>
-
+                    <i class="fa-solid fa-paper-plane"></i>
+                    一键导入订阅
+                </a>
+                <div class="tools">
+                    <button class="tool-btn" onclick="copyText('https://fa.zmxoo.xyz/linkapi')">复制订阅</button>
+                    <button class="tool-btn" onclick="showQR('小火箭订阅二维码', 'sub://https://fa.zmxoo.xyz/linkapi')">扫码导入</button>
+                </div>
+                <a href="https://t.me/zmxooo" target="_blank" class="card-ad" onclick="trackAdClick('rocket-inner-ad')">
+                    <span><span class="ad-badge" style="transform: scale(0.95);">特惠</span>小火箭正版美区 AppleID 独享</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
             </div>
         </div>
 
         <div class="card card-green">
-            <div class="icon-box icon-green">
-                <i class="fa-brands fa-telegram"></i>
+            <div>
+                <div class="icon-box icon-green">
+                    <i class="fa-brands fa-telegram"></i>
+                </div>
+                <h2>Telegram</h2>
+                <div class="desc">
+                    最新节点更新通知<br>
+                    用户交流与技术讨论群组<br>
+                    订阅异常实时通知
+                </div>
             </div>
-            <h2>Telegram</h2>
-            <div class="desc">
-                最新节点更新通知<br>
-                用户交流与技术讨论群组<br>
-                订阅异常实时通知
-            </div>
-            
-            <a
-              class="main-btn btn-green"
-              href="https://t.me/zmxooo"
-              target="_blank"
-            >
-                <i class="fa-brands fa-telegram"></i>
-                进入 Telegram 社区
-            </a>
-            
-            <div class="tools" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                <button
-                  class="tool-btn"
-                  style="width: 100%; height: 52px;"
-                  onclick="window.open('https://t.me/zmxooo', '_blank')"
+            <div>
+                <a
+                  class="main-btn btn-green"
+                  href="https://t.me/zmxooo"
+                  target="_blank"
                 >
-                    加入频道
-                </button>
-                <button
-                  class="tool-btn"
-                  style="width: 100%; height: 52px;"
-                  onclick="window.location.href='tg://resolve?domain=zmxooo'"
-                >
-                    打开频道
-                </button>
+                    <i class="fa-brands fa-telegram"></i>
+                    进入 Telegram 社区
+                </a>
+                
+                <div class="tools" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <button class="tool-btn" style="width: 100%; height: 42px;" onclick="window.open('https://t.me/zmxooo', '_blank')">加入频道</button>
+                    <button class="tool-btn" style="width: 100%; height: 42px;" onclick="window.location.href='tg://resolve?domain=zmxooo'">打开频道</button>
+                </div>
+                <a href="https://t.me/zmxooo" target="_blank" class="card-ad" onclick="trackAdClick('tg-inner-ad')">
+                    <span><span class="ad-badge" style="transform: scale(0.95);">推荐</span>大厂 ChatGPT 镜像站免翻直连</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
             </div>
         </div>
     </div>
 
+    <a href="https://t.me/zmxooo" target="_blank" class="ad-middle" onclick="trackAdClick('middle-text-ad')">
+        <span class="ad-badge">🔥 热门推荐</span> 长期招募各梯队优质赞助商 / 机场主挂载本位，商务合作请联系 TG 频道主。
+    </a>
+
     <div class="features">
         <div class="feature">
-            <i class="fa-solid fa-shield-halved"></i>
+            <i class="fa-solid fa-shield-halved" style="color: #60a5fa;"></i>
             <h3>长期维护</h3>
             <p>
                 公益免费订阅<br>
@@ -817,7 +925,7 @@ body::after{
             </p>
         </div>
         <div class="feature">
-            <i class="fa-solid fa-globe"></i>
+            <i class="fa-solid fa-globe" style="color: #c084fc;"></i>
             <h3>全球覆盖</h3>
             <p>
                 多地区节点接入<br>
@@ -825,7 +933,7 @@ body::after{
             </p>
         </div>
         <div class="feature">
-            <i class="fa-solid fa-bolt"></i>
+            <i class="fa-solid fa-bolt" style="color: #34d399;"></i>
             <h3>一键导入</h3>
             <p>
                 支持 Clash / 小火箭<br>
@@ -836,7 +944,7 @@ body::after{
 
     <div style="max-width: 860px; margin: 0 auto 50px; padding: 0 20px; text-align: center; color: var(--sub); font-size: 14px; line-height: 1.9;">
         <h3 style="color: #cbd5e1; font-size: 16px; margin-bottom: 12px; font-weight: 700;">为什么选择 Global Access 公益订阅？</h3>
-        <p style="margin-bottom: 12px;">对于从事<strong>独立开发 (Indie Hacker)</strong>、<strong>学术研究</strong>以及需要频繁使用 <strong>ChatGPT 等前沿 AI 工具</strong>的用户而言，一个稳定、低延迟的全球网络环境是核心生产力。在寻找可用节点的网络环境中，许多人经常遭遇配置失效或高昂费用的困扰。</p>
+        <p style="margin-bottom: 12px;">对于从事<strong>独立开发 (Indie Hacker)</strong>、<strong>学术研究</strong>以及需要频繁使用 <strong>ChatGPT 等前沿 AI 工具</strong>的用户而言，一个稳定、低延迟的全球 network 环境是核心生产力。在寻找可用节点的网络环境中，许多人经常遭遇配置失效或高昂费用的困扰。</p>
         <p>Global Access 致力于提供长期免费的公益网络路由支持。无论您使用的是 <strong>Clash (Meta/Mihomo)</strong> 还是 <strong>Shadowrocket (小火箭)</strong>，只需一键点击或扫码导入，即可轻松获取更新的节点配置。我们希望帮助您打破信息壁垒，让获取全球资讯、流媒体访问和前沿技术查阅变得更加自由畅通。</p>
     </div>
 
@@ -863,13 +971,12 @@ body::after{
 </div>
 
 <script>
-// 页面加载时动态更新所有带参数的链接与点击事件（已取消日期参数）
+// 页面加载逻辑
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. 定义基础链接
     const subapiUrl = "https://fa.zmxoo.xyz/subapi";
     const linkapiUrl = "https://fa.zmxoo.xyz/linkapi";
 
-    // 2. 动态更新 Clash 卡片中的 DOM 属性
+    // 动态绑定 Clash 参数
     const clashCard = document.querySelector('.card-blue');
     if (clashCard) {
         clashCard.querySelector('.main-btn').href = `clash://install-config?url=${encodeURIComponent(subapiUrl)}`;
@@ -878,21 +985,19 @@ document.addEventListener("DOMContentLoaded", function() {
         tools[1].setAttribute('onclick', `showQR('Clash 订阅二维码', '${subapiUrl}')`);
     }
 
-    // 3. 动态更新 Shadowrocket 卡片中的 DOM 属性
+    // 动态绑定小火箭参数 (使用正确的 Scheme)
     const ssrCard = document.querySelector('.card-purple');
     if (ssrCard) {
-        // 【关键修复】将 HTTPS 转换为 shadowrocket:// URL Scheme，并对原始链接进行 URI 编码
         const shadowrocketScheme = `shadowrocket://install-config?url=${encodeURIComponent(linkapiUrl)}`;
         ssrCard.querySelector('.main-btn').href = shadowrocketScheme;
         
-        // 复制和扫码功能依然使用原始的 HTTPS 链接，保证兼容性
         const tools = ssrCard.querySelectorAll('.tool-btn');
         tools[0].setAttribute('onclick', `copyText('${linkapiUrl}')`);
         tools[1].setAttribute('onclick', `showQR('小火箭订阅二维码', '${linkapiUrl}')`);
     }
 });
 
-// ================= 核心原生功能函数（保持原样） =================
+// 核心功能：剪贴板复制
 function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(showToast).catch(fallbackCopy);
@@ -927,13 +1032,25 @@ function copyText(text) {
     }
 }
 
+// 核心功能：打开二维码弹窗
 function showQR(title, text) {
     document.getElementById("qrTitle").innerText = title;
     document.getElementById("qrImage").src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(text);
     document.getElementById("qrModal").classList.add("show");
 }
 
+// 核心功能：关闭二维码弹窗
 function closeQR() {
     document.getElementById("qrModal").classList.remove("show");
 }
+
+// 商业化升级：广告点击数据统计/埋点追踪占位函数
+function trackAdClick(adPositionId) {
+    console.log(`[商业统计] 广告位被点击: ${adPositionId}`);
+    // 后期如需接入自建统计或 Google Analytics，可在下方直接追加代码
+    // fetch(`/api/track?pos=${adPositionId}`);
+}
 </script>
+
+</body>
+</html>
